@@ -1,0 +1,32 @@
+.header {
+    background: #231F20;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.headerWrapper {
+    margin: 0 auto;
+    width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerWrapper img{
+    display: block;
+    height: 30px;
+}
+
+.login {
+    text-decoration: none;
+    color: #d3d2d2;
+}
+
+.login a {
+    color: white;
+    text-decoration: none;
+}
+
+

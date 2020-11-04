@@ -1,0 +1,9 @@
+.app-wrapper {
+    margin: 10px auto 0;
+    width: 950px;
+}
+
+.wrapperContent {
+    display: flex;
+    justify-content: flex-start;
+}
