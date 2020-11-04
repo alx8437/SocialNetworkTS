@@ -1,0 +1,20 @@
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    color: grey;
+}
+
+.item img {
+    margin-right: 10px;
+    width: 40px;
+}
+
+.messageWrapper {
+    padding: 5px;
+    width: 100px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}

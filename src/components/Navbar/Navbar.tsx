@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './Navbar.module.css';
-import { FaMale, FaEnvelope, FaNewspaper, FaMusic, FaCog, FaUsers, FaSignInAlt} from 'react-icons/fa';
+import {FaMale, FaEnvelope, FaNewspaper, FaMusic, FaCog, FaUsers, FaSignInAlt} from 'react-icons/fa';
+
 const Navbar = () => {
     return (
         <nav className={styles.nav}>
             <div className={styles.item}>
                 <div className={styles.iconWrapper}>
-                    <div className={styles.icon}><FaMale color="#8DC63F" /> </div>
+                    <div className={styles.icon}><FaMale color="#8DC63F"/></div>
                     <div>Profile</div>
                 </div>
             </div>
