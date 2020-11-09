@@ -1,4 +1,4 @@
-.wrapper {
-    margin-top: 30px;
-    padding: 20px;
+.profileWrapper {
+    display: flex;
+    justify-content: space-between;
 }

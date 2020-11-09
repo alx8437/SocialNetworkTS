@@ -32,8 +32,17 @@
     left: 30px;
 }
 
-.active {
+.item {
+    font-weight: 500;
+}
 
+.item a {
+    color: #000;
+    text-decoration: none;
+}
+
+.item a.active {
+    color: #8DC63F;
 }
 
 .nonActive {

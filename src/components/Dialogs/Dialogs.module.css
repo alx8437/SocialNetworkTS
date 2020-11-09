@@ -1,0 +1,35 @@
+.dialogWrapper {
+    margin-top: 30px;
+    padding: 20px;
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sendMessage {
+    width: 300px;
+    margin-left: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sendMessage textarea {
+    width: 200px;
+    height: 25px;
+    color: #626161;
+    border-radius: 5px;
+
+}
+
+.sendMessage button {
+    background: #27aae1;
+    padding: 7px 25px;
+    border: none;
+    font-size: 14px;
+    color: #fff;
+    position: relative;
+    font-weight: 600;
+    outline: none;
+    border-radius: 30px;
+    cursor: pointer;
+}

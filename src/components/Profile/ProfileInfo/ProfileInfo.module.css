@@ -1,0 +1,16 @@
+.content {
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.otherResources {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.avatar {
+    width: 30px;
+}

@@ -2,15 +2,20 @@ import React from 'react';
 import styles from './Post.module.css';
 import avatar from '../../../../assets/images/userNoPhoto.png'
 
-const Post = () => {
+type PropsType = {
+    message: string
+    likesCount: number
+}
+
+const Post = (props: PropsType) => {
     return (
         <div>
             <div className={styles.item}>
                 <img src={avatar} alt="avatar" />
-                <div className={styles.messageWrapper}>Message</div>
+                <div className={styles.messageWrapper}>{props.message}</div>
             </div>
             <div>
-                <span>like</span>
+                <span>like {props.likesCount}</span>
             </div>
         </div>
     )

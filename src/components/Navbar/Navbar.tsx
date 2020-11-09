@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Navbar.module.css';
 import {FaMale, FaEnvelope, FaNewspaper, FaMusic, FaCog, FaUsers, FaSignInAlt} from 'react-icons/fa';
+import {NavLink} from "react-router-dom";
 
 const Navbar = () => {
     return (
@@ -8,31 +9,31 @@ const Navbar = () => {
             <div className={styles.item}>
                 <div className={styles.iconWrapper}>
                     <div className={styles.icon}><FaMale color="#8DC63F"/></div>
-                    <div>Profile</div>
+                    <NavLink to="/profile" activeClassName={styles.active}>Profile</NavLink>
                 </div>
             </div>
             <div className={styles.item}>
                 <div className={styles.iconWrapper}>
                     <div className={styles.icon}><FaEnvelope color="#662D91"/></div>
-                    <div>Messages</div>
+                    <NavLink to="/dialogs" activeClassName={styles.active}>Messages</NavLink>
                 </div>
             </div>
             <div className={styles.item}>
                 <div className={styles.iconWrapper}>
                     <div className={styles.icon}><FaNewspaper color="#EE5187"/></div>
-                    <div>News</div>
+                    <NavLink to="/news" activeClassName={styles.active}>News</NavLink>
                 </div>
             </div>
             <div className={styles.item}>
                 <div className={styles.iconWrapper}>
                     <div className={styles.icon}><FaMusic color="#F7941E"/></div>
-                    <div>Music</div>
+                    <NavLink to="/music" activeClassName={styles.active}>Music</NavLink>
                 </div>
             </div>
             <div className={styles.item}>
                 <div className={styles.iconWrapper}>
                     <div className={styles.icon}><FaCog color="#1C75BC"/></div>
-                    <div>Settings</div>
+                    <NavLink to="/settings" activeClassName={styles.active}>Settings</NavLink>
                 </div>
             </div>
             <div className={styles.item}>
