@@ -8,19 +8,29 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
+import {DialogItemPropsType} from "./components/Dialogs/DialogItem/DialogItem";
+import {MessagePropsType} from "./components/Dialogs/Message/Message";
 
-function App() {
+type AppPropsType = {
+    dialogsElements: Array<DialogItemPropsType>
+    messages: Array<MessagePropsType>
+}
+
+function App(props: AppPropsType) {
   return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header />
                 <div className='wrapperContent'>
                     <Navbar />
-                    <Route path='/profile' component={Profile}/>
-                    <Route path='/dialogs' component={Dialogs}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/settings' component={Settings}/>
-                    <Route path='/news' component={News}/>
+                    <Route path='/profile' render={ () => <Profile />}/>
+                    <Route path='/dialogs' render={ () => <Dialogs
+                        dialogsElements={props.dialogsElements}
+                        messages={props.messages}
+                    />}/>
+                    <Route path='/music' render={ () => <Music />}/>
+                    <Route path='/settings' render={ () => <Settings />}/>
+                    <Route path='/news' render={ () => <News />}/>
                 </div>
             </div>
         </BrowserRouter>

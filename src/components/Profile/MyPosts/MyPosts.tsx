@@ -9,7 +9,10 @@ const MyPosts = () => {
         [
             {id: 1, message: "Hello, i like this course", likeCount: 15},
             {id: 2, message: "It's a nice course, yes!", likeCount: 20},
+            {id: 3, message: "Hi!", likeCount: 2},
         ]
+
+    const postsElements = postData.map(p => <Post key={p.id} message={p.message} likesCount={p.likeCount}/>)
 
 
     return (
@@ -26,8 +29,7 @@ const MyPosts = () => {
                 </div>
             </div>
             <div className={styles.posts}>
-                <Post message={postData[0].message} likesCount={postData[0].id}/>
-                <Post message={postData[1].message} likesCount={postData[1].id}/>
+                {postsElements}
             </div>
         </div>
     )
