@@ -10,10 +10,12 @@ import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import {DialogItemPropsType} from "./components/Dialogs/DialogItem/DialogItem";
 import {MessagePropsType} from "./components/Dialogs/Message/Message";
+import {PostPropsType} from "./components/Profile/MyPosts/Post/Post";
 
 type AppPropsType = {
-    dialogsElements: Array<DialogItemPropsType>
+    dialogs: Array<DialogItemPropsType>
     messages: Array<MessagePropsType>
+    posts: Array<PostPropsType>
 }
 
 function App(props: AppPropsType) {
@@ -23,9 +25,9 @@ function App(props: AppPropsType) {
                 <Header />
                 <div className='wrapperContent'>
                     <Navbar />
-                    <Route path='/profile' render={ () => <Profile />}/>
+                    <Route path='/profile' render={ () => <Profile posts={props.posts}/>}/>
                     <Route path='/dialogs' render={ () => <Dialogs
-                        dialogsElements={props.dialogsElements}
+                        dialogsElements={props.dialogs}
                         messages={props.messages}
                     />}/>
                     <Route path='/music' render={ () => <Music />}/>

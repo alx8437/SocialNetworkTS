@@ -24,10 +24,17 @@ const messages = [
     {id: 5, message: "It's greate!"},
 ]
 
+const posts =
+    [
+        {id: 1, message: "Hello, i like this course", likesCount: 15},
+        {id: 2, message: "It's a nice course, yes!", likesCount: 20},
+        {id: 3, message: "Hi!", likesCount: 2},
+    ]
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App dialogsElements={dialogData} messages={messages}/>
+    <App dialogs={dialogData} messages={messages} posts={posts}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

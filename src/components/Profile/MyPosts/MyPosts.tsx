@@ -1,19 +1,14 @@
 import React from "react";
 import styles from './MyPosts.module.css';
-import Post from "./Post/Post";
+import Post, {PostPropsType} from "./Post/Post";
 
+type PropsType = {
+    posts: Array<PostPropsType>
+}
 
-const MyPosts = () => {
+const MyPosts = (props: PropsType) => {
 
-    const postData =
-        [
-            {id: 1, message: "Hello, i like this course", likeCount: 15},
-            {id: 2, message: "It's a nice course, yes!", likeCount: 20},
-            {id: 3, message: "Hi!", likeCount: 2},
-        ]
-
-    const postsElements = postData.map(p => <Post key={p.id} message={p.message} likesCount={p.likeCount}/>)
-
+    const postsElements = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     return (
         <div className={styles.postWrapper}>
