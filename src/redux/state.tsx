@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {rerenderEntireTree} from "./render";
 
 export type MessagePropsType = {
     id: string
@@ -49,11 +50,13 @@ export const state: StateType = {
 export function addPost(postText: string) {
     const newPost: PostPropsType = {id: v1(), message: postText, likesCount: 3};
     state.posts.push(newPost);
+    rerenderEntireTree(state)
 }
 
 export function addMessage(messageText: string) {
     const newMessage: MessagePropsType = {id: v1(), message: messageText};
     state.messages.push(newMessage);
+    rerenderEntireTree(state)
 }
 
 
