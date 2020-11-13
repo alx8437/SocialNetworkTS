@@ -1,18 +1,18 @@
-
+import {v1} from "uuid";
 
 export type MessagePropsType = {
-    id: number
+    id: string
     message: string
 }
 
 
 export type DialogItemPropsType = {
-    id: number
+    id: string
     name: string
 }
 
 export type PostPropsType = {
-    id: number
+    id: string
     message: string
     likesCount: number
 }
@@ -24,30 +24,38 @@ export type StateType = {
 }
 
 
+export const state: StateType = {
+    dialogs: [
+        {id: v1(), name: "Alex"},
+        {id: v1(), name: "Sveta"},
+        {id: v1(), name: "Andrey"},
+        {id: v1(), name: "Victor"},
+        {id: v1(), name: "Georgy"}
+    ],
+    messages: [
+        {id: v1(), message: "Hi"},
+        {id: v1(), message: "How are you"},
+        {id: v1(), message: "I learn React!"},
+        {id: v1(), message: "I am too"},
+        {id: v1(), message: "It's greate!"},
+    ],
+    posts: [
+        {id: v1(), message: "Hello, i like this course", likesCount: 15},
+        {id: v1(), message: "It's a nice course, yes!", likesCount: 20},
+        {id: v1(), message: "Hi!", likesCount: 2},
+    ]
+};
+
+export function addPost(postText: string) {
+    const newPost: PostPropsType = {id: v1(), message: postText, likesCount: 3};
+    state.posts.push(newPost);
+}
+
+export function addMessage(messageText: string) {
+    const newMessage: MessagePropsType = {id: v1(), message: messageText};
+    state.messages.push(newMessage);
+}
 
 
-export const state: StateType =
-    {
-        dialogs: [
-            {id: 1, name: "Alex"},
-            {id: 2, name: "Sveta"},
-            {id: 3, name: "Andrey"},
-            {id: 4, name: "Victor"},
-            {id: 5, name: "Georgy"}
-        ],
-        messages:
-            [
-                {id: 1, message: "Hi"},
-                {id: 2, message: "How are you"},
-                {id: 3, message: "I learn React!"},
-                {id: 4, message: "I am too"},
-                {id: 5, message: "It's greate!"},
-            ],
-        posts:
-            [
-                {id: 1, message: "Hello, i like this course", likesCount: 15},
-                {id: 2, message: "It's a nice course, yes!", likesCount: 20},
-                {id: 3, message: "Hi!", likesCount: 2},
-            ]
 
-    };
+
