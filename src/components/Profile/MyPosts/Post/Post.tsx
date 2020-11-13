@@ -1,12 +1,9 @@
 import React from 'react';
 import styles from './Post.module.css';
 import avatar from '../../../../assets/images/userNoPhoto.png'
+import {PostPropsType} from "../../../../redux/state";
 
-export type PostPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
+
 
 const Post = (props: PostPropsType) => {
     return (

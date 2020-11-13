@@ -1,6 +1,7 @@
 import React from "react";
+import { PostPropsType } from "../../../redux/state";
 import styles from './MyPosts.module.css';
-import Post, {PostPropsType} from "./Post/Post";
+import Post from "./Post/Post";
 
 type PropsType = {
     posts: Array<PostPropsType>
@@ -9,6 +10,11 @@ type PropsType = {
 const MyPosts = (props: PropsType) => {
 
     const postsElements = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>)
+    const newTextPost = React.createRef<HTMLTextAreaElement>();
+
+    const addPost = () => {
+        console.log(newTextPost.current?.value)
+    }
 
     return (
         <div className={styles.postWrapper}>
@@ -17,10 +23,11 @@ const MyPosts = (props: PropsType) => {
                 <textarea
                     className={styles.textarea}
                     placeholder={"Write what your wish"}
+                    ref={newTextPost}
                 />
                 </div>
                 <div>
-                    <button className={styles.button}>AddPost</button>
+                    <button className={styles.button} onClick={addPost}>AddPost</button>
                 </div>
             </div>
             <div className={styles.posts}>

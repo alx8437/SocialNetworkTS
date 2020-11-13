@@ -1,17 +1,24 @@
 import React from 'react';
 import styles from './Dialogs.module.css'
-import DialogItem, {DialogItemPropsType} from "./DialogItem/DialogItem";
-import Message, {MessagePropsType} from "./Message/Message";
+import {DialogItemPropsType, MessagePropsType} from "../../redux/state";
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
 
 type DialogsPropsType = {
-    dialogsElements: Array<DialogItemPropsType>
+    dialogs: Array<DialogItemPropsType>
     messages: Array<MessagePropsType>
 }
 
 const Dialogs = (props: DialogsPropsType) => {
 
-    const dialogsElements = props.dialogsElements.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    const dialogsElements = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     const messagesElements = props.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
+
+    const newTextMessage = React.createRef<HTMLTextAreaElement>()
+
+    const addMessage = () => {
+        console.log(newTextMessage.current?.value)
+    }
 
     return (
         <div className={styles.dialogs}>
@@ -25,10 +32,10 @@ const Dialogs = (props: DialogsPropsType) => {
             </div>
             <div className={styles.sendMessage}>
                 <textarea
-                    value="Hi"
-                    placeholder="enter your message"
+                    placeholder="Enter your message"
+                    ref={newTextMessage}
                 />
-                <button>send</button>
+                <button onClick={addMessage}>send</button>
             </div>
         </div>
     )
