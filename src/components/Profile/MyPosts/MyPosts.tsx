@@ -1,26 +1,32 @@
-import React from "react";
-import { PostPropsType } from "../../../redux/state";
+import React, {ChangeEvent} from "react";
+import {ProfilePage, updateTextPost} from "../../../redux/state";
 import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
 
 type PropsType = {
-    posts: Array<PostPropsType>
-    addPost: (postText: string) => void
+    profilePage: ProfilePage
+    addPost: () => void
+    updateTextPost: (newTextPost: string) => void
 }
 
 const MyPosts = (props: PropsType) => {
 
-    const postsElements = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>)
-    const newTextPost = React.createRef<HTMLTextAreaElement>();
+    const postsElements = props.profilePage.posts.map(p => <Post
+        key={p.id}
+        id={p.id}
+        message={p.message}
+        likesCount={p.likesCount}
+    />)
 
     const addPost = () => {
-        const postText = newTextPost.current?.value
-        if (postText) {
-            console.log(props.posts)
-            props.addPost(postText)
-            console.log(props.posts)
-        }
+            props.addPost()
     }
+
+    const updateTextPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateTextPost(e.currentTarget.value)
+    }
+
+
 
     return (
         <div className={styles.postWrapper}>
@@ -28,8 +34,8 @@ const MyPosts = (props: PropsType) => {
                 <div className={styles.textarea}>
                 <textarea
                     className={styles.textarea}
-                    placeholder={"Write what your wish"}
-                    ref={newTextPost}
+                    value={props.profilePage.newPostText}
+                    onChange={updateTextPost}
                 />
                 </div>
                 <div>

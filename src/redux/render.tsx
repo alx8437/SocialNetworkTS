@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
 import App from "../App";
-import {addMessage, addPost, StateType} from "./state";
+import {addMessage, addPost, StateType, updateTextPost} from "./state";
 
 
 export const rerenderEntireTree = (state: StateType) => {
@@ -13,6 +13,7 @@ export const rerenderEntireTree = (state: StateType) => {
                     state={state}
                     addPost={addPost}
                     addMessage={addMessage}
+                    updateTextPost={updateTextPost}
                 />
             </BrowserRouter>
         </React.StrictMode>,

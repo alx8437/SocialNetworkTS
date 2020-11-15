@@ -2,18 +2,23 @@ import React from "react";
 import styles from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {PostPropsType} from "../../redux/state";
+import {ProfilePage} from "../../redux/state";
 
 type PropsType = {
-    posts: Array<PostPropsType>
-    addPost: (postText: string) => void
+    profilePage: ProfilePage
+    addPost: () => void
+    updateTextPost: (newTextPost: string) => void
 }
 
 const Profile = (props: PropsType) => {
     return (
         <div className={styles.profileWrapper}>
             <ProfileInfo />
-            <MyPosts  posts={props.posts} addPost={props.addPost}/>
+            <MyPosts
+                profilePage={props.profilePage}
+                addPost={props.addPost}
+                updateTextPost={props.updateTextPost}
+            />
         </div>
     )
 };
