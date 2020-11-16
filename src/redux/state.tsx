@@ -17,6 +17,7 @@ export type PostPropsType = {
 export type DialogsPage = {
     dialogs: Array<DialogItemPropsType>
     messages: Array<MessagePropsType>
+    newTextMessage: string
 }
 export  type ProfilePage = {
     posts: Array<PostPropsType>
@@ -43,6 +44,7 @@ export const state: StateType = {
             {id: v1(), message: "I am too"},
             {id: v1(), message: "It's greate!"},
         ],
+        newTextMessage: ""
     },
     profilePage: {
         posts: [
@@ -65,14 +67,23 @@ export function addPost() {
     rerenderEntireTree(state)
 }
 
-export function addMessage(messageText: string) {
-    const newMessage: MessagePropsType = {id: v1(), message: messageText};
+export function addMessage() {
+    const newMessage: MessagePropsType = {
+        id: v1(),
+        message: state.dialogsPage.newTextMessage
+    };
     state.dialogsPage.messages.push(newMessage);
+    state.dialogsPage.newTextMessage = "";
     rerenderEntireTree(state)
 }
 
 export function updateTextPost(newTextPost: string) {
     state.profilePage.newPostText = newTextPost;
+    rerenderEntireTree(state)
+}
+
+export function updateMessageText(newTextMessage: string) {
+    state.dialogsPage.newTextMessage = newTextMessage;
     rerenderEntireTree(state)
 }
 
