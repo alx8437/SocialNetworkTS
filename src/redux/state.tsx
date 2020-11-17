@@ -1,5 +1,7 @@
 import {v1} from "uuid";
-import {rerenderEntireTree} from "./render";
+
+let rerenderEntireTree = () => {
+}
 
 export type MessagePropsType = {
     id: string
@@ -64,7 +66,7 @@ export function addPost() {
     };
     state.profilePage.posts.push(newPost);
     state.profilePage.newPostText = "";
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 export function addMessage() {
@@ -74,17 +76,21 @@ export function addMessage() {
     };
     state.dialogsPage.messages.push(newMessage);
     state.dialogsPage.newTextMessage = "";
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 export function updateTextPost(newTextPost: string) {
     state.profilePage.newPostText = newTextPost;
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 export function updateMessageText(newTextMessage: string) {
     state.dialogsPage.newTextMessage = newTextMessage;
-    rerenderEntireTree(state)
+    rerenderEntireTree()
+}
+
+export function subscribe(observer: () => void) {
+    rerenderEntireTree = observer
 }
 
 
