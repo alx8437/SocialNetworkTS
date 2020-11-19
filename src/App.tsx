@@ -22,12 +22,12 @@ function App(props: AppPropsType) {
             <div className='wrapperContent'>
                 <Navbar/>
                 <Route path='/profile' render={() => <
-                    Profile profilePage={props.store.state.profilePage}
+                    Profile profilePage={props.store.getState().profilePage}
                             addPost={props.store.addPost.bind(props.store)}
                             updateTextPost={props.store.updateTextPost.bind(props.store)}
                 />}/>
                 <Route path='/dialogs' render={() => <Dialogs
-                    dialogsPage={props.store.state.dialogsPage}
+                    dialogsPage={props.store.getState().dialogsPage}
                     addMessage={props.store.addMessage.bind(props.store)}
                     updateMessageText={props.store.updateMessageText.bind(props.store)}
                 />}/>

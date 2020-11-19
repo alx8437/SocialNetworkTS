@@ -31,17 +31,18 @@ export type StateType = {
 }
 
 export type StoreType = {
-    state: StateType
+    _state: StateType
     addPost: () => void
     addMessage: () => void
     updateTextPost: (newTextPost: string) => void
     updateMessageText: (newTextMessage: string) => void
     subscribe: (observer: () => void) => void
+    getState: () => StateType
 }
 
 
-export let store: StoreType = {
-    state: {
+let store: StoreType = {
+    _state: {
         dialogsPage: {
             dialogs: [
                 {id: v1(), name: "Alex"},
@@ -65,35 +66,38 @@ export let store: StoreType = {
                 {id: v1(), message: "It's a nice course, yes!", likesCount: 20},
                 {id: v1(), message: "Hi!", likesCount: 2},
             ],
-            newPostText: "123"
+            newPostText: ""
         }
+    },
+    getState() {
+        return this._state
     },
     addPost() {
         const newPost: PostPropsType = {
             id: v1(),
-            message: this.state.profilePage.newPostText,
+            message: this._state.profilePage.newPostText,
             likesCount: 3
         };
-        this.state.profilePage.posts.push(newPost);
-        this.state.profilePage.newPostText = ""
+        this._state.profilePage.posts.push(newPost);
+        this._state.profilePage.newPostText = ""
         rerenderEntireTree()
     },
     addMessage() {
         const newMessage: MessagePropsType = {
             id: v1(),
-            message: this.state.dialogsPage.newTextMessage
+            message: this._state.dialogsPage.newTextMessage
         };
-        this.state.dialogsPage.messages.push(newMessage);
-        this.state.dialogsPage.newTextMessage = "";
+        this._state.dialogsPage.messages.push(newMessage);
+        this._state.dialogsPage.newTextMessage = "";
         rerenderEntireTree()
     },
     updateTextPost(newTextPost: string) {
-        this.state.profilePage.newPostText = newTextPost;
+        this._state.profilePage.newPostText = newTextPost;
         rerenderEntireTree()
     },
 
     updateMessageText(newTextMessage: string) {
-        this.state.dialogsPage.newTextMessage = newTextMessage;
+        this._state.dialogsPage.newTextMessage = newTextMessage;
         rerenderEntireTree()
     },
 
@@ -102,6 +106,8 @@ export let store: StoreType = {
     }
 
 }
+
+export default store
 
 
 
