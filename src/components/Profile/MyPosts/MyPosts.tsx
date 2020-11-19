@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react";
-import {ProfilePage, updateTextPost} from "../../../redux/state";
+import {ProfilePage} from "../../../redux/store";
 import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
 

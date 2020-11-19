@@ -8,15 +8,11 @@ import {Route} from 'react-router-dom';
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
-import {StateType} from "./redux/state";
+import {StoreType} from "./redux/store";
 
 
 type AppPropsType = {
-    state: StateType
-    addPost: () => void
-    addMessage: () => void
-    updateTextPost: (newTextPost: string) => void
-    updateMessageText: (newTextMessage: string) => void
+    store: StoreType
 }
 
 function App(props: AppPropsType) {
@@ -26,14 +22,14 @@ function App(props: AppPropsType) {
             <div className='wrapperContent'>
                 <Navbar/>
                 <Route path='/profile' render={() => <
-                    Profile profilePage={props.state.profilePage}
-                            addPost={props.addPost}
-                            updateTextPost={props.updateTextPost}
+                    Profile profilePage={props.store.state.profilePage}
+                            addPost={props.store.addPost.bind(props.store)}
+                            updateTextPost={props.store.updateTextPost.bind(props.store)}
                 />}/>
                 <Route path='/dialogs' render={() => <Dialogs
-                    dialogsPage={props.state.dialogsPage}
-                    addMessage={props.addMessage}
-                    updateMessageText={props.updateMessageText}
+                    dialogsPage={props.store.state.dialogsPage}
+                    addMessage={props.store.addMessage.bind(props.store)}
+                    updateMessageText={props.store.updateMessageText.bind(props.store)}
                 />}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
