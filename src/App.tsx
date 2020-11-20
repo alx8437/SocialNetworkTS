@@ -23,13 +23,11 @@ function App(props: AppPropsType) {
                 <Navbar/>
                 <Route path='/profile' render={() => <
                     Profile profilePage={props.store.getState().profilePage}
-                            addPost={props.store.addPost.bind(props.store)}
-                            updateTextPost={props.store.updateTextPost.bind(props.store)}
+                            dispatch={props.store.dispatch.bind(props.store)}
                 />}/>
                 <Route path='/dialogs' render={() => <Dialogs
                     dialogsPage={props.store.getState().dialogsPage}
-                    addMessage={props.store.addMessage.bind(props.store)}
-                    updateMessageText={props.store.updateMessageText.bind(props.store)}
+                    dispatch={props.store.dispatch.bind(props.store)}
                 />}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>

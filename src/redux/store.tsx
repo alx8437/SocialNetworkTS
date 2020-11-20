@@ -1,8 +1,6 @@
 import {v1} from "uuid";
 
-let rerenderEntireTree = () => {
-}
-
+//State types
 export type MessagePropsType = {
     id: string
     message: string
@@ -30,14 +28,30 @@ export type StateType = {
     profilePage: ProfilePage
 }
 
+//Store types
 export type StoreType = {
     _state: StateType
-    addPost: () => void
-    addMessage: () => void
-    updateTextPost: (newTextPost: string) => void
-    updateMessageText: (newTextMessage: string) => void
+    _rerenderEntireTree: () => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
+    dispatch: (action: AddPostActionType |
+        AddMessageActionType | UpdateTextPost | UpdateTextMessage) => void
+}
+
+//Action types
+export type AddPostActionType = {
+    type: "ADD-POST"
+}
+export type UpdateTextPost = {
+    type: "UPDATE-TEXT-POST"
+    newTextPost: string
+}
+export type AddMessageActionType = {
+    type: "ADD-MESSAGE"
+}
+export type UpdateTextMessage = {
+    type: "UPDATE-TEXT-MESSAGE"
+    newTextMessage: string
 }
 
 
@@ -69,42 +83,46 @@ let store: StoreType = {
             newPostText: ""
         }
     },
+    _rerenderEntireTree() {},
+
     getState() {
         return this._state
     },
-    addPost() {
-        const newPost: PostPropsType = {
-            id: v1(),
-            message: this._state.profilePage.newPostText,
-            likesCount: 3
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = ""
-        rerenderEntireTree()
-    },
-    addMessage() {
-        const newMessage: MessagePropsType = {
-            id: v1(),
-            message: this._state.dialogsPage.newTextMessage
-        };
-        this._state.dialogsPage.messages.push(newMessage);
-        this._state.dialogsPage.newTextMessage = "";
-        rerenderEntireTree()
-    },
-    updateTextPost(newTextPost: string) {
-        this._state.profilePage.newPostText = newTextPost;
-        rerenderEntireTree()
-    },
-
-    updateMessageText(newTextMessage: string) {
-        this._state.dialogsPage.newTextMessage = newTextMessage;
-        rerenderEntireTree()
-    },
-
     subscribe(observer: () => void) {
-        rerenderEntireTree = observer
-    }
+        this._rerenderEntireTree = observer
+    },
 
+    dispatch(action) {
+        switch (action.type) {
+            case "ADD-POST":
+                const newPost: PostPropsType = {
+                    id: v1(),
+                    message: this._state.profilePage.newPostText,
+                    likesCount: 3
+                };
+                this._state.profilePage.posts.push(newPost);
+                this._state.profilePage.newPostText = ""
+                this._rerenderEntireTree()
+                break
+            case "UPDATE-TEXT-POST":
+                this._state.profilePage.newPostText = action.newTextPost;
+                this._rerenderEntireTree()
+                break
+            case "ADD-MESSAGE":
+                const newMessage: MessagePropsType = {
+                    id: v1(),
+                    message: this._state.dialogsPage.newTextMessage
+                };
+                this._state.dialogsPage.messages.push(newMessage);
+                this._state.dialogsPage.newTextMessage = "";
+                this._rerenderEntireTree()
+                break
+            case "UPDATE-TEXT-MESSAGE":
+                this._state.dialogsPage.newTextMessage = action.newTextMessage;
+                this._rerenderEntireTree()
+                break
+        }
+    }
 }
 
 export default store
