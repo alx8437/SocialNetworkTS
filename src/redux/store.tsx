@@ -34,25 +34,12 @@ export type StoreType = {
     _rerenderEntireTree: () => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
-    dispatch: (action: AddPostActionType |
-        AddMessageActionType | UpdateTextPost | UpdateTextMessage) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 //Action types
-export type AddPostActionType = {
-    type: "ADD-POST"
-}
-export type UpdateTextPost = {
-    type: "UPDATE-TEXT-POST"
-    newTextPost: string
-}
-export type AddMessageActionType = {
-    type: "ADD-MESSAGE"
-}
-export type UpdateTextMessage = {
-    type: "UPDATE-TEXT-MESSAGE"
-    newTextMessage: string
-}
+export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateTextPostAC>
+    | ReturnType<typeof addMessageAC> | ReturnType<typeof updateTextMessageAC>
 
 
 let store: StoreType = {
@@ -123,6 +110,17 @@ let store: StoreType = {
                 break
         }
     }
+}
+
+export const addPostAC = () => {
+    return { type: "ADD-POST"} as const
+}
+export const updateTextPostAC = (newTextPost: string) => {
+    return {type: "UPDATE-TEXT-POST", newTextPost} as const
+}
+export const addMessageAC = () => {return {type: "ADD-MESSAGE"} as const}
+export const updateTextMessageAC = (newTextMessage: string) => {
+    return {type: "UPDATE-TEXT-MESSAGE", newTextMessage} as const
 }
 
 export default store
