@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import dialogsReducer from "./dialogsReducer";
+import profileReducer from "./profileReducer";
 
 //State types
 export type MessagePropsType = {
@@ -57,7 +59,7 @@ let store: StoreType = {
                 {id: v1(), message: "How are you"},
                 {id: v1(), message: "I learn React!"},
                 {id: v1(), message: "I am too"},
-                {id: v1(), message: "It's greate!"},
+                {id: v1(), message: "It's grate!"},
             ],
             newTextMessage: ""
         },
@@ -80,35 +82,10 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case "ADD-POST":
-                const newPost: PostPropsType = {
-                    id: v1(),
-                    message: this._state.profilePage.newPostText,
-                    likesCount: 3
-                };
-                this._state.profilePage.posts.push(newPost);
-                this._state.profilePage.newPostText = ""
-                this._rerenderEntireTree()
-                break
-            case "UPDATE-TEXT-POST":
-                this._state.profilePage.newPostText = action.newTextPost;
-                this._rerenderEntireTree()
-                break
-            case "ADD-MESSAGE":
-                const newMessage: MessagePropsType = {
-                    id: v1(),
-                    message: this._state.dialogsPage.newTextMessage
-                };
-                this._state.dialogsPage.messages.push(newMessage);
-                this._state.dialogsPage.newTextMessage = "";
-                this._rerenderEntireTree()
-                break
-            case "UPDATE-TEXT-MESSAGE":
-                this._state.dialogsPage.newTextMessage = action.newTextMessage;
-                this._rerenderEntireTree()
-                break
-        }
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+
+        this._rerenderEntireTree()
     }
 }
 
