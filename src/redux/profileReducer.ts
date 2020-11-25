@@ -1,13 +1,18 @@
 import {v1} from "uuid";
-import {ActionTypes, PostPropsType, StateType} from "./store";
+import {
+    AddMessageActionType,
+    AddPostActionType,
+    PostPropsType,
+    ProfilePage,
+    StateType,
+    UpdateTextMessage,
+    UpdateTextPost
+} from "./store";
 
-type StateProfileReducer = {
-    posts: Array<PostPropsType>
-    newPostText: string
-}
 
 
-const profileReducer = (state: StateProfileReducer, action: ActionTypes) => {
+const profileReducer = (state: ProfilePage, action: AddPostActionType | UpdateTextPost
+    | AddMessageActionType | UpdateTextMessage) => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostPropsType = {
@@ -25,6 +30,13 @@ const profileReducer = (state: StateProfileReducer, action: ActionTypes) => {
         default:
             return state
     }
+}
+
+export const addPostAC = () => {
+    return { type: "ADD-POST"}
+}
+export const updateTextPostAC = (newTextPost: string) => {
+    return {type: "UPDATE-TEXT-POST", newTextPost} as const
 }
 
 export default profileReducer;

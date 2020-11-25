@@ -1,6 +1,6 @@
 import {v1} from "uuid";
-import dialogsReducer from "./dialogsReducer";
 import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
 
 //State types
 export type MessagePropsType = {
@@ -30,19 +30,32 @@ export type StateType = {
     profilePage: ProfilePage
 }
 
+//Action Creates Type
+export type AddPostActionType = {
+    type: "ADD-POST"
+}
+export type UpdateTextPost = {
+    type: "UPDATE-TEXT-POST"
+    newTextPost: string
+}
+export type AddMessageActionType = {
+    type: "ADD-MESSAGE"
+}
+export type UpdateTextMessage = {
+    type: "UPDATE-TEXT-MESSAGE"
+    newTextMessage: string
+}
+
+
 //Store types
 export type StoreType = {
     _state: StateType
     _rerenderEntireTree: () => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
-    dispatch: (action: ActionTypes) => void
+    dispatch: (action: UpdateTextPost | AddMessageActionType |
+        AddPostActionType | UpdateTextMessage) => void
 }
-
-//Action types
-export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateTextPostAC>
-    | ReturnType<typeof addMessageAC> | ReturnType<typeof updateTextMessageAC>
-
 
 let store: StoreType = {
     _state: {
@@ -89,16 +102,8 @@ let store: StoreType = {
     }
 }
 
-export const addPostAC = () => {
-    return { type: "ADD-POST"} as const
-}
-export const updateTextPostAC = (newTextPost: string) => {
-    return {type: "UPDATE-TEXT-POST", newTextPost} as const
-}
-export const addMessageAC = () => {return {type: "ADD-MESSAGE"} as const}
-export const updateTextMessageAC = (newTextMessage: string) => {
-    return {type: "UPDATE-TEXT-MESSAGE", newTextMessage} as const
-}
+
+
 
 export default store
 

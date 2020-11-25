@@ -1,14 +1,16 @@
 import {v1} from "uuid";
-import {ActionTypes, DialogItemPropsType, MessagePropsType, StateType} from "./store";
+import {
+    AddMessageActionType,
+    AddPostActionType,
+    DialogsPage,
+    MessagePropsType,
+    UpdateTextMessage,
+    UpdateTextPost
+} from "./store";
 
-type StateDialogsReducer = {
-    dialogs: Array<DialogItemPropsType>
-    messages: Array<MessagePropsType>
-    newTextMessage: string
-}
 
-
-const dialogsReducer = (state: StateDialogsReducer, action: ActionTypes) => {
+const dialogsReducer = (state: DialogsPage, action: AddPostActionType | UpdateTextPost
+    | AddMessageActionType | UpdateTextMessage) => {
     switch (action.type) {
         case "ADD-MESSAGE":
             const newMessage: MessagePropsType = {
@@ -25,6 +27,11 @@ const dialogsReducer = (state: StateDialogsReducer, action: ActionTypes) => {
             return state
     }
 
+}
+
+export const addMessageAC = () => ({type: "ADD-MESSAGE"})
+export const updateTextMessageAC = (newTextMessage: string) => {
+    return {type: "UPDATE-TEXT-MESSAGE", newTextMessage} as const
 }
 
 export default dialogsReducer;
