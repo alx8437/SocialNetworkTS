@@ -1,18 +1,17 @@
 import {v1} from "uuid";
-import {
-    AddMessageActionType,
-    AddPostActionType,
-    PostPropsType,
-    ProfilePage,
-    StateType,
-    UpdateTextMessage,
-    UpdateTextPost
-} from "./store";
+import {ActionTypes, PostPropsType, ProfilePage} from "./store";
 
+const  initialState = {
+    posts: [
+        {id: v1(), message: "Hello, i like this course", likesCount: 15},
+        {id: v1(), message: "It's a nice course, yes!", likesCount: 20},
+        {id: v1(), message: "Hi!", likesCount: 2},
+    ],
+    newPostText: ""
+}
 
-
-const profileReducer = (state: ProfilePage, action: AddPostActionType | UpdateTextPost
-    | AddMessageActionType | UpdateTextMessage) => {
+const profileReducer = (state: ProfilePage = initialState, action: ActionTypes) => {
+    debugger
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostPropsType = {
@@ -33,7 +32,7 @@ const profileReducer = (state: ProfilePage, action: AddPostActionType | UpdateTe
 }
 
 export const addPostAC = () => {
-    return { type: "ADD-POST"}
+    return {type: "ADD-POST"} as const
 }
 export const updateTextPostAC = (newTextPost: string) => {
     return {type: "UPDATE-TEXT-POST", newTextPost} as const

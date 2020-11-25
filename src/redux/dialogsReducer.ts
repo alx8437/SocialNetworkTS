@@ -1,16 +1,25 @@
 import {v1} from "uuid";
-import {
-    AddMessageActionType,
-    AddPostActionType,
-    DialogsPage,
-    MessagePropsType,
-    UpdateTextMessage,
-    UpdateTextPost
-} from "./store";
+import {ActionTypes, DialogsPage, MessagePropsType} from "./store";
 
+const initialState = {
+    dialogs: [
+        {id: v1(), name: "Alex"},
+        {id: v1(), name: "Sveta"},
+        {id: v1(), name: "Andrey"},
+        {id: v1(), name: "Victor"},
+        {id: v1(), name: "Georgy"}
+    ],
+    messages: [
+        {id: v1(), message: "Hi"},
+        {id: v1(), message: "How are you"},
+        {id: v1(), message: "I learn React!"},
+        {id: v1(), message: "I am too"},
+        {id: v1(), message: "It's grate!"},
+    ],
+    newTextMessage: ""
+}
 
-const dialogsReducer = (state: DialogsPage, action: AddPostActionType | UpdateTextPost
-    | AddMessageActionType | UpdateTextMessage) => {
+const dialogsReducer = (state: DialogsPage = initialState, action: ActionTypes) => {
     switch (action.type) {
         case "ADD-MESSAGE":
             const newMessage: MessagePropsType = {
@@ -29,7 +38,7 @@ const dialogsReducer = (state: DialogsPage, action: AddPostActionType | UpdateTe
 
 }
 
-export const addMessageAC = () => ({type: "ADD-MESSAGE"})
+export const addMessageAC = () => ({type: "ADD-MESSAGE"} as const)
 export const updateTextMessageAC = (newTextMessage: string) => {
     return {type: "UPDATE-TEXT-MESSAGE", newTextMessage} as const
 }

@@ -46,6 +46,9 @@ export type UpdateTextMessage = {
     newTextMessage: string
 }
 
+export type ActionTypes = AddPostActionType | UpdateTextPost | AddMessageActionType | UpdateTextMessage
+
+
 
 //Store types
 export type StoreType = {
