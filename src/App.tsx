@@ -8,8 +8,10 @@ import {Route} from 'react-router-dom';
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
-import {ActionTypes, DialogsPage, ProfilePage} from "./redux/store";
+import {DialogsPage, ProfilePage} from "./redux/store";
 import {CombinedState, Store} from "redux";
+import {ActionTypes} from "./redux/actionTypes";
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
 type AppPropsType = {
@@ -26,7 +28,7 @@ function App(props: AppPropsType) {
                     Profile profilePage={props.store.getState().profilePage}
                             dispatch={props.store.dispatch.bind(props.store)}
                 />}/>
-                <Route path='/dialogs' render={() => <Dialogs
+                <Route path='/dialogs' render={() => <DialogsContainer
                     dialogsPage={props.store.getState().dialogsPage}
                     dispatch={props.store.dispatch.bind(props.store)}
                 />}/>

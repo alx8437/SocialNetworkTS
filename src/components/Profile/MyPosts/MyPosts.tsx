@@ -1,12 +1,12 @@
 import React, {ChangeEvent} from "react";
-import {ActionTypes, ProfilePage} from "../../../redux/store";
+import {ProfilePage} from "../../../redux/store";
 import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostAC, updateTextPostAC} from "../../../redux/profileReducer";
 
 type PropsType = {
     profilePage: ProfilePage
-    dispatch: (action: ActionTypes) => void
+    addPost: () => void
+    updateTextPost: (text: string) => void
 }
 
 const MyPosts = (props: PropsType) => {
@@ -19,14 +19,13 @@ const MyPosts = (props: PropsType) => {
     />)
 
     const addPost = () => {
-            props.dispatch(addPostAC())
+        props.addPost()
     }
 
     const updateTextPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const newTextPost = e.currentTarget.value
-        props.dispatch(updateTextPostAC(newTextPost))
+        props.updateTextPost(newTextPost)
     }
-
 
 
     return (

@@ -1,5 +1,6 @@
 import {v1} from "uuid";
-import {ActionTypes, DialogsPage, MessagePropsType} from "./store";
+import {DialogsPage, MessagePropsType} from "./store";
+import {ActionTypes} from "./actionTypes";
 
 const initialState = {
     dialogs: [

@@ -1,8 +1,9 @@
 import React from "react";
 import styles from './Profile.module.css';
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {ActionTypes, ProfilePage} from "../../redux/store";
+import { ProfilePage} from "../../redux/store";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {ActionTypes} from "../../redux/actionTypes";
 
 type PropsType = {
     profilePage: ProfilePage
@@ -13,7 +14,7 @@ const Profile = (props: PropsType) => {
     return (
         <div className={styles.profileWrapper}>
             <ProfileInfo />
-            <MyPosts
+            <MyPostsContainer
                 profilePage={props.profilePage}
                 dispatch={props.dispatch}
             />

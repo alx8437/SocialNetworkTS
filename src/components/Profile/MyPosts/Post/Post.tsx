@@ -4,7 +4,6 @@ import avatar from '../../../../assets/images/userNoPhoto.png'
 import {PostPropsType} from "../../../../redux/store";
 
 
-
 const Post = (props: PostPropsType) => {
     return (
         <div>

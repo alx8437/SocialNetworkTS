@@ -1,5 +1,6 @@
 import {v1} from "uuid";
-import {ActionTypes, PostPropsType, ProfilePage} from "./store";
+import {PostPropsType, ProfilePage} from "./store";
+import {ActionTypes} from "./actionTypes";
 
 const  initialState = {
     posts: [
