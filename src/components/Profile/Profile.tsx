@@ -5,18 +5,18 @@ import { ProfilePage} from "../../redux/store";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ActionTypes} from "../../redux/actionTypes";
 
-type PropsType = {
+/*type PropsType = {
     profilePage: ProfilePage
     dispatch: (action: ActionTypes) => void
-}
+}*/
 
-const Profile = (props: PropsType) => {
+const Profile = (/*props: PropsType*/) => {
     return (
         <div className={styles.profileWrapper}>
             <ProfileInfo />
             <MyPostsContainer
-                profilePage={props.profilePage}
-                dispatch={props.dispatch}
+/*                profilePage={props.profilePage}
+                dispatch={props.dispatch}*/
             />
         </div>
     )

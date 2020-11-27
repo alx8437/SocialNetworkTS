@@ -14,23 +14,23 @@ import {ActionTypes} from "./redux/actionTypes";
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
-type AppPropsType = {
+/*type AppPropsType = {
     store: Store<CombinedState<{ profilePage: ProfilePage; dialogsPage: DialogsPage; }>, ActionTypes>
-}
+}*/
 
-function App(props: AppPropsType) {
+function App(/*props: AppPropsType*/) {
     return (
         <div className="app-wrapper">
             <Header/>
             <div className='wrapperContent'>
                 <Navbar/>
-                <Route path='/profile' render={() => <
-                    Profile profilePage={props.store.getState().profilePage}
-                            dispatch={props.store.dispatch.bind(props.store)}
+                <Route path='/profile' render={() => <Profile
+/*                    profilePage={props.store.getState().profilePage}
+                    dispatch={props.store.dispatch.bind(props.store)}*/
                 />}/>
                 <Route path='/dialogs' render={() => <DialogsContainer
-                    dialogsPage={props.store.getState().dialogsPage}
-                    dispatch={props.store.dispatch.bind(props.store)}
+/*                    dialogsPage={props.store.getState().dialogsPage}
+                    dispatch={props.store.dispatch.bind(props.store)}*/
                 />}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
