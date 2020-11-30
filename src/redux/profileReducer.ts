@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {ACTypes, PostPropsType, ProfilePage} from "./types";
 
-const  initialState: ProfilePage = {
+const initialState: ProfilePage = {
     posts: [
         {id: v1(), message: "Hello, i like this course", likesCount: 15},
         {id: v1(), message: "It's a nice course, yes!", likesCount: 20},
@@ -10,7 +10,7 @@ const  initialState: ProfilePage = {
     newPostText: ""
 }
 
-const profileReducer = (state: ProfilePage = initialState, action: ACTypes) => {
+const profileReducer = (state: ProfilePage = initialState, action: ACTypes): ProfilePage => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostPropsType = {
@@ -18,13 +18,18 @@ const profileReducer = (state: ProfilePage = initialState, action: ACTypes) => {
                 message: state.newPostText,
                 likesCount: 3
             };
-            state.posts.push(newPost);
-            state.newPostText = ""
-            return state
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ""
+            }
+
         case "UPDATE-TEXT-POST":
-            state.newPostText = action.newTextPost;
-            debugger
-            return state
+            return {
+                ...state,
+                newPostText: action.newTextPost
+            }
+
         default:
             return state
     }
