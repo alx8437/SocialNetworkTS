@@ -1,8 +1,7 @@
 import {v1} from "uuid";
-import {ACTypes, DialogsPage, MessagePropsType} from "./types";
-import {StateType} from "./redux-store";
+import {ACTypes, DialogsPageType, MessagePropsType} from "./types";
 
-const initialState: DialogsPage = {
+const initialState: DialogsPageType = {
     dialogs: [
         {id: v1(), name: "Alex"},
         {id: v1(), name: "Sveta"},
@@ -20,7 +19,7 @@ const initialState: DialogsPage = {
     newTextMessage: ""
 }
 
-const dialogsReducer = (state: DialogsPage = initialState, action: ACTypes): DialogsPage => {
+const dialogsReducer = (state: DialogsPageType = initialState, action: ACTypes): DialogsPageType => {
     switch (action.type) {
         case "ADD-MESSAGE":
             const newMessage: MessagePropsType = {

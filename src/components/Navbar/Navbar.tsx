@@ -39,7 +39,7 @@ const Navbar = () => {
             <div className={styles.item}>
                 <div className={styles.iconWrapper}>
                     <div className={styles.icon}><FaUsers color="#9E1F63"/></div>
-                    <div>Users</div>
+                    <NavLink to="/users" activeClassName={styles.active}>Users</NavLink>
                 </div>
             </div>
             <div className={styles.item}>
