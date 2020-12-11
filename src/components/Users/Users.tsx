@@ -17,59 +17,60 @@ type GetUsersType = {
     error: null
 }
 
-const Users = (props: UsersPropsType) => {
-
-    const getUsers = () => {
-        if (props.users.length === 0) {
+class Users extends React.Component<UsersPropsType> {
+    constructor(props: UsersPropsType) {
+        super(props);
+        if (this.props.users.length === 0) {
             axios.get<GetUsersType>("https://social-network.samuraijs.com/api/1.0/users")
                 .then(response => {
-                    props.setUsers(response.data.items)
+                    this.props.setUsers(response.data.items)
                 })
         }
     }
 
-    return (
-        <div className={styles.wrapper}>
-            <button onClick={getUsers}>Get users</button>
-            <div className={styles.pageChange}>
-                {/*                {pageCount.map(p => {
+    render() {
+        return (
+            <div className={styles.wrapper}>
+                <div className={styles.pageChange}>
+                    {/*                {pageCount.map(p => {
                     return <span  onClick={() => {
                         props.onPageChanged(p);
                     }} className={(p === props.currentPage) ? styles.pageActive : ''}>{p}</span>;
                 })}*/}
-            </div>
+                </div>
 
-            {
-                props.users.map(u =>
-                    <div className={styles.wrapperUser} key={u.id}>
-                        <div>
-                            <img className={styles.userPhoto} src={u.photos.small ? u.photos.small : user}/>
-                        </div>
-                        <div>
-                            {/*                            <NavLink to={"/profile/" + u.id}>
+                {
+                    this.props.users.map(u =>
+                        <div className={styles.wrapperUser} key={u.id}>
+                            <div>
+                                <img className={styles.userPhoto} alt={"user_img"} src={u.photos.small ? u.photos.small : user}/>
+                            </div>
+                            <div>
+                                {/*                            <NavLink to={"/profile/" + u.id}>
                                 <img
                                     className={styles.userPhoto}
                                     src={(u.photos.small === null) ? avatar : u.photos.small}
                                 />
                             </NavLink>*/}
-                        </div>
-                        <div>
-                            {u.followed
-                                ? <button onClick={() => {
-                                    props.unfollowUser(u.id)
-                                }}>Unfollow</button>
-                                : <button onClick={() => {
-                                    props.followUser(u.id)
-                                }}>Follow</button>
-                            }
-                        </div>
-                        <div>{u.name}</div>
-                        <div>{u.status}</div>
-                    </div>,
-                )
-            }
-        </div>
-    );
+                            </div>
+                            <div>
+                                {u.followed
+                                    ? <button onClick={() => {
+                                        this.props.unfollowUser(u.id)
+                                    }}>Unfollow</button>
+                                    : <button onClick={() => {
+                                        this.props.followUser(u.id)
+                                    }}>Follow</button>
+                                }
+                            </div>
+                            <div>{u.name}</div>
+                            <div>{u.status}</div>
+                        </div>,
+                    )
+                }
+            </div>
+        );
+    }
 
 }
 

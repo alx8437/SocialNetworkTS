@@ -1,5 +1,4 @@
 //Action Creates types
-import {v1} from "uuid";
 
 export type AddPostActionType = {
     type: "ADD-POST"
