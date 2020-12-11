@@ -1,4 +1,3 @@
-import {v1} from "uuid";
 import {ACTypes, User, UserPageType} from "./types";
 
 const initialState: UserPageType = {
@@ -29,10 +28,10 @@ const usersReducer = (state: UserPageType = initialState, action: ACTypes): User
     }
 }
 
-export const followAC = (userId: string) => {
+export const followAC = (userId: number) => {
     return {type: "FOLLOW", userId} as const
 }
-export const unfollowAC = (userId: string) => {
+export const unfollowAC = (userId: number) => {
     return {type: "UNFOLLOW", userId} as const
 }
 export const setUsersAC = (users: Array<User>) => {

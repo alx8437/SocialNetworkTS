@@ -18,12 +18,12 @@ export type UpdateTextMessage = {
 
 export type FollowActionType = {
     type: "FOLLOW"
-    userId: string
+    userId: number
 }
 
 export type UnfollowActionType = {
     type: "UNFOLLOW"
-    userId: string
+    userId: number
 }
 
 export type SetUsersActionType = {
@@ -59,14 +59,21 @@ export  type ProfilePageType = {
     newPostText: string
 }
 
+type photosUser = {
+    small: string | null
+    large: string | null
+}
+
 export type User = {
-    id: string,
-    fullname: string,
+    id: number,
+    name: string,
     followed: boolean
-    status: string,
-    location: { city: string, country: string }
+    status: string | null,
+    photos: photosUser
+    uniqueUrlName: null | string
 }
 
 export type UserPageType = {
     users: Array<User>
 }
+

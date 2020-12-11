@@ -1,45 +1,36 @@
 import React from "react";
 import {User} from "../../redux/types";
 import styles from "./Users.module.css";
-import {v1} from "uuid";
+import axios from "axios"
+import user from "../../assets/images/user.png"
 
 type UsersPropsType = {
     users: Array<User>
-    followUser: (userId: string) => void
-    unfollowUser: (userId: string) => void
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
     setUsers: (users: Array<User>) => void
 }
 
-const Users = (props: UsersPropsType) => {
-    if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: v1(),
-                followed: true,
-                fullname: "Alex",
-                status: "Hi everyone",
-                location: {city: "Krasnodar", country: "Russia"}
-            },
-            {
-                id: v1(),
-                followed: false,
-                fullname: "Danya",
-                status: "Hi there",
-                location: {city: "Moscow", country: "Russia"}
-            },
-            {
-                id: v1(),
-                followed: true,
-                fullname: "Mira",
-                status: "Hi",
-                location: {city: "Los-Angeles", country: "USA"}
-            }
+type GetUsersType = {
+    items: Array<User>
+    totalCount: number
+    error: null
+}
 
-        ])
+const Users = (props: UsersPropsType) => {
+
+    const getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get<GetUsersType>("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                    props.setUsers(response.data.items)
+                })
+        }
     }
 
     return (
         <div className={styles.wrapper}>
+            <button onClick={getUsers}>Get users</button>
             <div className={styles.pageChange}>
                 {/*                {pageCount.map(p => {
                     return <span  onClick={() => {
@@ -49,10 +40,13 @@ const Users = (props: UsersPropsType) => {
             </div>
 
             {
-                props.users.map(u => <div key={u.id}>
-                    <span>
+                props.users.map(u =>
+                    <div className={styles.wrapperUser} key={u.id}>
                         <div>
-{/*                            <NavLink to={"/profile/" + u.id}>
+                            <img className={styles.userPhoto} src={u.photos.small ? u.photos.small : user}/>
+                        </div>
+                        <div>
+                            {/*                            <NavLink to={"/profile/" + u.id}>
                                 <img
                                     className={styles.userPhoto}
                                     src={(u.photos.small === null) ? avatar : u.photos.small}
@@ -69,18 +63,8 @@ const Users = (props: UsersPropsType) => {
                                 }}>Follow</button>
                             }
                         </div>
-                    </span>
-                        <span>
-                        <span>
-                            <div>{u.fullname}</div>
-                            <div>{u.status}</div>
-                        </span>
-                        <span>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
-                        </span>
-
-                    </span>
+                        <div>{u.name}</div>
+                        <div>{u.status}</div>
                     </div>,
                 )
             }
