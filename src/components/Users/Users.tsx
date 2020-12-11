@@ -18,8 +18,7 @@ type GetUsersType = {
 }
 
 class Users extends React.Component<UsersPropsType> {
-    constructor(props: UsersPropsType) {
-        super(props);
+    componentDidMount(): void {
         if (this.props.users.length === 0) {
             axios.get<GetUsersType>("https://social-network.samuraijs.com/api/1.0/users")
                 .then(response => {

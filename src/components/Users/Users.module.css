@@ -4,8 +4,8 @@
 }
 
 .userPhoto {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
 }
 
 .pageActive {
@@ -20,7 +20,7 @@
 
 .wrapperUser {
     padding: 10px;
-    width: 100px;
+    width: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
