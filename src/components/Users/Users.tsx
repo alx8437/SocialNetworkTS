@@ -5,37 +5,49 @@ import axios from "axios"
 import user from "../../assets/images/user.png"
 
 type UsersPropsType = {
-    users: Array<User>
-    followUser: (userId: number) => void
-    unfollowUser: (userId: number) => void
-    setUsers: (users: Array<User>) => void
+    users: Array<User>,
+    pageSize: number,
+    followUser: (userId: number) => void,
+    unfollowUser: (userId: number) => void,
+    setUsers: (users: Array<User>) => void,
+    totalUsersCount: number,
+    currentPage: number,
+    changeCurrentPage: (currentPage: number) => void
 }
 
 type GetUsersType = {
-    items: Array<User>
-    totalCount: number
-    error: null
+    items: Array<User>,
+    totalCount: number,
+    error: null,
 }
 
 class Users extends React.Component<UsersPropsType> {
     componentDidMount(): void {
         if (this.props.users.length === 0) {
-            axios.get<GetUsersType>("https://social-network.samuraijs.com/api/1.0/users")
+            axios.get<GetUsersType>(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
                 .then(response => {
+                    debugger
                     this.props.setUsers(response.data.items)
                 })
         }
     }
 
     render() {
+        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        const pages: Array<number> = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return (
             <div className={styles.wrapper}>
                 <div className={styles.pageChange}>
-                    {/*                {pageCount.map(p => {
-                    return <span  onClick={() => {
-                        props.onPageChanged(p);
-                    }} className={(p === props.currentPage) ? styles.pageActive : ''}>{p}</span>;
-                })}*/}
+                    {pages.map((p, index) =>
+                        <span
+                            onClick={() => this.props.changeCurrentPage(p)}
+                            key={index}
+                            className={this.props.currentPage === p ? styles.selectedPage : ""}>{p}</span>)}
                 </div>
 
                 {
@@ -45,12 +57,7 @@ class Users extends React.Component<UsersPropsType> {
                                 <img className={styles.userPhoto} alt={"user_img"} src={u.photos.small ? u.photos.small : user}/>
                             </div>
                             <div>
-                                {/*                            <NavLink to={"/profile/" + u.id}>
-                                <img
-                                    className={styles.userPhoto}
-                                    src={(u.photos.small === null) ? avatar : u.photos.small}
-                                />
-                            </NavLink>*/}
+
                             </div>
                             <div>
                                 {u.followed
