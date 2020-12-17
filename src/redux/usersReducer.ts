@@ -1,7 +1,7 @@
 import {
     ACTypes,
     ChangeCurrentPageActionType,
-    FollowActionType,
+    FollowActionType, SetTotalCountPagesActionType,
     SetUsersActionType,
     UnfollowActionType,
     User,
@@ -11,8 +11,8 @@ import {
 const initialState: UsersReducerType = {
     users: [],
     pageSize: 4,
-    totalUsersCount: 21,
-    currentPage: 2,
+    totalUsersCount: 0,
+    currentPage: 1,
 }
 
 
@@ -33,13 +33,16 @@ const usersReducer = (state: UsersReducerType = initialState, action: ACTypes): 
                 )
             }
         case "SET-USERS":
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
         case "CHANGE_CURRENT_PAGE":
             return {...state, currentPage: action.currentPage}
+        case "SET_TOTAL_COUNT_PAGES":
+            return {...state, totalUsersCount: action.totalCount}
         default:
             return state
     }
 }
+
 
 export const followAC = (userId: number): FollowActionType => {
     return {type: "FOLLOW", userId} as const
@@ -55,6 +58,10 @@ export const setUsersAC = (users: Array<User>): SetUsersActionType => {
 
 export const changeCurrentPageAC = (currentPage: number): ChangeCurrentPageActionType => {
     return {type: "CHANGE_CURRENT_PAGE", currentPage}
+}
+
+export const setTotalCountPagesAC = (totalCount: number): SetTotalCountPagesActionType => {
+    return {type: "SET_TOTAL_COUNT_PAGES", totalCount}
 }
 
 

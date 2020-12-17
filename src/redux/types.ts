@@ -1,5 +1,4 @@
 //Action Creates types
-
 export type AddPostActionType = {
     type: "ADD-POST",
 }
@@ -35,9 +34,16 @@ export type ChangeCurrentPageActionType = {
     currentPage: number
 }
 
+export type SetTotalCountPagesActionType = {
+    type: "SET_TOTAL_COUNT_PAGES",
+    totalCount: number,
+}
+
 export type ACTypes = AddPostActionType | UpdateTextPost
     | AddMessageActionType | UpdateTextMessage | FollowActionType | UnfollowActionType |
-    SetUsersActionType | ChangeCurrentPageActionType
+    SetUsersActionType | ChangeCurrentPageActionType | SetTotalCountPagesActionType
+
+
 
 //State types
 export type MessagePropsType = {
