@@ -110,7 +110,7 @@ test("change current page", () => {
     expect(newState.currentPage).toBe(22);
 });
 
-test("change current page", () => {
+test("change totalCount page", () => {
     const action: SetTotalCountPagesActionType = {
         type: ACTIONS_TYPE_USERS.SET_TOTAL_COUNT_PAGES,
         totalCount: 7456,

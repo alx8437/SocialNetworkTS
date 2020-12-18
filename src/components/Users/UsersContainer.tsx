@@ -31,7 +31,7 @@ const mapStateToProps = (state: StateType): MapStateToProps => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
+        totalUsersCount: state.usersPage.totalCount,
         currentPage: state.usersPage.currentPage,
     }
 }
