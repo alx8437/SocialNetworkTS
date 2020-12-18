@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Post.module.css';
 import avatar from '../../../../assets/images/user.png'
-import { PostPropsType } from '../../../../redux/types';
+import { PostPropsType } from '../../../../redux/stateTypes';
 
 
 const Post = (props: PostPropsType) => {

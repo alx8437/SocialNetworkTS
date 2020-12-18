@@ -1,10 +1,10 @@
-import {UsersReducerType} from "../types";
+import {UsersReducerType} from "../stateTypes";
 import {ACTIONS_TYPE_USERS, UsersActionsType} from "./usersActions";
 
 const initialState: UsersReducerType = {
     users: [],
     pageSize: 4,
-    totalUsersCount: 0,
+    totalCount: 0,
     currentPage: 1,
 }
 
@@ -30,7 +30,7 @@ const usersReducer = (state: UsersReducerType = initialState, action: UsersActio
         case ACTIONS_TYPE_USERS.CHANGE_CURRENT_PAGE:
             return {...state, currentPage: action.currentPage}
         case ACTIONS_TYPE_USERS.SET_TOTAL_COUNT_PAGES:
-            return {...state, totalUsersCount: action.totalCount}
+            return {...state, totalCount: action.totalCount}
         default:
             return state
     }

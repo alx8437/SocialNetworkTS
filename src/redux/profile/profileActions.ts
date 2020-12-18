@@ -3,10 +3,10 @@ export enum ACTIONS_TYPE_PROFILE {
     UPDATE_TEXT_POST = "Profile/MyPostsContainer/UPDATE_TEXT_POST",
 }
 
-type AddPostActionType = {
+export type AddPostActionType = {
     type: ACTIONS_TYPE_PROFILE.ADD_POST,
 }
-type UpdateTextPost = {
+export type UpdateTextPost = {
     type: ACTIONS_TYPE_PROFILE.UPDATE_TEXT_POST,
     newTextPost: string,
 }

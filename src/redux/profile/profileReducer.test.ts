@@ -1,30 +1,37 @@
-import {AddPostActionType, ProfilePageType, UpdateTextPost} from "../types";
+import {ProfileReducerType} from "../stateTypes";
 import profileReducer from "./profileReducer";
+import {ACTIONS_TYPE_PROFILE, AddPostActionType, UpdateTextPost} from "./profileActions";
+
+let startState: ProfileReducerType = {
+    posts: [],
+    newPostText: ""
+}
+
+beforeEach(() => {
+    startState = {
+        posts: [],
+        newPostText: "new post"
+    }
+});
 
 test("adding new post", () => {
-    const state: ProfilePageType = {
-        posts: [],
-        newPostText: "new text"
-    }
+
     const action: AddPostActionType = {
-        type: "ADD-POST"
+        type: ACTIONS_TYPE_PROFILE.ADD_POST
     }
-    const newState = profileReducer(state, action)
+    const newState = profileReducer(startState, action)
 
     expect(newState.posts.length).toBe(1)
-    expect(newState.posts[0].message).toBe( "new text")
+    expect(newState.posts[0].message).toBe( "new post")
 })
 
 test("upd text post", () => {
-    const state: ProfilePageType = {
-        posts: [],
-        newPostText: ""
-    }
-    const action: UpdateTextPost = {
-        type: "UPDATE-TEXT-POST",
-        newTextPost: "text be updated"
-    }
-    const newState = profileReducer(state, action)
 
-    expect(newState.newPostText).toBe("text be updated")
+    const action: UpdateTextPost = {
+        type: ACTIONS_TYPE_PROFILE.UPDATE_TEXT_POST,
+        newTextPost: "text post be updated"
+    }
+    const newState = profileReducer(startState, action)
+
+    expect(newState.newPostText).toBe("text post be updated")
 })

@@ -1,5 +1,5 @@
 import React from "react";
-import {User} from "../../redux/types";
+import {User} from "../../redux/stateTypes";
 import styles from "./Users.module.css";
 import axios from "axios"
 import user from "../../assets/images/user.png"

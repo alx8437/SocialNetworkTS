@@ -1,4 +1,4 @@
-import {User} from "../types";
+import {User} from "../stateTypes";
 
 export enum ACTIONS_TYPE_USERS {
     FOLLOW = "Users/FOLLOW",
@@ -8,28 +8,28 @@ export enum ACTIONS_TYPE_USERS {
     SET_TOTAL_COUNT_PAGES = 'Users/SET_TOTAL_COUNT_PAGES',
 }
 
-type FollowActionType = {
+export type FollowActionType = {
     type: ACTIONS_TYPE_USERS.FOLLOW,
     userId: number,
 }
 
-type UnfollowActionType = {
+export type UnfollowActionType = {
     type: ACTIONS_TYPE_USERS.UNFOLLOW,
     userId: number,
 }
 
-type SetUsersActionType = {
+export type SetUsersActionType = {
     type: ACTIONS_TYPE_USERS.SET_USERS,
     users: Array<User>,
 }
 
-type ChangeCurrentPageActionType = {
+export type ChangeCurrentPageActionType = {
     type: ACTIONS_TYPE_USERS.CHANGE_CURRENT_PAGE,
     currentPage: number
 }
 
 
-type SetTotalCountPagesActionType = {
+export type SetTotalCountPagesActionType = {
     type: ACTIONS_TYPE_USERS.SET_TOTAL_COUNT_PAGES
     totalCount: number,
 }

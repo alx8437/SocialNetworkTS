@@ -1,15 +1,3 @@
-//Action Creates types
-
-export type AddMessageActionType = {
-    type: "ADD-MESSAGE",
-}
-export type UpdateTextMessage = {
-    type: "UPDATE-TEXT-MESSAGE",
-    newTextMessage: string,
-}
-
-
-
 //State types
 export type MessagePropsType = {
     id: string,
@@ -24,17 +12,17 @@ export type PostPropsType = {
     message: string,
     likesCount: number,
 }
-export type DialogsPageType = {
+export type DialogsReducerType = {
     dialogs: Array<DialogItemPropsType>,
     messages: Array<MessagePropsType>,
     newTextMessage: string,
 }
-export  type ProfilePageType = {
+export  type ProfileReducerType = {
     posts: Array<PostPropsType>,
     newPostText: string,
 }
 
-type photosUser = {
+export type PhotosUser = {
     small: string | null,
     large: string | null,
 }
@@ -44,14 +32,13 @@ export type User = {
     name: string,
     followed: boolean,
     status: string | null,
-    photos: photosUser,
-    uniqueUrlName: null | string,
+    photos: PhotosUser,
 }
 
 export type UsersReducerType = {
     users: Array<User>,
     pageSize: number,
-    totalUsersCount: number,
+    totalCount: number,
     currentPage: number,
 }
 

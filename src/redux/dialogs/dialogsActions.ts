@@ -3,11 +3,11 @@ export enum ACTION_TYPES_DIALOGS {
     UPDATE_TEXT_MESSAGE = "Dialogs/UPDATE_TEXT_MESSAGE",
 }
 
-type AddMessageActionType = {
+export type AddMessageActionType = {
     type: ACTION_TYPES_DIALOGS.ADD_MESSAGE,
 }
 
-type UpdateTextMessage = {
+export type UpdateTextMessage = {
     type: ACTION_TYPES_DIALOGS.UPDATE_TEXT_MESSAGE,
     newTextMessage: string,
 }

@@ -1,8 +1,8 @@
 import {v1} from "uuid";
-import {DialogsPageType, MessagePropsType} from "../types";
+import {DialogsReducerType, MessagePropsType} from "../stateTypes";
 import {ACTION_TYPES_DIALOGS, DialogsActionsType} from "./dialogsActions";
 
-const initialState: DialogsPageType = {
+const initialState: DialogsReducerType = {
     dialogs: [
         {id: v1(), name: "Alex"},
         {id: v1(), name: "Sveta"},
@@ -20,7 +20,7 @@ const initialState: DialogsPageType = {
     newTextMessage: ""
 }
 
-const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionsType): DialogsPageType => {
+const dialogsReducer = (state: DialogsReducerType = initialState, action: DialogsActionsType): DialogsReducerType => {
     switch (action.type) {
         case ACTION_TYPES_DIALOGS.ADD_MESSAGE:
             const newMessage: MessagePropsType = {
