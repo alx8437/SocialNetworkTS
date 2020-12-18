@@ -1,8 +1,8 @@
 import {combineReducers, createStore} from "redux";
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
+import profileReducer from "./profile/profileReducer";
+import dialogsReducer from "./dialogs/dialogsReducer";
 import {composeWithDevTools} from "redux-devtools-extension";
-import usersReducer from "./usersReducer";
+import usersReducer from "./users/usersReducer";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,

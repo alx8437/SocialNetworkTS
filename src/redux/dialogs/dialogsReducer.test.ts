@@ -1,4 +1,4 @@
-import {AddMessageActionType, DialogsPageType, UpdateTextMessage} from "./types";
+import {AddMessageActionType, DialogsPageType, UpdateTextMessage} from "../types";
 import dialogsReducer from "./dialogsReducer";
 
 

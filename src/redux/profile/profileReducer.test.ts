@@ -1,4 +1,4 @@
-import {AddPostActionType, ProfilePageType, UpdateTextPost} from "./types";
+import {AddPostActionType, ProfilePageType, UpdateTextPost} from "../types";
 import profileReducer from "./profileReducer";
 
 test("adding new post", () => {

@@ -1,9 +1,9 @@
-import {addPostAC, updateTextPostAC} from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {ACTypes, ProfilePageType} from "../../../redux/types";
+import {ProfilePageType} from "../../../redux/types";
 import {StateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
+import {addPostAC, ProfileActionsType, updateTextPostAC} from "../../../redux/profile/profileActions";
 
 type MapStatePropsType = {
     profilePage: ProfilePageType
@@ -21,7 +21,7 @@ const mapStateToProps = (state: StateType): MapStatePropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<ACTypes>): MapDispatchPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch<ProfileActionsType>): MapDispatchPropsType => {
     return {
         addPost: () => {
             dispatch(addPostAC())

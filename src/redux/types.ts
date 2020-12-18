@@ -1,11 +1,5 @@
 //Action Creates types
-export type AddPostActionType = {
-    type: "ADD-POST",
-}
-export type UpdateTextPost = {
-    type: "UPDATE-TEXT-POST"
-    newTextPost: string,
-}
+
 export type AddMessageActionType = {
     type: "ADD-MESSAGE",
 }
@@ -13,35 +7,6 @@ export type UpdateTextMessage = {
     type: "UPDATE-TEXT-MESSAGE",
     newTextMessage: string,
 }
-
-export type FollowActionType = {
-    type: "FOLLOW",
-    userId: number,
-}
-
-export type UnfollowActionType = {
-    type: "UNFOLLOW",
-    userId: number,
-}
-
-export type SetUsersActionType = {
-    type: "SET-USERS",
-    users: Array<User>,
-}
-
-export type ChangeCurrentPageActionType = {
-    type: "CHANGE_CURRENT_PAGE",
-    currentPage: number
-}
-
-export type SetTotalCountPagesActionType = {
-    type: "SET_TOTAL_COUNT_PAGES",
-    totalCount: number,
-}
-
-export type ACTypes = AddPostActionType | UpdateTextPost
-    | AddMessageActionType | UpdateTextMessage | FollowActionType | UnfollowActionType |
-    SetUsersActionType | ChangeCurrentPageActionType | SetTotalCountPagesActionType
 
 
 
