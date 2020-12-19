@@ -1,4 +1,4 @@
-import {User} from "../stateTypes";
+import {UserType} from "../stateTypes";
 
 export enum ACTIONS_TYPE_USERS {
     FOLLOW = "Users/FOLLOW",
@@ -20,7 +20,7 @@ export type UnfollowActionType = {
 
 export type SetUsersActionType = {
     type: ACTIONS_TYPE_USERS.SET_USERS,
-    users: Array<User>,
+    users: Array<UserType>,
 }
 
 export type ChangeCurrentPageActionType = {
@@ -45,7 +45,7 @@ export const unfollowAC = (userId: number): UnfollowActionType => {
     return {type: ACTIONS_TYPE_USERS.UNFOLLOW, userId}
 }
 
-export const setUsersAC = (users: Array<User>): SetUsersActionType => {
+export const setUsersAC = (users: Array<UserType>): SetUsersActionType => {
     return {type: ACTIONS_TYPE_USERS.SET_USERS, users}
 }
 

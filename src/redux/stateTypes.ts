@@ -22,21 +22,21 @@ export  type ProfileReducerType = {
     newPostText: string,
 }
 
-export type PhotosUser = {
+export type PhotosUserType = {
     small: string | null,
     large: string | null,
 }
 
-export type User = {
+export type UserType = {
     id: number,
     name: string,
     followed: boolean,
     status: string | null,
-    photos: PhotosUser,
+    photos: PhotosUserType,
 }
 
 export type UsersReducerType = {
-    users: Array<User>,
+    users: Array<UserType>,
     pageSize: number,
     totalCount: number,
     currentPage: number,
