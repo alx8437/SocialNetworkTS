@@ -6,6 +6,7 @@ export enum ACTIONS_TYPE_USERS {
     SET_USERS = 'Users/SET_USERS',
     CHANGE_CURRENT_PAGE = 'Users/CHANGE_CURRENT_PAGE',
     SET_TOTAL_COUNT_PAGES = 'Users/SET_TOTAL_COUNT_PAGES',
+    TOGGLE_IS_FETCHING = 'Users/TOGGLE_IS_FETCHING'
 }
 
 export type FollowActionType = {
@@ -34,8 +35,14 @@ export type SetTotalCountPagesActionType = {
     totalCount: number,
 }
 
+export type ToggleIsFetchingActionType = {
+    type: ACTIONS_TYPE_USERS.TOGGLE_IS_FETCHING,
+    isFetching: boolean,
+}
+
 export type UsersActionsType = FollowActionType | UnfollowActionType |
     SetUsersActionType | ChangeCurrentPageActionType | SetTotalCountPagesActionType
+    | ToggleIsFetchingActionType
 
 export const followAC = (userId: number): FollowActionType => {
     return {type: ACTIONS_TYPE_USERS.FOLLOW, userId}
@@ -55,4 +62,8 @@ export const changeCurrentPageAC = (currentPage: number): ChangeCurrentPageActio
 
 export const setTotalCountPagesAC = (totalCount: number): SetTotalCountPagesActionType => {
     return {type: ACTIONS_TYPE_USERS.SET_TOTAL_COUNT_PAGES, totalCount}
+}
+
+export const ToggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingActionType => {
+    return {type: ACTIONS_TYPE_USERS.TOGGLE_IS_FETCHING, isFetching}
 }

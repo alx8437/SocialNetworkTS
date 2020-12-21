@@ -40,5 +40,6 @@ export type UsersReducerType = {
     pageSize: number,
     totalCount: number,
     currentPage: number,
+    isFetching: boolean,
 }
 

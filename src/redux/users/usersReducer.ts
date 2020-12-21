@@ -6,6 +6,7 @@ const initialState: UsersReducerType = {
     pageSize: 4,
     totalCount: 0,
     currentPage: 1,
+    isFetching: false,
 }
 
 
@@ -31,6 +32,8 @@ const usersReducer = (state: UsersReducerType = initialState, action: UsersActio
             return {...state, currentPage: action.currentPage}
         case ACTIONS_TYPE_USERS.SET_TOTAL_COUNT_PAGES:
             return {...state, totalCount: action.totalCount}
+        case ACTIONS_TYPE_USERS.TOGGLE_IS_FETCHING:
+            return {...state, isFetching: action.isFetching}
         default:
             return state
     }
