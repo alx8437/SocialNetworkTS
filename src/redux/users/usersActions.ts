@@ -44,26 +44,26 @@ export type UsersActionsType = FollowActionType | UnfollowActionType |
     SetUsersActionType | ChangeCurrentPageActionType | SetTotalCountPagesActionType
     | ToggleIsFetchingActionType
 
-export const followAC = (userId: number): FollowActionType => {
+export const follow = (userId: number): FollowActionType => {
     return {type: ACTIONS_TYPE_USERS.FOLLOW, userId}
 }
 
-export const unfollowAC = (userId: number): UnfollowActionType => {
+export const unfollow = (userId: number): UnfollowActionType => {
     return {type: ACTIONS_TYPE_USERS.UNFOLLOW, userId}
 }
 
-export const setUsersAC = (users: Array<UserType>): SetUsersActionType => {
+export const setUsers = (users: Array<UserType>): SetUsersActionType => {
     return {type: ACTIONS_TYPE_USERS.SET_USERS, users}
 }
 
-export const changeCurrentPageAC = (currentPage: number): ChangeCurrentPageActionType => {
+export const changeCurrentPage = (currentPage: number): ChangeCurrentPageActionType => {
     return {type: ACTIONS_TYPE_USERS.CHANGE_CURRENT_PAGE, currentPage}
 }
 
-export const setTotalCountPagesAC = (totalCount: number): SetTotalCountPagesActionType => {
+export const setTotalCountPages = (totalCount: number): SetTotalCountPagesActionType => {
     return {type: ACTIONS_TYPE_USERS.SET_TOTAL_COUNT_PAGES, totalCount}
 }
 
-export const ToggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingActionType => {
+export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => {
     return {type: ACTIONS_TYPE_USERS.TOGGLE_IS_FETCHING, isFetching}
 }
