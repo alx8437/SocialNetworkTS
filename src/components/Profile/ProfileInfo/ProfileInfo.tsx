@@ -9,7 +9,6 @@ type ProfileInfoPropsType = {
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
 
-
     return (
         <div>
             <div className={styles.content}>

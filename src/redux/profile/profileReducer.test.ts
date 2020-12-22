@@ -1,4 +1,4 @@
-import {ProfileReducerType, ProfileType} from "../stateTypes";
+import {ProfileReducerType} from "../stateTypes";
 import profileReducer from "./profileReducer";
 import {ACTIONS_TYPE_PROFILE, AddPostActionType, SetUserProfile, UpdateTextPost} from "./profileActions";
 

@@ -29,6 +29,7 @@ type MapDispatchToPropsType = {
     setTotalCountPages: (totalCount: number) => void,
     toggleIsFetching: (isFetching: boolean) => void,
 }
+type UsersApiPropsType = MapDispatchToPropsType & MapStateToPropsType
 type GetUsersType = {
     items: Array<UserType>,
     totalCount: number,
@@ -36,7 +37,7 @@ type GetUsersType = {
 }
 
 
-class UsersApi extends React.Component<MapDispatchToPropsType & MapStateToPropsType> {
+class UsersApi extends React.Component<UsersApiPropsType> {
     componentDidMount(): void {
         this.props.toggleIsFetching(true);
             axios.get<GetUsersType>(

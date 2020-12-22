@@ -6,35 +6,41 @@ import axios from "axios"
 import Preloader from "../../common/Preloader/Preloader";
 import {setUserProfile} from "../../../redux/profile/profileActions";
 import {StateType} from "../../../redux/redux-store";
+import {RouteComponentProps, withRouter } from "react-router-dom";
 
-export type MapStateToPropsType = {
+export type MapStatePropsType = {
     profile: ProfileType | null,
+}
+
+type PathParamsType = {
+    userId: string,
 }
 export type MapDispatchPropsType = {
     setUserProfile: (profile: ProfileType) => void,
 }
+type ProfileInfoPropsType = RouteComponentProps<PathParamsType> & MapStatePropsType & MapDispatchPropsType
 
-export class ProfileInfoApi extends React.Component<MapStateToPropsType & MapDispatchPropsType> {
-
+export class ProfileInfoApi extends React.Component<ProfileInfoPropsType> {
     componentDidMount(): void {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        const userId = this.props.match.params.userId ? this.props.match.params.userId : 8425;
+        axios.get<ProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(res => {
                 this.props.setUserProfile(res.data)
             })
     }
-
     render() {
         return this.props.profile ? <ProfileInfo profile={this.props.profile}/> : <Preloader/>
     }
 }
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => {
+const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
         profile: state.profilePage.profile
     }
 }
 
+const DataFromRoute = withRouter(ProfileInfoApi)
 
-const ProfileInfoContainer = connect<MapStateToPropsType, MapDispatchPropsType, {}, StateType>(
-    mapStateToProps, {setUserProfile})(ProfileInfoApi);
+const ProfileInfoContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, StateType>(
+    mapStateToProps, {setUserProfile})(DataFromRoute);
 export default ProfileInfoContainer
