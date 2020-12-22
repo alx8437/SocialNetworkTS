@@ -1,14 +1,13 @@
 import React from "react";
 import styles from './Profile.module.css';
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import ProfileInfoContainer from "./ProfileInfo/ProfileInfoContainer";
 
 
-
-const Profile = (/*props: PropsType*/) => {
+const Profile = () => {
     return (
         <div className={styles.profileWrapper}>
-            <ProfileInfo />
+            <ProfileInfoContainer />
             <MyPostsContainer />
         </div>
     )

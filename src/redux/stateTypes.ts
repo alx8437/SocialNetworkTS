@@ -17,7 +17,31 @@ export type DialogsReducerType = {
     messages: Array<MessagePropsType>,
     newTextMessage: string,
 }
+
+export type ProfileType = {
+    aboutMe: string | null,
+    contacts: {
+        facebook: string | null,
+        website: string | null,
+        vk: string | null,
+        twitter: string | null,
+        instagram: string | null,
+        youtube: string | null,
+        github: string | null,
+        mainLink: string | null,
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: null | string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string | null,
+        large: string | null,
+    }
+}
+
 export  type ProfileReducerType = {
+    profile: ProfileType | null,
     posts: Array<PostPropsType>,
     newPostText: string,
 }

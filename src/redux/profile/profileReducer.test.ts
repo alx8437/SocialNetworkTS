@@ -1,14 +1,16 @@
-import {ProfileReducerType} from "../stateTypes";
+import {ProfileReducerType, ProfileType} from "../stateTypes";
 import profileReducer from "./profileReducer";
-import {ACTIONS_TYPE_PROFILE, AddPostActionType, UpdateTextPost} from "./profileActions";
+import {ACTIONS_TYPE_PROFILE, AddPostActionType, SetUserProfile, UpdateTextPost} from "./profileActions";
 
 let startState: ProfileReducerType = {
+    profile: null,
     posts: [],
     newPostText: ""
 }
 
 beforeEach(() => {
     startState = {
+        profile: null,
         posts: [],
         newPostText: "new post"
     }
@@ -34,4 +36,35 @@ test("upd text post", () => {
     const newState = profileReducer(startState, action)
 
     expect(newState.newPostText).toBe("text post be updated")
+})
+
+test("add new user", () => {
+    const action: SetUserProfile = {
+        type: ACTIONS_TYPE_PROFILE.SET_USER_PROFILE,
+        profile: {
+            aboutMe: "",
+            contacts: {
+                facebook: "facebook.com",
+                website: null,
+                vk: "",
+                twitter: "",
+                instagram: "",
+                youtube: null,
+                github: "github.com",
+                mainLink: null
+            },
+            lookingForAJob: true,
+            lookingForAJobDescription: "",
+            fullName: "Alex",
+            userId: 8427,
+            photos: {
+                small: "",
+                large: ""
+            }
+        }
+    }
+    const newState = profileReducer(startState, action);
+
+    expect(newState.profile?.fullName).toBe("Alex");
+    expect(newState.profile?.userId).toBe(8427);
 })

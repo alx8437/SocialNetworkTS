@@ -21,7 +21,6 @@ type MapStateToPropsType = {
     currentPage: number,
     isFetching: boolean,
 }
-
 type MapDispatchToPropsType = {
     follow: (userId: number) => void,
     unfollow: (userId: number) => void,
@@ -30,8 +29,6 @@ type MapDispatchToPropsType = {
     setTotalCountPages: (totalCount: number) => void,
     toggleIsFetching: (isFetching: boolean) => void,
 }
-
-
 type GetUsersType = {
     items: Array<UserType>,
     totalCount: number,
@@ -45,7 +42,6 @@ class UsersApi extends React.Component<MapDispatchToPropsType & MapStateToPropsT
             axios.get<GetUsersType>(
                 `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
                 .then(response => {
-                    debugger
                     this.props.setUsers(response.data.items);
                     this.props.setTotalCountPages(response.data.totalCount);
                     this.props.toggleIsFetching(false);
@@ -94,6 +90,6 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
 
 const UsersContainer =
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {
-        follow, unfollow, setUsers, changeCurrentPage, setTotalCountPages, toggleIsFetching
+        follow, unfollow, setUsers, changeCurrentPage, setTotalCountPages, toggleIsFetching,
     })(UsersApi)
 export default UsersContainer;

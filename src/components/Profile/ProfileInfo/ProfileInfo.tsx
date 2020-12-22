@@ -1,19 +1,23 @@
 import React from "react";
 import styles from './ProfileInfo.module.css';
+import {ProfileType} from "../../../redux/stateTypes";
+
+type ProfileInfoPropsType = {
+    profile: ProfileType,
+}
 
 
-const ProfileInfo = () => {
+const ProfileInfo = (props: ProfileInfoPropsType) => {
+
 
     return (
         <div>
             <div className={styles.content}>
-                Profile
-
-                <div className={styles.otherResources}>
-                    <div>vk</div>
-                    <div>Full name</div>
-                    <div>about</div>
-                </div>
+                    <div><img
+                        src={props.profile.photos.small ? props.profile.photos.small : ""}
+                        alt="avatar"/>
+                        </div>
+                    <div>{props.profile.fullName}</div>
             </div>
         </div>
     )

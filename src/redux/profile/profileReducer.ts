@@ -3,6 +3,7 @@ import {PostPropsType, ProfileReducerType} from "../stateTypes";
 import {ACTIONS_TYPE_PROFILE, ProfileActionsType} from "./profileActions";
 
 const initialState: ProfileReducerType = {
+    profile: null,
     posts: [
         {id: v1(), message: "Hello, i like this course", likesCount: 15},
         {id: v1(), message: "It's a nice course, yes!", likesCount: 20},
@@ -28,6 +29,11 @@ const profileReducer = (state: ProfileReducerType = initialState, action: Profil
             return {
                 ...state,
                 newPostText: action.newTextPost
+            }
+        case ACTIONS_TYPE_PROFILE.SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.profile
             }
         default:
             return state
