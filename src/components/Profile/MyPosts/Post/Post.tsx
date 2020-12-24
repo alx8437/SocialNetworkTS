@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Post.module.css';
-import avatar from '../../../../assets/images/user.png'
+import avatar from '../../../../assets/images/defaultAvatar.png'
 import { PostPropsType } from '../../../../redux/stateTypes';
 
 

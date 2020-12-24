@@ -1,5 +1,5 @@
 import styles from "./Users.module.css";
-import user from "../../assets/images/user.png";
+import defaultAvatar from "../../assets/images/defaultAvatar.png";
 import React from "react";
 import {UserType} from "../../redux/stateTypes";
 import {NavLink} from "react-router-dom";
@@ -37,7 +37,7 @@ const User = (props: UsersPropsType) => {
                         <div>
                             <NavLink to={`/profile/${u.id}`}>
                                 <img className={styles.userPhoto} alt={"user_img"}
-                                     src={u.photos.small ? u.photos.small : user}/>
+                                     src={u.photos.small ? u.photos.small : defaultAvatar}/>
                             </NavLink>
                         </div>
                         <div>
