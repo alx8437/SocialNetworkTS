@@ -7,7 +7,7 @@ export type AddMessageActionType = {
     type: ACTION_TYPES_DIALOGS.ADD_MESSAGE,
 }
 
-export type UpdateTextMessage = {
+export type UpdateTextMessageActionType = {
     type: ACTION_TYPES_DIALOGS.UPDATE_TEXT_MESSAGE,
     newTextMessage: string,
 }
@@ -19,4 +19,4 @@ export const updateTextMessageAC = (newTextMessage: string) => {
 
 
 
-export type DialogsActionsType = AddMessageActionType | UpdateTextMessage
+export type DialogsActionsType = AddMessageActionType | UpdateTextMessageActionType

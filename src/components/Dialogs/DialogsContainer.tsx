@@ -1,12 +1,12 @@
 import {addMessageAC, DialogsActionsType, updateTextMessageAC} from "../../redux/dialogs/dialogsActions";
-import {DialogsReducerType} from '../../redux/stateTypes';
+import {DialogsStateType} from '../../redux/stateTypes';
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 
 type MapStatePropsType = {
-    dialogsPage: DialogsReducerType
+    dialogsPage: DialogsStateType
 }
 
 type MapDispatchPropsType = {

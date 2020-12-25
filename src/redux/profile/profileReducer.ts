@@ -1,8 +1,8 @@
 import {v1} from "uuid";
-import {PostPropsType, ProfileReducerType} from "../stateTypes";
+import {PostPropsType, ProfileStateType} from "../stateTypes";
 import {ACTIONS_TYPE_PROFILE, ProfileActionsType} from "./profileActions";
 
-const initialState: ProfileReducerType = {
+const initialState: ProfileStateType = {
     profile: null,
     posts: [
         {id: v1(), message: "Hello, i like this course", likesCount: 15},
@@ -12,7 +12,7 @@ const initialState: ProfileReducerType = {
     newPostText: ""
 }
 
-const profileReducer = (state: ProfileReducerType = initialState, action: ProfileActionsType): ProfileReducerType => {
+const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType): ProfileStateType => {
     switch (action.type) {
         case ACTIONS_TYPE_PROFILE.ADD_POST:
             const newPost: PostPropsType = {

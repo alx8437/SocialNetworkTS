@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from "react";
 import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {ProfileReducerType} from "../../../redux/stateTypes";
+import {ProfileStateType} from "../../../redux/stateTypes";
 
 type PropsType = {
-    profilePage: ProfileReducerType
+    profilePage: ProfileStateType
     addPost: () => void
     updateTextPost: (text: string) => void
 }

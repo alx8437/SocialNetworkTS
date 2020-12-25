@@ -1,8 +1,8 @@
-import {ProfileReducerType} from "../stateTypes";
+import {ProfileStateType} from "../stateTypes";
 import profileReducer from "./profileReducer";
 import {ACTIONS_TYPE_PROFILE, AddPostActionType, SetUserProfile, UpdateTextPost} from "./profileActions";
 
-let startState: ProfileReducerType = {
+let startState: ProfileStateType = {
     profile: null,
     posts: [],
     newPostText: ""

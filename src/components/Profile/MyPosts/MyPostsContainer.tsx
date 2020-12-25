@@ -1,12 +1,12 @@
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {ProfileReducerType} from "../../../redux/stateTypes";
+import {ProfileStateType} from "../../../redux/stateTypes";
 import {StateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {addPostAC, ProfileActionsType, updateTextPostAC} from "../../../redux/profile/profileActions";
 
 type MapStatePropsType = {
-    profilePage: ProfileReducerType
+    profilePage: ProfileStateType
 }
 
 type MapDispatchPropsType = {

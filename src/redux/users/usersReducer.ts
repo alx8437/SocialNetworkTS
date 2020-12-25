@@ -1,7 +1,7 @@
-import {UsersReducerType} from "../stateTypes";
+import {UsersStateType} from "../stateTypes";
 import {ACTIONS_TYPE_USERS, UsersActionsType} from "./usersActions";
 
-const initialState: UsersReducerType = {
+const initialState: UsersStateType = {
     users: [],
     pageSize: 4,
     totalCount: 0,
@@ -10,7 +10,7 @@ const initialState: UsersReducerType = {
 }
 
 
-const usersReducer = (state: UsersReducerType = initialState, action: UsersActionsType): UsersReducerType => {
+const usersReducer = (state: UsersStateType = initialState, action: UsersActionsType): UsersStateType => {
     switch (action.type) {
         case ACTIONS_TYPE_USERS.FOLLOW:
             return {

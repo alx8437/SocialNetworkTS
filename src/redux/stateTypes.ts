@@ -12,7 +12,8 @@ export type PostPropsType = {
     message: string,
     likesCount: number,
 }
-export type DialogsReducerType = {
+
+export type DialogsStateType = {
     dialogs: Array<DialogItemPropsType>,
     messages: Array<MessagePropsType>,
     newTextMessage: string,
@@ -39,8 +40,7 @@ export type ProfileType = {
         large: string | null,
     }
 }
-
-export  type ProfileReducerType = {
+export  type ProfileStateType = {
     profile: ProfileType | null,
     posts: Array<PostPropsType>,
     newPostText: string,
@@ -50,7 +50,6 @@ export type PhotosUserType = {
     small: string | null,
     large: string | null,
 }
-
 export type UserType = {
     id: number,
     name: string,
@@ -58,12 +57,23 @@ export type UserType = {
     status: string | null,
     photos: PhotosUserType,
 }
-
-export type UsersReducerType = {
+export type UsersStateType = {
     users: Array<UserType>,
     pageSize: number,
     totalCount: number,
     currentPage: number,
     isFetching: boolean,
 }
+
+export type UserData = {
+    userId: number | null,
+    login:  string | null,
+    email: string | null,
+}
+export type AuthStateType = {
+    data: UserData,
+    isAuth: boolean,
+}
+
+
 

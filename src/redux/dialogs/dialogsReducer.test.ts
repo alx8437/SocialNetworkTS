@@ -1,9 +1,9 @@
 import dialogsReducer from "./dialogsReducer";
-import {ACTION_TYPES_DIALOGS, AddMessageActionType, UpdateTextMessage} from "./dialogsActions";
-import {DialogsReducerType} from "../stateTypes";
+import {ACTION_TYPES_DIALOGS, AddMessageActionType, UpdateTextMessageActionType} from "./dialogsActions";
+import {DialogsStateType} from "../stateTypes";
 
 
-let startState: DialogsReducerType = {
+let startState: DialogsStateType = {
     dialogs: [],
     messages: [],
     newTextMessage: '',
@@ -30,7 +30,7 @@ test("add message test", () => {
 
 test("update text message", () => {
 
-    const action: UpdateTextMessage = {
+    const action: UpdateTextMessageActionType = {
         type: ACTION_TYPES_DIALOGS.UPDATE_TEXT_MESSAGE,
         newTextMessage: "new text"
     }
