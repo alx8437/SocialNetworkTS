@@ -3,7 +3,7 @@ import {PostPropsType, ProfileStateType} from "../stateTypes";
 import {ACTIONS_TYPE_PROFILE, ProfileActionsType} from "./profileActions";
 
 const initialState: ProfileStateType = {
-    profile: null,
+    profile:  null,
     posts: [
         {id: v1(), message: "Hello, i like this course", likesCount: 15},
         {id: v1(), message: "It's a nice course, yes!", likesCount: 20},

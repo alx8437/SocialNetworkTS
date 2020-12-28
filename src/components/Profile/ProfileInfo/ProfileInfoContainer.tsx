@@ -7,6 +7,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import {setUserProfile} from "../../../redux/profile/profileActions";
 import {StateType} from "../../../redux/redux-store";
 import {RouteComponentProps, withRouter } from "react-router-dom";
+import {profileApi} from "../../../api/api";
 
 export type MapStatePropsType = {
     profile: ProfileType | null,
@@ -23,10 +24,7 @@ type ProfileInfoPropsType = RouteComponentProps<PathParamsType> & MapStatePropsT
 export class ProfileInfoApi extends React.Component<ProfileInfoPropsType> {
     componentDidMount(): void {
         const userId = this.props.match.params.userId ? this.props.match.params.userId : 8425;
-        axios.get<ProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(res => {
-                this.props.setUserProfile(res.data)
-            })
+        profileApi.getProfile(userId).then(data => this.props.setUserProfile(data))
     }
     render() {
         return this.props.profile ? <ProfileInfo profile={this.props.profile}/> : <Preloader/>

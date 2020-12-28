@@ -14,7 +14,6 @@ type MapDispatchPropsType = {
     updateTextPost: (text: string) => void
 }
 
-
 const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
         profilePage: state.profilePage
@@ -32,7 +31,5 @@ const mapDispatchToProps = (dispatch: Dispatch<ProfileActionsType>): MapDispatch
     }
 }
 
-
 const MyPostsContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, StateType>(mapStateToProps, mapDispatchToProps)(MyPosts)
-
 export default MyPostsContainer;

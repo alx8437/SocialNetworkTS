@@ -27,7 +27,6 @@ const MyPosts = (props: PropsType) => {
         props.updateTextPost(newTextPost)
     }
 
-
     return (
         <div className={styles.postWrapper}>
             <div className={styles.postBlock}>

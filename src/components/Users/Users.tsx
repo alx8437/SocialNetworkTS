@@ -4,6 +4,7 @@ import React from "react";
 import {UserType} from "../../redux/stateTypes";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {userApi} from "../../api/api";
 
 type UsersPropsType = {
     totalUsersCount: number,
@@ -15,9 +16,6 @@ type UsersPropsType = {
     unfollowUser: (userId: number) => void,
 }
 
-type FollowPostResponseType = {
-    resultCode: number
-}
 
 const User = (props: UsersPropsType) => {
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -37,54 +35,34 @@ const User = (props: UsersPropsType) => {
             </div>
 
             {
-                props.users.map(u =>
-                    <div className={styles.wrapperUser} key={u.id}>
-                        <div>
-                            <NavLink to={`/profile/${u.id}`}>
-                                <img className={styles.userPhoto} alt={"user_img"}
-                                     src={u.photos.small ? u.photos.small : defaultAvatar}/>
-                            </NavLink>
-                        </div>
-                        <div>
-                            {u.followed
+                props.users.map(u => {
+                        const unFollow = () => {
+                            userApi.unFollowUser(u.id).then(data => {
+                               if (data.resultCode === 0) props.unfollowUser(u.id);
+                            });
+                        }
+                        const follow = () => {
+                            userApi.followUser(u.id).then(data => {
+                                if (data.resultCode === 0) props.followUser(u.id);
+                            })
+                        }
 
-                                ? <button onClick={
-                                    () => {
-                                        axios.delete<FollowPostResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                             {
-                                                withCredentials: true,
-                                                headers: {
-                                                    "API-KEY": "e655fc0d-99c3-4c81-8dea-0837243fe8bf"
-                                                }
-                                            })
-                                            .then((res) => {
-                                                if (res.data.resultCode === 0) {
-                                                    props.unfollowUser(u.id)
-                                                }
-                                            })
-                                    }
-                                }>Unfollow</button>
-
-                                : <button onClick={
-                                    () => {
-                                        axios.post<FollowPostResponseType>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                            {}, {
-                                                withCredentials: true,
-                                                headers: {
-                                                    "API-KEY": "e655fc0d-99c3-4c81-8dea-0837243fe8bf"
-                                                }
-                                            })
-                                            .then((res) => {
-                                                if (res.data.resultCode === 0) {
-                                                    props.followUser(u.id)
-                                                }
-                                            })
-                                    }}>Follow</button>
-                            }
+                        return <div className={styles.wrapperUser} key={u.id}>
+                            <div>
+                                <NavLink to={`/profile/${u.id}`}>
+                                    <img className={styles.userPhoto} alt={"user_img"}
+                                         src={u.photos.small ? u.photos.small : defaultAvatar}/>
+                                </NavLink>
+                            </div>
+                            <div>
+                                {u.followed ? <button onClick={unFollow}>Unfollow</button>
+                                    : <button onClick={follow}>Follow</button>
+                                }
+                            </div>
+                            <div>{u.name}</div>
+                            <div>{u.status}</div>
                         </div>
-                        <div>{u.name}</div>
-                        <div>{u.status}</div>
-                    </div>,
+                    },
                 )
             }
         </div>
