@@ -36,12 +36,12 @@ type GetUsersType = {
     error: null,
 }
 
-
 class UsersApi extends React.Component<UsersApiPropsType> {
     componentDidMount(): void {
         this.props.toggleIsFetching(true);
             axios.get<GetUsersType>(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+                {withCredentials: true})
                 .then(response => {
                     this.props.setUsers(response.data.items);
                     this.props.setTotalCountPages(response.data.totalCount);
@@ -54,7 +54,8 @@ class UsersApi extends React.Component<UsersApiPropsType> {
         this.props.toggleIsFetching(true);
         this.props.changeCurrentPage(pageNumber);
         axios.get<GetUsersType>(
-            `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+            {withCredentials: true})
             .then(response => {
                 this.props.setUsers(response.data.items);
                 this.props.toggleIsFetching(false);

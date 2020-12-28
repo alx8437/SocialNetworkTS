@@ -13,7 +13,8 @@ let startState: UsersStateType = {
     users: [],
     currentPage: 1,
     totalCount: 4222,
-    pageSize: 4
+    pageSize: 4,
+    isFetching: true,
 };
 
 beforeEach(() => {
