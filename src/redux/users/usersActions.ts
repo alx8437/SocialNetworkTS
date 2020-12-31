@@ -1,4 +1,4 @@
-import {UserType} from "../stateTypes";
+import {UserType} from "../rootStateTypes";
 
 export enum ACTIONS_TYPE_USERS {
     FOLLOW = "Users/FOLLOW",
@@ -6,7 +6,8 @@ export enum ACTIONS_TYPE_USERS {
     SET_USERS = 'Users/SET_USERS',
     CHANGE_CURRENT_PAGE = 'Users/CHANGE_CURRENT_PAGE',
     SET_TOTAL_COUNT_PAGES = 'Users/SET_TOTAL_COUNT_PAGES',
-    TOGGLE_IS_FETCHING = 'Users/TOGGLE_IS_FETCHING'
+    TOGGLE_IS_FETCHING = 'Users/TOGGLE_IS_FETCHING',
+    TOGGLE_IS_FOLLOWING_PROGRESS = 'Users/TOGGLE_IS_FOLLOWING_PROGRESS',
 }
 
 export type FollowActionType = {
@@ -40,9 +41,15 @@ export type ToggleIsFetchingActionType = {
     isFetching: boolean,
 }
 
+export type ToggleIsFollowingInProgressActionType = {
+    type: ACTIONS_TYPE_USERS.TOGGLE_IS_FOLLOWING_PROGRESS,
+    userId: number,
+    isFetching: boolean,
+}
+
 export type UsersActionsType = FollowActionType | UnfollowActionType |
     SetUsersActionType | ChangeCurrentPageActionType | SetTotalCountPagesActionType
-    | ToggleIsFetchingActionType
+    | ToggleIsFetchingActionType | ToggleIsFollowingInProgressActionType
 
 export const follow = (userId: number): FollowActionType => {
     return {type: ACTIONS_TYPE_USERS.FOLLOW, userId}
@@ -66,4 +73,8 @@ export const setTotalCountPages = (totalCount: number): SetTotalCountPagesAction
 
 export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => {
     return {type: ACTIONS_TYPE_USERS.TOGGLE_IS_FETCHING, isFetching}
+}
+
+export const toggleIsFollowingProgress = (userId: number, isFetching: boolean): ToggleIsFollowingInProgressActionType => {
+    return {type: ACTIONS_TYPE_USERS.TOGGLE_IS_FOLLOWING_PROGRESS, userId, isFetching}
 }

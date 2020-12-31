@@ -1,4 +1,4 @@
-import {AuthStateType} from "../stateTypes";
+import {AuthStateType} from "../rootStateTypes";
 import {ACTIONS_TYPE_AUTH, IsAuthActionType} from "./authActions";
 
 const initialState = {

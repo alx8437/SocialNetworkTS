@@ -1,4 +1,4 @@
-import {UserData} from "../stateTypes";
+import {UserData} from "../rootStateTypes";
 
 export enum ACTIONS_TYPE_AUTH {
     USER_IS_AUTH = "Header/USER_IS_AUTH"

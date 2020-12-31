@@ -1,6 +1,6 @@
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {ProfileStateType} from "../../../redux/stateTypes";
+import {ProfileStateType} from "../../../redux/rootStateTypes";
 import {StateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {addPostAC, ProfileActionsType, updateTextPostAC} from "../../../redux/profile/profileActions";

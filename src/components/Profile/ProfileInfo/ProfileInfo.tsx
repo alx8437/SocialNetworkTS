@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './ProfileInfo.module.css';
-import {ProfileType} from "../../../redux/stateTypes";
+import {ProfileType} from "../../../redux/rootStateTypes";
 import defaultAvatar from "../../../assets/images/defaultAvatar.png";
 
 type ProfileInfoPropsType = {

@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {ProfileStateType} from "../../../redux/stateTypes";
+import {ProfileStateType} from "../../../redux/rootStateTypes";
 
 type PropsType = {
     profilePage: ProfileStateType

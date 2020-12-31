@@ -7,7 +7,7 @@ import {
     UnfollowActionType
 } from "./usersActions";
 import usersReducer from "./usersReducer";
-import {UsersStateType} from "../stateTypes";
+import {UsersStateType} from "../rootStateTypes";
 
 let startState: UsersStateType = {
     users: [],

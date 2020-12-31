@@ -1,4 +1,4 @@
-import {UsersStateType} from "../stateTypes";
+import {UsersStateType} from "../rootStateTypes";
 import {ACTIONS_TYPE_USERS, UsersActionsType} from "./usersActions";
 
 const initialState: UsersStateType = {
@@ -7,8 +7,8 @@ const initialState: UsersStateType = {
     totalCount: 0,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: [],
 }
-
 
 const usersReducer = (state: UsersStateType = initialState, action: UsersActionsType): UsersStateType => {
     switch (action.type) {
@@ -34,6 +34,13 @@ const usersReducer = (state: UsersStateType = initialState, action: UsersActions
             return {...state, totalCount: action.totalCount}
         case ACTIONS_TYPE_USERS.TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+        case ACTIONS_TYPE_USERS.TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
         default:
             return state
     }

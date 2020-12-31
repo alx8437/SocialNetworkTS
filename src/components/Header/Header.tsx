@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Header.module.css';
 import logo from "../../assets/images/logo.png"
 import {NavLink} from "react-router-dom";
-import {UserData} from "../../redux/stateTypes";
+import {UserData} from "../../redux/rootStateTypes";
 
 type HeaderPropsType = {
     userData: UserData,

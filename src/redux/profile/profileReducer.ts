@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {PostPropsType, ProfileStateType} from "../stateTypes";
+import {PostPropsType, ProfileStateType} from "../rootStateTypes";
 import {ACTIONS_TYPE_PROFILE, ProfileActionsType} from "./profileActions";
 
 const initialState: ProfileStateType = {

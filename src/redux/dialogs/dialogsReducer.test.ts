@@ -1,6 +1,6 @@
 import dialogsReducer from "./dialogsReducer";
 import {ACTION_TYPES_DIALOGS, AddMessageActionType, UpdateTextMessageActionType} from "./dialogsActions";
-import {DialogsStateType} from "../stateTypes";
+import {DialogsStateType} from "../rootStateTypes";
 
 
 let startState: DialogsStateType = {

@@ -1,4 +1,4 @@
-import {ProfileType} from "../stateTypes";
+import {ProfileType} from "../rootStateTypes";
 
 export enum ACTIONS_TYPE_PROFILE {
     ADD_POST = "Profile/MyPostsContainer/ADD_POST",

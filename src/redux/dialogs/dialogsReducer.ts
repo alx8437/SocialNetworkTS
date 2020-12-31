@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {DialogsStateType, MessagePropsType} from "../stateTypes";
+import {DialogsStateType, MessagePropsType} from "../rootStateTypes";
 import {ACTION_TYPES_DIALOGS, DialogsActionsType} from "./dialogsActions";
 
 const initialState: DialogsStateType = {

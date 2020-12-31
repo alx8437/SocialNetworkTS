@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ProfileType, UserType} from "../redux/stateTypes";
+import {ProfileType, UserType} from "../redux/rootStateTypes";
 
 export type GetUsersResponseType = {
     items: Array<UserType>,

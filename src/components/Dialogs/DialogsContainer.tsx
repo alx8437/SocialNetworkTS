@@ -1,5 +1,5 @@
 import {addMessageAC, DialogsActionsType, updateTextMessageAC} from "../../redux/dialogs/dialogsActions";
-import {DialogsStateType} from '../../redux/stateTypes';
+import {DialogsStateType} from '../../redux/rootStateTypes';
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
