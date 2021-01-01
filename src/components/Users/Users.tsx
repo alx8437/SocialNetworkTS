@@ -28,11 +28,12 @@ const User = (props: UsersPropsType) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.pageChange}>
-                {pages.map((p, index) =>
-                    <span
+                {pages.map((p, index) => {
+                  return  <span
                         onClick={() => props.onPageChanged(p)}
                         key={index}
-                        className={props.currentPage === p ? styles.selectedPage : ""}>{p}</span>)}
+                        className={props.currentPage === p ? styles.selectedPage : ""}>{p}
+                    </span>})}
             </div>
 
             {

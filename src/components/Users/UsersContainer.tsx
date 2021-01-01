@@ -3,7 +3,7 @@ import {UserType} from "../../redux/rootStateTypes";
 import {StateType} from "../../redux/redux-store";
 import {
     changeCurrentPage,
-    follow,
+    follow, getUsersThunkCreator,
     setTotalCountPages,
     setUsers,
     toggleIsFetching, toggleIsFollowingProgress,
@@ -25,34 +25,21 @@ type MapStateToPropsType = {
 type MapDispatchToPropsType = {
     follow: (userId: number) => void,
     unfollow: (userId: number) => void,
-    setUsers: (users: Array<UserType>) => void,
     changeCurrentPage: (currentPage: number) => void,
-    setTotalCountPages: (totalCount: number) => void,
-    toggleIsFetching: (isFetching: boolean) => void,
     toggleIsFollowingProgress: (userId: number, isFetching: boolean) => void,
+    getUsersThunkCreator: (currentPage: number, pageSize: number) => void,
 }
 type UsersApiPropsType = MapDispatchToPropsType & MapStateToPropsType
 
 class UsersApi extends React.Component<UsersApiPropsType> {
     componentDidMount(): void {
-        this.props.toggleIsFetching(true);
-        userApi.getUser(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.setUsers(data.items);
-                this.props.setTotalCountPages(data.totalCount);
-                this.props.toggleIsFetching(false);
-            });
+        this.props.changeCurrentPage(this.props.currentPage);
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.toggleIsFetching(true);
         this.props.changeCurrentPage(pageNumber);
-        userApi.getUser(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.setUsers(data.items);
-                this.props.setTotalCountPages(data.totalCount);
-                this.props.toggleIsFetching(false);
-            });
+        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize);
     }
     render() {
         return <React.Fragment>
@@ -74,6 +61,6 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
 
 const UsersContainer =
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {
-         follow, unfollow, setUsers, changeCurrentPage, setTotalCountPages, toggleIsFetching, toggleIsFollowingProgress,
+         follow, unfollow, changeCurrentPage, toggleIsFollowingProgress, getUsersThunkCreator,
     })(UsersApi);
 export default UsersContainer;

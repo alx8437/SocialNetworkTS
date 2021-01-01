@@ -1,4 +1,6 @@
 import {UserType} from "../rootStateTypes";
+import {userApi} from "../../api/api";
+import {Dispatch} from "redux";
 
 export enum ACTIONS_TYPE_USERS {
     FOLLOW = "Users/FOLLOW",
@@ -51,30 +53,39 @@ export type UsersActionsType = FollowActionType | UnfollowActionType |
     SetUsersActionType | ChangeCurrentPageActionType | SetTotalCountPagesActionType
     | ToggleIsFetchingActionType | ToggleIsFollowingInProgressActionType
 
+//Action creators
 export const follow = (userId: number): FollowActionType => {
     return {type: ACTIONS_TYPE_USERS.FOLLOW, userId}
-}
-
+};
 export const unfollow = (userId: number): UnfollowActionType => {
     return {type: ACTIONS_TYPE_USERS.UNFOLLOW, userId}
-}
-
+};
 export const setUsers = (users: Array<UserType>): SetUsersActionType => {
     return {type: ACTIONS_TYPE_USERS.SET_USERS, users}
-}
-
+};
 export const changeCurrentPage = (currentPage: number): ChangeCurrentPageActionType => {
     return {type: ACTIONS_TYPE_USERS.CHANGE_CURRENT_PAGE, currentPage}
-}
-
+};
 export const setTotalCountPages = (totalCount: number): SetTotalCountPagesActionType => {
     return {type: ACTIONS_TYPE_USERS.SET_TOTAL_COUNT_PAGES, totalCount}
-}
-
+};
 export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => {
     return {type: ACTIONS_TYPE_USERS.TOGGLE_IS_FETCHING, isFetching}
-}
-
+};
 export const toggleIsFollowingProgress = (userId: number, isFetching: boolean): ToggleIsFollowingInProgressActionType => {
     return {type: ACTIONS_TYPE_USERS.TOGGLE_IS_FOLLOWING_PROGRESS, userId, isFetching}
+};
+
+//Thunks creators
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch<UsersActionsType>) => {
+        dispatch(toggleIsFetching(true));
+        userApi.getUser(currentPage, pageSize)
+            .then(data => {
+                debugger
+                dispatch(setUsers(data.items));
+                dispatch(setTotalCountPages(data.totalCount));
+                dispatch(toggleIsFetching(false));
+            });
+    }
 }
