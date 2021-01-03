@@ -54,10 +54,10 @@ export type UsersActionsType = FollowActionType | UnfollowActionType |
     | ToggleIsFetchingActionType | ToggleIsFollowingInProgressActionType
 
 //Action creators
-export const follow = (userId: number): FollowActionType => {
+export const followSuccess = (userId: number): FollowActionType => {
     return {type: ACTIONS_TYPE_USERS.FOLLOW, userId}
 };
-export const unfollow = (userId: number): UnfollowActionType => {
+export const unfollowSuccess = (userId: number): UnfollowActionType => {
     return {type: ACTIONS_TYPE_USERS.UNFOLLOW, userId}
 };
 export const setUsers = (users: Array<UserType>): SetUsersActionType => {
@@ -77,15 +77,34 @@ export const toggleIsFollowingProgress = (userId: number, isFetching: boolean): 
 };
 
 //Thunks creators
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+export const getUsers = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch<UsersActionsType>) => {
         dispatch(toggleIsFetching(true));
         userApi.getUser(currentPage, pageSize)
             .then(data => {
-                debugger
                 dispatch(setUsers(data.items));
                 dispatch(setTotalCountPages(data.totalCount));
                 dispatch(toggleIsFetching(false));
             });
+    }
+}
+
+export const unfollow = (userId: number) => {
+    return (dispatch: Dispatch<UsersActionsType>) => {
+        dispatch(toggleIsFollowingProgress(userId, true));
+        userApi.unFollowUser(userId).then(data => {
+            if (data.resultCode === 0) dispatch(unfollowSuccess(userId));
+            dispatch(toggleIsFollowingProgress(userId, false));
+        });
+    }
+}
+
+export const follow = (userId: number) => {
+    return (dispatch: Dispatch<UsersActionsType>) => {
+        dispatch(toggleIsFollowingProgress(userId, true));
+        userApi.followUser(userId).then(data => {
+            if (data.resultCode === 0) dispatch(followSuccess(userId));
+            dispatch(toggleIsFollowingProgress(userId, false));
+        });
     }
 }

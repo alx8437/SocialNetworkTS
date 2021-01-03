@@ -3,16 +3,14 @@ import {UserType} from "../../redux/rootStateTypes";
 import {StateType} from "../../redux/redux-store";
 import {
     changeCurrentPage,
-    follow, getUsersThunkCreator,
-    setTotalCountPages,
-    setUsers,
-    toggleIsFetching, toggleIsFollowingProgress,
-    unfollow
+    follow,
+    getUsers,
+    toggleIsFollowingProgress,
+    unfollow,
 } from "../../redux/users/usersActions";
 import React from "react";
 import User from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {userApi} from "../../api/api";
 
 type MapStateToPropsType = {
     users: Array<UserType>,
@@ -27,19 +25,19 @@ type MapDispatchToPropsType = {
     unfollow: (userId: number) => void,
     changeCurrentPage: (currentPage: number) => void,
     toggleIsFollowingProgress: (userId: number, isFetching: boolean) => void,
-    getUsersThunkCreator: (currentPage: number, pageSize: number) => void,
+    getUsers: (currentPage: number, pageSize: number) => void,
 }
 type UsersApiPropsType = MapDispatchToPropsType & MapStateToPropsType
 
 class UsersApi extends React.Component<UsersApiPropsType> {
     componentDidMount(): void {
         this.props.changeCurrentPage(this.props.currentPage);
-        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.changeCurrentPage(pageNumber);
-        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize);
+        this.props.getUsers(pageNumber, this.props.pageSize);
     }
     render() {
         return <React.Fragment>
@@ -61,6 +59,6 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
 
 const UsersContainer =
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {
-         follow, unfollow, changeCurrentPage, toggleIsFollowingProgress, getUsersThunkCreator,
+         follow, unfollow, changeCurrentPage, toggleIsFollowingProgress, getUsers,
     })(UsersApi);
 export default UsersContainer;

@@ -2,11 +2,10 @@ import React from "react";
 import {connect} from "react-redux";
 import ProfileInfo from "./ProfileInfo";
 import {ProfileType} from "../../../redux/rootStateTypes";
-import axios from "axios"
 import Preloader from "../../common/Preloader/Preloader";
 import {setUserProfile} from "../../../redux/profile/profileActions";
 import {StateType} from "../../../redux/redux-store";
-import {RouteComponentProps, withRouter } from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {profileApi} from "../../../api/api";
 
 export type MapStatePropsType = {
