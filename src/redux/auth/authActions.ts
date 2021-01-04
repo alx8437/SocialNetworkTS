@@ -1,6 +1,5 @@
 import {UserData} from "../rootStateTypes";
 import {Dispatch} from "redux";
-import axios from "axios";
 import {authApi} from "../../api/api";
 
 export enum ACTIONS_TYPE_AUTH {

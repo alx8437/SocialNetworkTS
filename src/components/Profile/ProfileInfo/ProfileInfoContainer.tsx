@@ -4,11 +4,12 @@ import ProfileInfo from "./ProfileInfo";
 import {ProfileType} from "../../../redux/rootStateTypes";
 import Preloader from "../../common/Preloader/Preloader";
 import {StateType} from "../../../redux/redux-store";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {getUserProfile} from "../../../redux/profile/profileActions";
 
 export type MapStatePropsType = {
     profile: ProfileType | null,
+    isAuth: boolean,
 }
 
 type PathParamsType = {
@@ -27,13 +28,16 @@ export class ProfileInfoApi extends React.Component<ProfileInfoPropsType> {
     }
 
     render() {
+        if (!this.props.isAuth) return <Redirect to={'login'}/>
+
         return this.props.profile ? <ProfileInfo profile={this.props.profile}/> : <Preloader/>
     }
 }
 
 const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth: state.auth.isAuth,
     }
 }
 
