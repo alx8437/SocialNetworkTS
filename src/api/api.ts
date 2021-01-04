@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ProfileType, UserType} from "../redux/rootStateTypes";
+import {ProfileType, UserData, UserType} from "../redux/rootStateTypes";
 
 export type GetUsersResponseType = {
     items: Array<UserType>,
@@ -10,6 +10,12 @@ export type GetUsersResponseType = {
 type FollowingUsersPostResponseType = {
     resultCode: number
 }
+
+type GetLoginDataType = {
+    data: UserData,
+    resultCode: number
+}
+
 
 const instance = axios.create({
     withCredentials: true,
@@ -38,5 +44,13 @@ export const profileApi = {
     getProfile(userId: number | string) {
         return  instance.get<ProfileType>(`profile/${userId}`)
             .then(res => res.data);
+    }
+}
+
+export const authApi = {
+    me() {
+       return instance.get<GetLoginDataType>(`auth/me`,
+            {withCredentials: true})
+            .then(res => res.data)
     }
 }
