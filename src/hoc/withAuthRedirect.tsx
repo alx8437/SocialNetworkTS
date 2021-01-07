@@ -4,8 +4,9 @@ import {DialogsPropsType} from "../components/Dialogs/Dialogs";
 import {ProfileInfoPropsType} from "../components/Profile/ProfileInfo/ProfileInfoContainer";
 import {StateType} from "../redux/redux-store";
 import {connect} from "react-redux";
+import {UsersApiPropsType} from "../components/Users/UsersContainer";
 
-type PropsType = DialogsPropsType | ProfileInfoPropsType
+type PropsType = DialogsPropsType | ProfileInfoPropsType | UsersApiPropsType
 
 type MapStatePropsType = {
     isAuth: boolean
@@ -17,13 +18,13 @@ const mapStateToProps = (state: StateType): MapStatePropsType => {
     }
 }
 
+
 export const withAuthRedirect = (Component: any) => {
     debugger
-     const RedirectComponent = (props: any) => {
+     const RedirectComponent = (props: PropsType & MapStatePropsType) => {
+        debugger
         if (!props.isAuth) return <Redirect to={"/login"}/>
         return <Component {...props}/>
     };
-    const connectedRedirectComponent = connect(mapStateToProps)(RedirectComponent)
-
-    return connectedRedirectComponent;
+    return connect(mapStateToProps)(RedirectComponent)
 }

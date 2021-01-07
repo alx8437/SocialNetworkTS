@@ -12,7 +12,7 @@ import React from "react";
 import User from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {ProfileInfoApi} from "../Profile/ProfileInfo/ProfileInfoContainer";
+import {compose} from "redux";
 
 type MapStateToPropsType = {
     users: Array<UserType>,
@@ -29,9 +29,9 @@ type MapDispatchToPropsType = {
     toggleIsFollowingProgress: (userId: number, isFetching: boolean) => void,
     getUsers: (currentPage: number, pageSize: number) => void,
 }
-type UsersApiPropsType = MapDispatchToPropsType & MapStateToPropsType
+export type UsersApiPropsType = MapDispatchToPropsType & MapStateToPropsType
 
-class UsersApi extends React.Component<UsersApiPropsType> {
+class UsersContainer extends React.Component<UsersApiPropsType> {
     componentDidMount(): void {
         this.props.changeCurrentPage(this.props.currentPage);
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
@@ -59,10 +59,12 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
     }
 }
 
-const withAuthRedirectComponent = withAuthRedirect(UsersApi);
 
-const UsersContainer =
+
+
+export default compose(
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {
-         follow, unfollow, changeCurrentPage, toggleIsFollowingProgress, getUsers,
-    })(withAuthRedirectComponent);
-export default UsersContainer;
+        follow, unfollow, changeCurrentPage, toggleIsFollowingProgress, getUsers,
+    }),
+    withAuthRedirect
+)(UsersContainer) as React.ComponentType;
