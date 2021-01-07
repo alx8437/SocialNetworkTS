@@ -12,6 +12,7 @@ export type IsAuthActionType = {
     isAuth: boolean,
 }
 
+//Action creators
 export const setUserData = (data: UserData, isAuth: boolean): IsAuthActionType => {
    return {
        type: ACTIONS_TYPE_AUTH.USER_IS_AUTH,
@@ -20,6 +21,7 @@ export const setUserData = (data: UserData, isAuth: boolean): IsAuthActionType =
    }
 };
 
+//Thunks
 export const authMe = () => {
     return (dispatch: Dispatch<IsAuthActionType>) => {
         authApi.me().then(res => {

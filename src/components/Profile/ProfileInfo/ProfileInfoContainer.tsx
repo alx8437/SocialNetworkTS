@@ -6,10 +6,10 @@ import Preloader from "../../common/Preloader/Preloader";
 import {StateType} from "../../../redux/redux-store";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {getUserProfile} from "../../../redux/profile/profileActions";
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 
 export type MapStatePropsType = {
     profile: ProfileType | null,
-    isAuth: boolean,
 }
 
 type PathParamsType = {
@@ -19,7 +19,7 @@ export type MapDispatchPropsType = {
     getUserProfile: (userId: number) => void;
 };
 
-type ProfileInfoPropsType = RouteComponentProps<PathParamsType> & MapStatePropsType & MapDispatchPropsType
+export type ProfileInfoPropsType = RouteComponentProps<PathParamsType> & MapStatePropsType & MapDispatchPropsType
 
 export class ProfileInfoApi extends React.Component<ProfileInfoPropsType> {
     componentDidMount(): void {
@@ -28,8 +28,6 @@ export class ProfileInfoApi extends React.Component<ProfileInfoPropsType> {
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={'login'}/>
-
         return this.props.profile ? <ProfileInfo profile={this.props.profile}/> : <Preloader/>
     }
 }
@@ -37,12 +35,15 @@ export class ProfileInfoApi extends React.Component<ProfileInfoPropsType> {
 const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
         profile: state.profilePage.profile,
-        isAuth: state.auth.isAuth,
     }
 }
 
-const DataFromRoute = withRouter(ProfileInfoApi)
+
+
+const withAuthRedirectComponent = withAuthRedirect(ProfileInfoApi)
+
+const withDataFromRoute = withRouter(withAuthRedirectComponent)
 
 const ProfileInfoContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, StateType>(
-    mapStateToProps, {getUserProfile})(DataFromRoute);
+    mapStateToProps, {getUserProfile})(withDataFromRoute);
 export default ProfileInfoContainer

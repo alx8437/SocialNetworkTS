@@ -11,6 +11,8 @@ import {
 import React from "react";
 import User from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {ProfileInfoApi} from "../Profile/ProfileInfo/ProfileInfoContainer";
 
 type MapStateToPropsType = {
     users: Array<UserType>,
@@ -57,8 +59,10 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
     }
 }
 
+const withAuthRedirectComponent = withAuthRedirect(UsersApi);
+
 const UsersContainer =
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {
          follow, unfollow, changeCurrentPage, toggleIsFollowingProgress, getUsers,
-    })(UsersApi);
+    })(withAuthRedirectComponent);
 export default UsersContainer;
