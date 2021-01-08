@@ -1,4 +1,7 @@
 .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 30px;
     padding: 20px;
 }
@@ -13,4 +16,8 @@
 
 .avatar {
     width: 80px;
+}
+
+.name {
+    text-align: center;
 }
