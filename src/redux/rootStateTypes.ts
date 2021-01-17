@@ -44,6 +44,7 @@ export  type ProfileStateType = {
     profile: ProfileType | null,
     posts: Array<PostPropsType>,
     newPostText: string,
+    status: string,
 }
 
 export type PhotosUserType = {
@@ -54,7 +55,7 @@ export type UserType = {
     id: number,
     name: string,
     followed: boolean,
-    status: string | null,
+    status: string,
     photos: PhotosUserType,
 }
 export type UsersStateType = {

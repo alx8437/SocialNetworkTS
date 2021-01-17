@@ -16,6 +16,8 @@ type GetLoginDataType = {
     resultCode: number
 }
 
+type GetStatusDataType =  string | null
+
 
 const instance = axios.create({
     withCredentials: true,
@@ -44,6 +46,16 @@ export const profileApi = {
     getProfile(userId: number | string) {
         return  instance.get<ProfileType>(`profile/${userId}`)
             .then(res => res.data);
+    },
+
+    getStatus(userId: number | string) {
+        return instance.get<GetStatusDataType>(`profile/status/${userId}`)
+            .then(res => res.data);
+    },
+
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, { status })
+            .then(res => res.data);
     }
 }
 
@@ -51,6 +63,6 @@ export const authApi = {
     me() {
        return instance.get<GetLoginDataType>(`auth/me`,
             {withCredentials: true})
-            .then(res => res.data)
+            .then(res => res.data);
     }
 }

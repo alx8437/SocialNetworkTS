@@ -1,28 +1,63 @@
-import React from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 
 type PropsType = {
-    status: string
+    status: string,
+    updateStatus: (status: string) => void,
 };
 
+type LocalStateType = {
+    editMode: boolean,
+    status: string,
+}
+
 class ProfileStatus extends React.Component<PropsType> {
-    state = {
-        editMode: false
+
+    state: LocalStateType = {
+        editMode: false,
+        status: this.props.status,
     }
 
-    toggleEditMode = () => {
-        this.setState((state: {editMode: boolean}) => {
-            return {editMode: !state.editMode}
+    activateEditMode = () => {
+        this.setState(() => {
+            return {editMode: true}
         })
+    }
+
+    deactivateEditMode = () => {
+        this.setState(() => {
+            return {editMode: false};
+        });
+        this.props.updateStatus(this.state.status)
+    }
+
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const status = e.currentTarget.value
+        this.setState(() => {
+            return {status};
+        })
+    }
+    onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            this.deactivateEditMode()
+        }
     }
 
     render() {
         return <React.Fragment>
-            {this.state.editMode ?
+            {this.state.editMode
+                ?
                 <div>
-                    <input autoFocus={true} onBlur={this.toggleEditMode} value={this.props.status}/>
-                </div> :
+                    <input
+                        onChange={this.onStatusChange}
+                        autoFocus={true}
+                        onBlur={this.deactivateEditMode}
+                        value={this.state.status}
+                        onKeyPress={this.onKeyPressHandler}
+                    />
+                </div>
+                :
                 <div>
-                    <span onDoubleClick={this.toggleEditMode}>{this.props.status}</span>
+                    <span onDoubleClick={this.activateEditMode}>{this.props.status || "no status"}</span>
                 </div>}
         </React.Fragment>
 

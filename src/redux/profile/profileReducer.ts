@@ -9,7 +9,8 @@ const initialState: ProfileStateType = {
         {id: v1(), message: "It's a nice course, yes!", likesCount: 20},
         {id: v1(), message: "Hi!", likesCount: 2},
     ],
-    newPostText: ""
+    newPostText: "",
+    status: "",
 }
 
 const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType): ProfileStateType => {
@@ -18,22 +19,32 @@ const profileReducer = (state: ProfileStateType = initialState, action: ProfileA
             const newPost: PostPropsType = {
                 id: v1(),
                 message: state.newPostText,
-                likesCount: 3
+                likesCount: 3,
             };
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ""
+                newPostText: "",
             }
         case ACTIONS_TYPE_PROFILE.UPDATE_TEXT_POST:
             return {
                 ...state,
-                newPostText: action.newTextPost
+                newPostText: action.newTextPost,
             }
         case ACTIONS_TYPE_PROFILE.SET_USER_PROFILE:
             return {
                 ...state,
-                profile: action.profile
+                profile: action.profile,
+            }
+        case ACTIONS_TYPE_PROFILE.SET_PROFILE_STATUS:
+            return {
+                ...state,
+                status: action.status,
+            }
+        case ACTIONS_TYPE_PROFILE.UPDATE_PROFILE_STATUS:
+            return {
+                ...state,
+                status: action.status,
             }
         default:
             return state
