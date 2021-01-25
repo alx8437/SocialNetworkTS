@@ -42,6 +42,14 @@ class ProfileStatus extends React.Component<PropsType> {
         }
     }
 
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<LocalStateType>): void {
+        if (prevProps.status !== this.props.status) {
+            this.setState(() => {
+               return {status: this.props.status}
+            });
+        }
+    }
+
     render() {
         return <React.Fragment>
             {this.state.editMode

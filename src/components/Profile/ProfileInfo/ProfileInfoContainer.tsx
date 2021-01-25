@@ -19,7 +19,7 @@ type PathParamsType = {
 }
 export type MapDispatchPropsType = {
     getUserProfile: (userId: number) => void,
-    getStatus:  (userId: number) => void,
+    getStatus: (userId: number) => void,
     updateStatus: (status: string) => void,
 };
 

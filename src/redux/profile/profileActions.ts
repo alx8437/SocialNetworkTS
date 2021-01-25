@@ -52,7 +52,7 @@ export const updateProfileStatusAC = (status: string): UpdateProfileStatus => {
     }
 }
 
-//Thunks
+//Thunks creators
 export const getUserProfile = (userId: number) => {
     return (dispatch: Dispatch<ProfileActionsType>) => {
         profileApi.getProfile(userId).then(data => {

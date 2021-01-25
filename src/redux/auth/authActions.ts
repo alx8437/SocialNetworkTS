@@ -21,7 +21,7 @@ export const setUserData = (data: UserData, isAuth: boolean): IsAuthActionType =
    }
 };
 
-//Thunks
+//Thunks creators
 export const authMe = () => {
     return (dispatch: Dispatch<IsAuthActionType>) => {
         authApi.me().then(res => {
