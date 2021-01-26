@@ -5,9 +5,9 @@ import {ProfileType} from "../../../redux/rootStateTypes";
 import Preloader from "../../common/Preloader/Preloader";
 import {StateType} from "../../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {getStatus, getUserProfile, updateStatus} from "../../../redux/profile/profileActions";
 import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {getStatus, getUserProfile, updateStatus} from "../../../redux/profile/profileReducer";
 
 export type MapStatePropsType = {
     profile: ProfileType | null,

@@ -1,18 +1,12 @@
 import {connect} from "react-redux";
 import {UserType} from "../../redux/rootStateTypes";
 import {StateType} from "../../redux/redux-store";
-import {
-    changeCurrentPage,
-    follow,
-    getUsers,
-    toggleIsFollowingProgress,
-    unfollow,
-} from "../../redux/users/usersActions";
 import React from "react";
 import User from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {changeCurrentPage, follow, getUsers, toggleIsFollowingProgress, unfollow} from "../../redux/users/usersReducer";
 
 type MapStateToPropsType = {
     users: Array<UserType>,

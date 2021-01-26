@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {ProfileStateType} from "../../../redux/rootStateTypes";
 import {StateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
-import {addPostAC, ProfileActionsType, updateTextPostAC} from "../../../redux/profile/profileActions";
+import {addPostAC, ProfileActionsType, updateTextPostAC } from "../../../redux/profile/profileReducer";
 
 type MapStatePropsType = {
     profilePage: ProfileStateType

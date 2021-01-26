@@ -1,4 +1,3 @@
-import {addMessageAC, DialogsActionsType, updateTextMessageAC} from "../../redux/dialogs/dialogsActions";
 import {DialogsStateType} from '../../redux/rootStateTypes';
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
@@ -6,6 +5,7 @@ import {StateType} from "../../redux/redux-store";
 import {compose, Dispatch} from "redux";
 import React from "react";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {addMessageAC, DialogsActionsType, updateTextMessageAC} from "../../redux/dialogs/dialogsReducer";
 
 type MapStatePropsType = {
     dialogsPage: DialogsStateType

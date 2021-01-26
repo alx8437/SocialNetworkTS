@@ -1,5 +1,4 @@
-import dialogsReducer from "./dialogsReducer";
-import {ACTION_TYPES_DIALOGS, AddMessageActionType, UpdateTextMessageActionType} from "./dialogsActions";
+import dialogsReducer, {ACTION_TYPES_DIALOGS, AddMessageActionType, UpdateTextMessageActionType } from "./dialogsReducer";
 import {DialogsStateType} from "../rootStateTypes";
 
 

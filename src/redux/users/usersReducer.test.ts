@@ -1,12 +1,7 @@
-import {
-    ACTIONS_TYPE_USERS,
+
+import usersReducer, {ACTIONS_TYPE_USERS,
     ChangeCurrentPageActionType,
-    FollowActionType,
-    SetTotalCountPagesActionType,
-    SetUsersActionType,
-    UnfollowActionType
-} from "./usersActions";
-import usersReducer from "./usersReducer";
+    FollowActionType, SetTotalCountPagesActionType, SetUsersActionType, UnfollowActionType} from "./usersReducer";
 import {UsersStateType} from "../rootStateTypes";
 
 let startState: UsersStateType = {
@@ -15,6 +10,7 @@ let startState: UsersStateType = {
     totalCount: 4222,
     pageSize: 4,
     isFetching: true,
+    followingInProgress: [],
 };
 
 beforeEach(() => {

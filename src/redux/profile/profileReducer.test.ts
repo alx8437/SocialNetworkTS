@@ -1,18 +1,24 @@
 import {ProfileStateType} from "../rootStateTypes";
-import profileReducer from "./profileReducer";
-import {ACTIONS_TYPE_PROFILE, AddPostActionType, SetUserProfile, UpdateTextPost} from "./profileActions";
+import profileReducer, {
+    ACTIONS_TYPE_PROFILE,
+    AddPostActionType,
+    SetUserProfileType,
+    UpdateTextPost
+} from "./profileReducer";
 
 let startState: ProfileStateType = {
     profile: null,
     posts: [],
-    newPostText: ""
+    newPostText: "",
+    status: "",
 }
 
 beforeEach(() => {
     startState = {
         profile: null,
         posts: [],
-        newPostText: "new post"
+        newPostText: "new post",
+        status: "",
     }
 });
 
@@ -39,7 +45,7 @@ test("upd text post", () => {
 })
 
 test("add new user", () => {
-    const action: SetUserProfile = {
+    const action: SetUserProfileType = {
         type: ACTIONS_TYPE_PROFILE.SET_USER_PROFILE,
         profile: {
             aboutMe: "",

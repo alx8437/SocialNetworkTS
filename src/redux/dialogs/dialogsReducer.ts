@@ -1,6 +1,20 @@
 import {v1} from "uuid";
 import {DialogsStateType, MessagePropsType} from "../rootStateTypes";
-import {ACTION_TYPES_DIALOGS, DialogsActionsType} from "./dialogsActions";
+
+export enum ACTION_TYPES_DIALOGS {
+    ADD_MESSAGE = "Dialogs/ADD_MESSAGE",
+    UPDATE_TEXT_MESSAGE = "Dialogs/UPDATE_TEXT_MESSAGE",
+}
+
+export type AddMessageActionType = {
+    type: ACTION_TYPES_DIALOGS.ADD_MESSAGE,
+}
+
+export type UpdateTextMessageActionType = {
+    type: ACTION_TYPES_DIALOGS.UPDATE_TEXT_MESSAGE,
+    newTextMessage: string,
+}
+
 
 const initialState: DialogsStateType = {
     dialogs: [
@@ -42,5 +56,14 @@ const dialogsReducer = (state: DialogsStateType = initialState, action: DialogsA
             return state
     }
 }
+
+export const addMessageAC = () => ({type: ACTION_TYPES_DIALOGS.ADD_MESSAGE} as const)
+export const updateTextMessageAC = (newTextMessage: string) => {
+    return {type: ACTION_TYPES_DIALOGS.UPDATE_TEXT_MESSAGE, newTextMessage} as const
+}
+
+
+
+export type DialogsActionsType = AddMessageActionType | UpdateTextMessageActionType
 
 export default dialogsReducer;
