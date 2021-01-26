@@ -3,7 +3,7 @@ import Header from "./Header";
 import {UserData} from "../../redux/rootStateTypes";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
-import {authMe} from "../../redux/auth/authActions";
+import {authMe} from "../../redux/auth/authReducer";
 
 type MapStateToPropsType = {
     data: UserData,

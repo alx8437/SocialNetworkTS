@@ -1,19 +1,33 @@
 import axios from "axios";
-import {ProfileType, UserData, UserType} from "../redux/rootStateTypes";
+import {ProfileType, UserType} from "../redux/rootStateTypes";
+import {FormDataType} from "../components/Login/Login";
 
 export type GetUsersResponseType = {
     items: Array<UserType>,
     totalCount: number,
-    error: null,
+    error: null | string,
 }
 
 type FollowingUsersPostResponseType = {
     resultCode: number
 }
 
-type GetLoginDataType = {
-    data: UserData,
+type GetLoginResponseType = {
     resultCode: number
+    messages: Array<string>,
+    data: {
+        id: number,
+        email: string,
+        login: string,
+    }
+}
+
+type PostLoginResponseType = {
+    resultCode: number
+    messages: Array<string>,
+    data: {
+        userId: number
+    }
 }
 
 type GetStatusDataType =  string | null
@@ -61,8 +75,13 @@ export const profileApi = {
 
 export const authApi = {
     me() {
-       return instance.get<GetLoginDataType>(`auth/me`,
-            {withCredentials: true})
+       return instance.get<GetLoginResponseType>(`auth/me`)
             .then(res => res.data);
+    },
+    login(payload: FormDataType) {
+        return instance.post<PostLoginResponseType>(`auth/login`, {payload})
+            .then(res => {
+                debugger
+            });
     }
 }

@@ -68,7 +68,7 @@ export type UsersStateType = {
 }
 
 export type UserData = {
-    userId: number | null,
+    id: number | null,
     login:  string | null,
     email: string | null,
 }

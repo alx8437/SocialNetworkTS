@@ -1,8 +1,9 @@
 import React from "react";
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
+import {authApi} from "../../api/api";
 
 //Types for our form
-type FormDataType = {
+ export type FormDataType = {
     login: string,
     password: string,
     rememberMe: boolean,
@@ -13,14 +14,13 @@ type FormDataType = {
 // Сюда прийдут из нее пропсы - их мы должны встретить и типизировать, юзаем InjectedFormProps
 // Также дженериками уточняем тип данных формы FormDataType - пишем сами
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
-    debugger
     return <React.Fragment>
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field placeholder={"login"} name={"login"} component={"input"}/>
             </div>
             <div>
-                <Field placeholder={"password"} name={"password"} component={"input"}/>
+                <Field placeholder={"password"} type={"password"} name={"password"} component={"input"}/>
             </div>
             <div>
                 <Field type="checkbox" name={"rememberMe"} component={"input"}/> remember me
@@ -36,7 +36,7 @@ const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 // Here we use our LoginReduxForm, that we wrap our LoginForm component
 export const Login = () => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        authApi.login(formData)
     }
 
     return <div>
