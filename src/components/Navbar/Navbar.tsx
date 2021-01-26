@@ -45,7 +45,7 @@ const Navbar = () => {
             <div className={styles.item}>
                 <div className={styles.iconWrapper}>
                     <div className={styles.icon}><FaSignInAlt color="#a8dadc"/></div>
-                    <div>Login</div>
+                    <NavLink to={"/login"} activeClassName={styles.active}>Login</NavLink>
                 </div>
             </div>
         </nav>
