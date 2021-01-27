@@ -16,7 +16,6 @@ export type PostPropsType = {
 export type DialogsStateType = {
     dialogs: Array<DialogItemPropsType>,
     messages: Array<MessagePropsType>,
-    newTextMessage: string,
 }
 
 export type ProfileType = {
@@ -43,7 +42,6 @@ export type ProfileType = {
 export  type ProfileStateType = {
     profile: ProfileType | null,
     posts: Array<PostPropsType>,
-    newPostText: string,
     status: string,
 }
 

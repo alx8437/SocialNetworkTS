@@ -3,18 +3,12 @@ import {DialogsStateType, MessagePropsType} from "../rootStateTypes";
 
 export enum ACTION_TYPES_DIALOGS {
     ADD_MESSAGE = "Dialogs/ADD_MESSAGE",
-    UPDATE_TEXT_MESSAGE = "Dialogs/UPDATE_TEXT_MESSAGE",
 }
 
 export type AddMessageActionType = {
     type: ACTION_TYPES_DIALOGS.ADD_MESSAGE,
+    newTextMessage: string
 }
-
-export type UpdateTextMessageActionType = {
-    type: ACTION_TYPES_DIALOGS.UPDATE_TEXT_MESSAGE,
-    newTextMessage: string,
-}
-
 
 const initialState: DialogsStateType = {
     dialogs: [
@@ -31,7 +25,6 @@ const initialState: DialogsStateType = {
         {id: v1(), message: "I am too"},
         {id: v1(), message: "It's grate!"},
     ],
-    newTextMessage: ""
 }
 
 const dialogsReducer = (state: DialogsStateType = initialState, action: DialogsActionsType): DialogsStateType => {
@@ -39,31 +32,25 @@ const dialogsReducer = (state: DialogsStateType = initialState, action: DialogsA
         case ACTION_TYPES_DIALOGS.ADD_MESSAGE:
             const newMessage: MessagePropsType = {
                 id: v1(),
-                message: state.newTextMessage
+                message: action.newTextMessage,
             };
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
-                newTextMessage: ''
-            }
-
-        case ACTION_TYPES_DIALOGS.UPDATE_TEXT_MESSAGE:
-            return  {
-                ...state,
-                newTextMessage: action.newTextMessage
             }
         default:
             return state
     }
 }
 
-export const addMessageAC = () => ({type: ACTION_TYPES_DIALOGS.ADD_MESSAGE} as const)
-export const updateTextMessageAC = (newTextMessage: string) => {
-    return {type: ACTION_TYPES_DIALOGS.UPDATE_TEXT_MESSAGE, newTextMessage} as const
+export const addMessageAC = (newTextMessage: string): AddMessageActionType => {
+    return {
+        type: ACTION_TYPES_DIALOGS.ADD_MESSAGE,
+        newTextMessage,
+    }
 }
 
 
-
-export type DialogsActionsType = AddMessageActionType | UpdateTextMessageActionType
+export type DialogsActionsType = AddMessageActionType
 
 export default dialogsReducer;

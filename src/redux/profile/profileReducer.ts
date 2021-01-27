@@ -5,7 +5,6 @@ import {profileApi} from "../../api/api";
 
 export enum ACTIONS_TYPE_PROFILE {
     ADD_POST = "Profile/MyPostsContainer/ADD_POST",
-    UPDATE_TEXT_POST = "Profile/MyPostsContainer/UPDATE_TEXT_POST",
     SET_USER_PROFILE = "Profile/SET_USER_PROFILE",
     SET_PROFILE_STATUS = "Profile/SET_PROFILE_STATUS",
     UPDATE_PROFILE_STATUS = "Profile/UPDATE_PROFILE_STATUS",
@@ -18,18 +17,15 @@ const initialState: ProfileStateType = {
         {id: v1(), message: "It's a nice course, yes!", likesCount: 20},
         {id: v1(), message: "Hi!", likesCount: 2},
     ],
-    newPostText: "",
     status: "",
 }
 
 //Types for action creators
 export type AddPostActionType = {
     type: ACTIONS_TYPE_PROFILE.ADD_POST,
+    newPostMessage: string
 }
-export type UpdateTextPost = {
-    type: ACTIONS_TYPE_PROFILE.UPDATE_TEXT_POST,
-    newTextPost: string,
-}
+
 export type SetUserProfileType = {
     type: ACTIONS_TYPE_PROFILE.SET_USER_PROFILE,
     profile: ProfileType
@@ -43,26 +39,19 @@ export type UpdateProfileStatus = {
     status: string
 }
 
-export type ProfileActionsType = AddPostActionType | UpdateTextPost
-    | SetUserProfileType | SetProfileStatusType | UpdateProfileStatus;
+export type ProfileActionsType = AddPostActionType | SetUserProfileType | SetProfileStatusType | UpdateProfileStatus;
 
 const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType): ProfileStateType => {
     switch (action.type) {
         case ACTIONS_TYPE_PROFILE.ADD_POST:
             const newPost: PostPropsType = {
                 id: v1(),
-                message: state.newPostText,
+                message: action.newPostMessage,
                 likesCount: 3,
             };
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: "",
-            }
-        case ACTIONS_TYPE_PROFILE.UPDATE_TEXT_POST:
-            return {
-                ...state,
-                newPostText: action.newTextPost,
             }
         case ACTIONS_TYPE_PROFILE.SET_USER_PROFILE:
             return {
@@ -85,10 +74,8 @@ const profileReducer = (state: ProfileStateType = initialState, action: ProfileA
 }
 
 //Action Creators
-export const addPostAC = (): AddPostActionType => ({type: ACTIONS_TYPE_PROFILE.ADD_POST});
-export const updateTextPostAC = (newTextPost: string): UpdateTextPost => {
-    return {type: ACTIONS_TYPE_PROFILE.UPDATE_TEXT_POST, newTextPost}
-};
+export const addPostAC = (newPostMessage: string): AddPostActionType =>
+    ({type: ACTIONS_TYPE_PROFILE.ADD_POST, newPostMessage});
 export const setUserProfileAC = (profile: ProfileType): SetUserProfileType => {
     return {type: ACTIONS_TYPE_PROFILE.SET_USER_PROFILE, profile}
 };
