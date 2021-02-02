@@ -1,7 +1,7 @@
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {ProfileStateType} from "../../../redux/rootStateTypes";
-import {StateType} from "../../../redux/redux-store";
+import {RootStateType} from "../../../redux/redux-store";
 import {addPostAC} from "../../../redux/profile/profileReducer";
 
 type MapStatePropsType = {
@@ -12,11 +12,11 @@ type MapDispatchPropsType = {
     addPostAC: (newPostMessage: string) => void
 }
 
-const mapStateToProps = (state: StateType): MapStatePropsType => {
+const mapStateToProps = (state: RootStateType): MapStatePropsType => {
     return {
         profilePage: state.profilePage
     }
 }
 
-const MyPostsContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, StateType>(mapStateToProps, {addPostAC})(MyPosts)
+const MyPostsContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, RootStateType>(mapStateToProps, {addPostAC})(MyPosts)
 export default MyPostsContainer;

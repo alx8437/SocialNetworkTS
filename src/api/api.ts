@@ -1,6 +1,5 @@
 import axios from "axios";
 import {ProfileType, UserType} from "../redux/rootStateTypes";
-import {FormDataType} from "../components/Login/Login";
 
 export type GetUsersResponseType = {
     items: Array<UserType>,
@@ -22,7 +21,7 @@ type GetLoginResponseType = {
     }
 }
 
-type PostLoginResponseType = {
+type AuthApiResponseType<D> = {
     resultCode: number
     messages: Array<string>,
     data: {
@@ -78,10 +77,12 @@ export const authApi = {
        return instance.get<GetLoginResponseType>(`auth/me`)
             .then(res => res.data);
     },
-    login(payload: FormDataType) {
-        return instance.post<PostLoginResponseType>(`auth/login`, {payload})
-            .then(res => {
-                debugger
-            });
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post<AuthApiResponseType<{UserId: number}>>(`auth/login`, {email, password, rememberMe})
+            .then(res => res.data);
+    },
+    logOut() {
+        return instance.delete<AuthApiResponseType<{}>>(`auth/login`)
+            .then(res => res.data)
     }
 }

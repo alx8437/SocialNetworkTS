@@ -3,6 +3,8 @@ import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {ProfileStateType} from "../../../redux/rootStateTypes";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import {Textarea} from "../../common/FormsControls/FormsControls";
 
 type PropsType = {
     profilePage: ProfileStateType
@@ -12,6 +14,9 @@ type PropsType = {
 type AddPostFormDataType = {
     newPostMessage: string
 }
+
+const maxLength5 = maxLengthCreator(5);
+
 
 const MyPosts = (props: PropsType) => {
 
@@ -42,9 +47,10 @@ const AddPostForm: React.FC<InjectedFormProps<AddPostFormDataType>> = (props) =>
             <div className={styles.textarea}>
                 <div className={styles.textarea}>
                     <Field
-                        component={"textarea"}
+                        component={Textarea}
                         name={"newPostMessage"}
-                        placeholder={"Enter your text"}
+                        placeholder={"Enter your post"}
+                        validate={[required, maxLength5]}
                     />
                 </div>
             </div>

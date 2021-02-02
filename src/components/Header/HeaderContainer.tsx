@@ -2,15 +2,16 @@ import React from 'react';
 import Header from "./Header";
 import {UserData} from "../../redux/rootStateTypes";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/redux-store";
-import {authMe} from "../../redux/auth/authReducer";
+import {RootStateType} from "../../redux/redux-store";
+import {authMe, logOutMe} from "../../redux/auth/authReducer";
 
 type MapStateToPropsType = {
     data: UserData,
     isAuth: boolean,
 }
 type MapDispatchToPropsType = {
-    authMe: () => void
+    authMe: () => void,
+    logOutMe: () => void,
 }
 
 
@@ -22,12 +23,16 @@ class HeaderApi extends React.Component<HeaderApiPropsType> {
     }
 
     render() {
-        return <Header userData={this.props.data} isAuth={this.props.isAuth}/>
+        return <Header
+            userData={this.props.data}
+            isAuth={this.props.isAuth}
+            logOutMe={this.props.logOutMe}
+        />
     }
 
 }
 
-const mapStateToProps = (state: StateType) => {
+const mapStateToProps = (state: RootStateType) => {
     return {
         data: state.auth.data,
         isAuth: state.auth.isAuth,
@@ -35,5 +40,6 @@ const mapStateToProps = (state: StateType) => {
 }
 
 const HeaderContainer =
-    connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {authMe})(HeaderApi);
+    connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>
+    (mapStateToProps, {authMe, logOutMe})(HeaderApi);
 export default HeaderContainer;

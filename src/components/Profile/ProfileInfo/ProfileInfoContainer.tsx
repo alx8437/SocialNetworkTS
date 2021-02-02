@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import ProfileInfo from "./ProfileInfo";
 import {ProfileType} from "../../../redux/rootStateTypes";
 import Preloader from "../../common/Preloader/Preloader";
-import {StateType} from "../../../redux/redux-store";
+import {RootStateType} from "../../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -40,13 +40,12 @@ export class ProfileContainer extends React.Component<ProfileInfoPropsType> {
                 status={this.props.status}
                 updateStatus={this.props.updateStatus}
             />
-
             :
             <Preloader/>
     }
 }
 
-const mapStateToProps = (state: StateType): MapStatePropsType => {
+const mapStateToProps = (state: RootStateType): MapStatePropsType => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
@@ -54,7 +53,7 @@ const mapStateToProps = (state: StateType): MapStatePropsType => {
 }
 
 export default compose(
-    connect<MapStatePropsType, MapDispatchPropsType, {}, StateType>(
+    connect<MapStatePropsType, MapDispatchPropsType, {}, RootStateType>(
         mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
     withAuthRedirect

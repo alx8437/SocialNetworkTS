@@ -22,6 +22,7 @@
 }
 
 .sendMessage button {
+    height: 30px;
     background: #27aae1;
     padding: 7px 25px;
     border: none;

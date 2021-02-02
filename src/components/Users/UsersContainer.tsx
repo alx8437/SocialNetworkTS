@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {UserType} from "../../redux/rootStateTypes";
-import {StateType} from "../../redux/redux-store";
+import {RootStateType} from "../../redux/redux-store";
 import React from "react";
 import User from "./Users";
 import Preloader from "../common/Preloader/Preloader";
@@ -42,7 +42,7 @@ class UsersContainer extends React.Component<UsersApiPropsType> {
     }
 }
 
-const mapStateToProps = (state: StateType): MapStateToPropsType => {
+const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -57,7 +57,7 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
 
 
 export default compose(
-    connect<MapStateToPropsType, MapDispatchToPropsType, {}, StateType>(mapStateToProps, {
+    connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(mapStateToProps, {
         follow, unfollow, changeCurrentPage, toggleIsFollowingProgress, getUsers,
     }),
     withAuthRedirect

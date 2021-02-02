@@ -1,4 +1,4 @@
-import {AuthStateType, UserData} from "../rootStateTypes";
+import {UserData} from "../rootStateTypes";
 import {Dispatch} from "redux";
 import {authApi} from "../../api/api";
 
@@ -6,6 +6,16 @@ export enum ACTIONS_TYPE_AUTH {
     USER_IS_AUTH = "Header/USER_IS_AUTH"
 }
 
+export type AuthStateType = {
+    data: UserData,
+    isAuth: boolean,
+}
+
+export type IsAuthActionType = {
+    type: ACTIONS_TYPE_AUTH.USER_IS_AUTH,
+    data: UserData,
+    isAuth: boolean,
+}
 
 const initialState = {
     data: {
@@ -14,13 +24,6 @@ const initialState = {
         email: null,
     },
     isAuth: false,
-}
-
-
-export type IsAuthActionType = {
-    type: ACTIONS_TYPE_AUTH.USER_IS_AUTH,
-    data: UserData,
-    isAuth: boolean,
 }
 
 
@@ -52,6 +55,32 @@ export const authMe = () => {
         authApi.me().then(res => {
             if (res.resultCode === 0) {
                 dispatch(setUserData(res.data, true));
+            }
+        })
+    }
+}
+
+export const loginMe = (email: string, password: string, rememberMe: boolean) => {
+    return (dispatch: Dispatch<any>) => {
+        authApi.login(email, password, rememberMe).then(res => {
+            if (res.resultCode === 0) {
+                dispatch(authMe())
+            }
+        })
+
+    }
+}
+
+export const logOutMe = () => {
+    return (dispatch: Dispatch<any>) => {
+        authApi.logOut().then(res => {
+            if (res.resultCode === 0) {
+                const resetUserData: UserData = {
+                    login: null,
+                    email: null,
+                    id: null
+                }
+                dispatch(setUserData(resetUserData, false))
             }
         })
     }

@@ -70,10 +70,6 @@ export type UserData = {
     login:  string | null,
     email: string | null,
 }
-export type AuthStateType = {
-    data: UserData,
-    isAuth: boolean,
-}
 
 
 

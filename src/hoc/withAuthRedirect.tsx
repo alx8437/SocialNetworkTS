@@ -2,7 +2,7 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import {DialogsPropsType} from "../components/Dialogs/Dialogs";
 import {ProfileInfoPropsType} from "../components/Profile/ProfileInfo/ProfileInfoContainer";
-import {StateType} from "../redux/redux-store";
+import {RootStateType} from "../redux/redux-store";
 import {connect} from "react-redux";
 import {UsersApiPropsType} from "../components/Users/UsersContainer";
 
@@ -12,7 +12,7 @@ type MapStatePropsType = {
     isAuth: boolean
 }
 
-const mapStateToProps = (state: StateType): MapStatePropsType => {
+const mapStateToProps = (state: RootStateType): MapStatePropsType => {
     return {
         isAuth: state.auth.isAuth,
     }
