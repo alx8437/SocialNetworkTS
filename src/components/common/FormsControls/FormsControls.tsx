@@ -25,26 +25,29 @@ export const FormControl: React.FC<PropsType> = (
     {
         input,
         meta,
-        ...props}) =>
-{
+        ...props
+    }) => {
     const hasError = meta.touched && meta.error;
     return <React.Fragment>
-        <div>
+
             {props.children}
-        </div>
-        {hasError && <span className={s.errorMessage}>{meta.error}</span>}
+
+        {hasError && <div className={s.errorMessage}>{meta.error}</div>}
     </React.Fragment>
 }
 
 export const Textarea: React.FC<PropsType> = (props) => {
-    const {  input, meta, ...restProps} = props;
+    const {input, meta, ...restProps} = props;
     return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
 
 }
 
 export const Input: React.FC<PropsType> = (props) => {
-    const {  input, meta, ...restProps} = props;
-    return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
+    const styleForError = (props.meta.error && props.meta.touched) ? `${s.errorBorder}` : '';
+    const {input, meta, ...restProps} = props;
+    return <FormControl {...props}>
+        <input className={styleForError} {...input} {...restProps}/>
+    </FormControl>
 
 }
 

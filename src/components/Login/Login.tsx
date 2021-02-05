@@ -6,6 +6,7 @@ import {loginMe} from "../../redux/auth/authReducer";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/redux-store";
 import { Redirect } from "react-router-dom";
+import s from "../common/FormsControls/FormControls.module.css"
 
 // Types for our form
 export type LoginFormDataType = {
@@ -27,6 +28,7 @@ type MapDispatchPropsType = {
 // Сюда прийдут из нее пропсы - их мы должны встретить и типизировать, юзаем InjectedFormProps
 // Также дженериками уточняем тип данных формы FormDataType - пишем сами
 const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
+    const styleForError = props.error ? `${s.errorMessage}` : '';
     return <React.Fragment>
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -53,6 +55,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
                     component={Input}
                 /> remember me
             </div>
+            <div className={styleForError}>{props.error}</div>
             <button>Login</button>
         </form>
     </React.Fragment>

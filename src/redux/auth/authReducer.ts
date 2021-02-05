@@ -1,6 +1,7 @@
 import {UserData} from "../rootStateTypes";
 import {Dispatch} from "redux";
 import {authApi} from "../../api/api";
+import {stopSubmit} from "redux-form";
 
 export enum ACTIONS_TYPE_AUTH {
     USER_IS_AUTH = "Header/USER_IS_AUTH"
@@ -65,6 +66,8 @@ export const loginMe = (email: string, password: string, rememberMe: boolean) =>
         authApi.login(email, password, rememberMe).then(res => {
             if (res.resultCode === 0) {
                 dispatch(authMe())
+            } else {
+                dispatch(stopSubmit('login', {_error: res.messages[0]}))
             }
         })
 
