@@ -67,7 +67,8 @@ export const loginMe = (email: string, password: string, rememberMe: boolean) =>
             if (res.resultCode === 0) {
                 dispatch(authMe())
             } else {
-                dispatch(stopSubmit('login', {_error: res.messages[0]}))
+                const message = res.messages.length > 0 ?  res.messages[0] : "some error"
+                dispatch(stopSubmit('login', {_error: message}))
             }
         })
 

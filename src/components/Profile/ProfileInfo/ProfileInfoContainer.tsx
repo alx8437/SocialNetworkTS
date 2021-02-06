@@ -12,6 +12,7 @@ import {getStatus, getUserProfile, updateStatus} from "../../../redux/profile/pr
 export type MapStatePropsType = {
     profile: ProfileType | null,
     status: string,
+    authUserId: number | null,
 }
 
 type PathParamsType = {
@@ -27,7 +28,7 @@ export type ProfileInfoPropsType = RouteComponentProps<PathParamsType> & MapStat
 
 export class ProfileContainer extends React.Component<ProfileInfoPropsType> {
     componentDidMount(): void {
-        const userId = this.props.match.params.userId ? this.props.match.params.userId : 8425;
+        const userId = this.props.match.params.userId ? this.props.match.params.userId : this.props.authUserId;
         this.props.getUserProfile(Number(userId));
         this.props.getStatus(Number(userId));
     }
@@ -49,6 +50,7 @@ const mapStateToProps = (state: RootStateType): MapStatePropsType => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
+        authUserId: state.auth.data.id,
     }
 }
 
