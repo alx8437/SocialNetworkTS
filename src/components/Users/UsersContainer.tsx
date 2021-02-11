@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {UserType} from "../../redux/rootStateTypes";
-import {RootStateType} from "../../redux/redux-store";
+import {RootStateType} from "../../redux/store";
 import React from "react";
 import User from "./Users";
 import Preloader from "../common/Preloader/Preloader";

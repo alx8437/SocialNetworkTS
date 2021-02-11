@@ -4,7 +4,7 @@ import {required} from "../../utils/validators/validators";
 import {Input} from "../common/FormsControls/FormsControls";
 import {loginMe} from "../../redux/auth/authReducer";
 import {connect} from "react-redux";
-import {RootStateType} from "../../redux/redux-store";
+import {RootStateType} from "../../redux/store";
 import { Redirect } from "react-router-dom";
 import s from "../common/FormsControls/FormControls.module.css"
 

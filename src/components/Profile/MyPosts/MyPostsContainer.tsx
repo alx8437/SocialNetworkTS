@@ -1,7 +1,7 @@
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {ProfileStateType} from "../../../redux/rootStateTypes";
-import {RootStateType} from "../../../redux/redux-store";
+import {RootStateType} from "../../../redux/store";
 import {addPostAC} from "../../../redux/profile/profileReducer";
 
 type MapStatePropsType = {

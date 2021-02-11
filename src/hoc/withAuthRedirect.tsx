@@ -2,7 +2,7 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import {DialogsPropsType} from "../components/Dialogs/Dialogs";
 import {ProfileInfoPropsType} from "../components/Profile/ProfileInfo/ProfileInfoContainer";
-import {RootStateType} from "../redux/redux-store";
+import {RootStateType} from "../redux/store";
 import {connect} from "react-redux";
 import {UsersApiPropsType} from "../components/Users/UsersContainer";
 

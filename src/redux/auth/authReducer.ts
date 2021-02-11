@@ -3,17 +3,20 @@ import {Dispatch} from "redux";
 import {authApi} from "../../api/api";
 import {stopSubmit} from "redux-form";
 
+//Actions types type
 export enum ACTIONS_TYPE_AUTH {
     USER_IS_AUTH = "Header/USER_IS_AUTH"
 }
 
-export type AuthStateType = {
+//Action creators types
+export type IsAuthActionType = {
+    type: ACTIONS_TYPE_AUTH.USER_IS_AUTH,
     data: UserData,
     isAuth: boolean,
 }
 
-export type IsAuthActionType = {
-    type: ACTIONS_TYPE_AUTH.USER_IS_AUTH,
+//Reducer type
+export type AuthStateType = {
     data: UserData,
     isAuth: boolean,
 }
@@ -50,10 +53,10 @@ export const setUserData = (data: UserData, isAuth: boolean): IsAuthActionType =
     }
 };
 
-//Thunks creators
-export const authMe = () => {
+//Thunk creators
+export const getAuthMe = () => {
     return (dispatch: Dispatch<IsAuthActionType>) => {
-        authApi.me().then(res => {
+        return authApi.me().then(res => {
             if (res.resultCode === 0) {
                 dispatch(setUserData(res.data, true));
             }
@@ -65,7 +68,7 @@ export const loginMe = (email: string, password: string, rememberMe: boolean) =>
     return (dispatch: Dispatch<any>) => {
         authApi.login(email, password, rememberMe).then(res => {
             if (res.resultCode === 0) {
-                dispatch(authMe())
+                dispatch(getAuthMe())
             } else {
                 const message = res.messages.length > 0 ?  res.messages[0] : "some error"
                 dispatch(stopSubmit('login', {_error: message}))

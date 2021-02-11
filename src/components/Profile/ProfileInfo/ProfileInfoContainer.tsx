@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import ProfileInfo from "./ProfileInfo";
 import {ProfileType} from "../../../redux/rootStateTypes";
 import Preloader from "../../common/Preloader/Preloader";
-import {RootStateType} from "../../../redux/redux-store";
+import {RootStateType} from "../../../redux/store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -29,6 +29,7 @@ export type ProfileInfoPropsType = RouteComponentProps<PathParamsType> & MapStat
 export class ProfileContainer extends React.Component<ProfileInfoPropsType> {
     componentDidMount(): void {
         const userId = this.props.match.params.userId ? this.props.match.params.userId : this.props.authUserId;
+        debugger
         this.props.getUserProfile(Number(userId));
         this.props.getStatus(Number(userId));
     }
