@@ -18,5 +18,6 @@ const mapStateToProps = (state: RootStateType): MapStatePropsType => {
     }
 }
 
-const MyPostsContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, RootStateType>(mapStateToProps, {addPostAC})(MyPosts)
+const MyPostsContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, RootStateType>(
+    mapStateToProps, {addPostAC})(MyPosts)
 export default MyPostsContainer;

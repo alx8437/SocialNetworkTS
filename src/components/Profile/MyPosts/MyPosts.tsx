@@ -15,7 +15,7 @@ type AddPostFormDataType = {
     newPostMessage: string
 }
 
-const maxLength5 = maxLengthCreator(5);
+const maxLength50 = maxLengthCreator(50);
 
 
 const MyPosts = (props: PropsType) => {
@@ -50,7 +50,7 @@ const AddPostForm: React.FC<InjectedFormProps<AddPostFormDataType>> = (props) =>
                         component={Textarea}
                         name={"newPostMessage"}
                         placeholder={"Enter your post"}
-                        validate={[required, maxLength5]}
+                        validate={[required, maxLength50]}
                     />
                 </div>
             </div>

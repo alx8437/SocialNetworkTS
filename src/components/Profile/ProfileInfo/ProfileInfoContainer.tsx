@@ -29,7 +29,6 @@ export type ProfileInfoPropsType = RouteComponentProps<PathParamsType> & MapStat
 export class ProfileContainer extends React.Component<ProfileInfoPropsType> {
     componentDidMount(): void {
         const userId = this.props.match.params.userId ? this.props.match.params.userId : this.props.authUserId;
-        debugger
         this.props.getUserProfile(Number(userId));
         this.props.getStatus(Number(userId));
     }
