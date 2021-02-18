@@ -7,6 +7,10 @@ import App from "./App";
 import {Provider} from 'react-redux';
 import store from "./redux/store";
 
+//  Fake dispatch be add that repeat render
+setInterval(() => {
+    store.dispatch({type: "FAKE"})
+},  1000)
 
 ReactDOM.render(
     <React.StrictMode>

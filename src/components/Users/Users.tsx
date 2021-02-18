@@ -24,8 +24,8 @@ const User = (props: UsersPropsType) => {
         pages.push(i)
     }
 
-    return (
-        <div className={styles.wrapper}>
+    return <div className={styles.wrapper}>
+            {console.log("RENDER USERS")}
             <div className={styles.pageChange}>
                 {pages.map((p, index) => {
                   return  <span
@@ -62,7 +62,6 @@ const User = (props: UsersPropsType) => {
                 )
             }
         </div>
-    );
 }
 
 export default User;

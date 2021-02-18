@@ -8,11 +8,12 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {changeCurrentPage, follow, getUsers, toggleIsFollowingProgress, unfollow} from "../../redux/users/usersReducer";
 import {
-    getCurrentPage, getFollowingInProgress,
+    getCurrentPage,
+    getFollowingInProgress,
     getIsFetchingStatus,
     getTotalUsersCount,
     getUserPageSize,
-    getUsersSelector
+    getUsersSuperSelector
 } from "../../redux/users/user-selectors";
 
 type MapStateToPropsType = {
@@ -42,6 +43,7 @@ class UsersContainer extends React.Component<UsersApiPropsType> {
         this.props.changeCurrentPage(pageNumber);
         this.props.getUsers(pageNumber, this.props.pageSize);
     }
+
     render() {
         return <React.Fragment>
             {this.props.isFetching ? <Preloader/> : <User {...this.props} onPageChanged={this.onPageChanged}/>}
@@ -50,8 +52,9 @@ class UsersContainer extends React.Component<UsersApiPropsType> {
 }
 
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
+    console.log("Map state to props USERS")
     return {
-        users: getUsersSelector(state),
+        users: getUsersSuperSelector(state),
         pageSize: getUserPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
@@ -59,8 +62,6 @@ const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
         followingInProgress: getFollowingInProgress(state),
     }
 }
-
-
 
 
 export default compose(
