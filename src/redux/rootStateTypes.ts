@@ -43,7 +43,6 @@ export  type ProfileStateType = {
     profile: ProfileType | null,
     posts: Array<PostPropsType>,
     status: string,
-    fake: number
 }
 
 export type PhotosUserType = {

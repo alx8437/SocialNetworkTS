@@ -1,76 +1,60 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from "react";
 
 type PropsType = {
     status: string,
     updateStatus: (status: string) => void,
 };
 
-type LocalStateType = {
-    editMode: boolean,
-    status: string,
-}
+const ProfileStatus = (props: PropsType) => {
 
-class ProfileStatus extends React.Component<PropsType> {
+    const [editMode, setEditMode] = useState(false);
+    const [status, setStatus] = useState(props.status)
 
-    state: LocalStateType = {
-        editMode: false,
-        status: this.props.status,
+    const activateEditMode = () => {
+        setEditMode(true);
     }
 
-    activateEditMode = () => {
-        this.setState(() => {
-            return {editMode: true}
-        })
+    const deactivateEditMode = () => {
+        setEditMode(false);
+        props.updateStatus(status)
+        debugger
     }
 
-    deactivateEditMode = () => {
-        this.setState(() => {
-            return {editMode: false};
-        });
-        this.props.updateStatus(this.state.status)
-    }
-
-    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         const status = e.currentTarget.value
-        this.setState(() => {
-            return {status};
-        })
+        setStatus(status)
     }
-    onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            this.deactivateEditMode()
+            deactivateEditMode()
         }
     }
 
-    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<LocalStateType>): void {
-        if (prevProps.status !== this.props.status) {
-            this.setState(() => {
-               return {status: this.props.status}
-            });
+    useEffect(() => {
+        if (props.status !== status) {
+            setStatus(props.status)
         }
-    }
+    }, [props.status])
 
-    render() {
-        return <React.Fragment>
-            {this.state.editMode
-                ?
-                <div>
-                    <input
-                        onChange={this.onStatusChange}
-                        autoFocus={true}
-                        onBlur={this.deactivateEditMode}
-                        value={this.state.status}
-                        onKeyPress={this.onKeyPressHandler}
-                    />
-                </div>
-                :
-                <div>
-                    <span onDoubleClick={this.activateEditMode}>{this.props.status || "no status"}</span>
-                </div>}
-        </React.Fragment>
+    return <React.Fragment>
+        {editMode
+            ?
+            <div>
+                <input
+                    onChange={onStatusChange}
+                    autoFocus={true}
+                    onBlur={deactivateEditMode}
+                    value={status}
+                    onKeyPress={onKeyPressHandler}
+                />
+            </div>
+            :
+            <div>
+                <span onDoubleClick={activateEditMode}>{props.status || "no status"}</span>
+            </div>}
+    </React.Fragment>
 
-
-    }
 }
 
 export default ProfileStatus;

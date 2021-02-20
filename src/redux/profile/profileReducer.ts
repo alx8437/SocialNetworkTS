@@ -8,7 +8,6 @@ export enum ACTIONS_TYPE_PROFILE {
     SET_USER_PROFILE = "Profile/SET_USER_PROFILE",
     SET_PROFILE_STATUS = "Profile/SET_PROFILE_STATUS",
     UPDATE_PROFILE_STATUS = "Profile/UPDATE_PROFILE_STATUS",
-    FAKE = 'FAKE'
 }
 
 const initialState: ProfileStateType = {
@@ -19,7 +18,6 @@ const initialState: ProfileStateType = {
         {id: v1(), message: "Hi!", likesCount: 2},
     ],
     status: "",
-    fake: 1,
 }
 
 //Types for action creators
@@ -44,7 +42,7 @@ export type UpdateProfileStatus = {
 
 export type ProfileActionsType = AddPostActionType | SetUserProfileType | SetProfileStatusType | UpdateProfileStatus;
 
-const profileReducer = (state: ProfileStateType = initialState, action: any): ProfileStateType => {
+const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType): ProfileStateType => {
     switch (action.type) {
         case ACTIONS_TYPE_PROFILE.ADD_POST:
             const newPost: PostPropsType = {
@@ -71,11 +69,6 @@ const profileReducer = (state: ProfileStateType = initialState, action: any): Pr
                 ...state,
                 status: action.status,
             }
-        case ACTIONS_TYPE_PROFILE.FAKE:
-                return {
-                    ...state,
-                    fake: state.fake + 1
-                }
         default:
             return state
     }
@@ -121,7 +114,5 @@ export const updateStatus = (status: string) => {
         });
     }
 }
-
-
 
 export default profileReducer;

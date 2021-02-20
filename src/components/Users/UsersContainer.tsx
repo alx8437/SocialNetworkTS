@@ -52,7 +52,6 @@ class UsersContainer extends React.Component<UsersApiPropsType> {
 }
 
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
-    console.log("Map state to props USERS")
     return {
         users: getUsersSuperSelector(state),
         pageSize: getUserPageSize(state),
