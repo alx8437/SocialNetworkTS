@@ -10,6 +10,11 @@ const ProfileStatus = (props: PropsType) => {
     const [editMode, setEditMode] = useState(false);
     const [status, setStatus] = useState(props.status)
 
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+
+
     const activateEditMode = () => {
         setEditMode(true);
     }
@@ -31,11 +36,6 @@ const ProfileStatus = (props: PropsType) => {
         }
     }
 
-    useEffect(() => {
-        if (props.status !== status) {
-            setStatus(props.status)
-        }
-    }, [props.status])
 
     return <React.Fragment>
         {editMode
