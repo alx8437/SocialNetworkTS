@@ -1,12 +1,12 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {combineReducers} from "redux";
 import profileReducer from "./profile/profileReducer";
 import dialogsReducer from "./dialogs/dialogsReducer";
-import {composeWithDevTools} from "redux-devtools-extension";
 import usersReducer from "./users/usersReducer";
 import {authReducer} from "./auth/authReducer";
 import thunk from "redux-thunk";
 import { reducer as formReducer } from 'redux-form'
 import {appReducer} from "./app/appReducer";
+import {configureStore} from "@reduxjs/toolkit";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -17,8 +17,11 @@ let rootReducer = combineReducers({
     app: appReducer,
 })
 
-
 export type RootStateType = ReturnType<typeof rootReducer>
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk)
+})
 
 export default store;

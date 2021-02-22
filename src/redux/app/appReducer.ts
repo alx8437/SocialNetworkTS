@@ -1,44 +1,26 @@
-//Action type types
 import {Dispatch} from "redux";
 import {getAuthMe} from "../auth/authReducer";
-
-enum ACTIONS_TYPE {
-    SET_INITIALIZED = "SET_INITIALIZED"
-}
-
-//Action creator types
-type SetInitialisedActionType = {
-    type: ACTIONS_TYPE.SET_INITIALIZED,
-}
-
-type AllActionsType = SetInitialisedActionType
-
-//Reducer type
-export type AppStateType = {
-    initialized: boolean,
-}
+import {createSlice} from "@reduxjs/toolkit";
 
 
-//Reducer
 const initialState = {
     initialized: false,
 }
 
-export const appReducer = (state: AppStateType = initialState, action: AllActionsType): AppStateType => {
-    switch (action.type) {
-        case ACTIONS_TYPE.SET_INITIALIZED:
-            return {...state, initialized: true}
-        default:
-            return state
+//slice reducer
+const slice = createSlice({
+    name: "initializedApp",
+    initialState,
+    reducers: {
+        setInitialisedAC(state) {
+            state.initialized = !state.initialized
+        }
     }
-}
+})
 
-//Action creators
-const setInitialisedAC = (): SetInitialisedActionType => {
-    return {
-        type: ACTIONS_TYPE.SET_INITIALIZED,
-    }
-}
+const {setInitialisedAC} = slice.actions
+
+export const appReducer = slice.reducer
 
 //Thunk creators
 export const setInitialised = () => (dispatch: Dispatch<any>) => {
