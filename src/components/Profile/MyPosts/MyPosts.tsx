@@ -18,21 +18,12 @@ type AddPostFormDataType = {
 const maxLength50 = maxLengthCreator(50);
 
 
-class MyPosts extends React.Component<PropsType> {
-
-    componentDidMount(): void {
-        setTimeout(() => {
-            this.setState(() => ({a: 12}))
-        }, 3000)
-    }
-
-    shouldComponentUpdate(nextProps: Readonly<PropsType>, nextState: Readonly<{}>, ): boolean {
-        return nextProps !== this.props || nextState !== this.state;
-    }
+class MyPosts extends React.PureComponent<PropsType> {
 
     render() {
+
         console.log("RENDER")
-        console.log(this.state)
+
         const postsElements = this.props.profilePage.posts.map(p => <Post
             key={p.id}
             id={p.id}
