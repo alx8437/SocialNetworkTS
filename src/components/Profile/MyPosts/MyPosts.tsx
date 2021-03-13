@@ -1,13 +1,14 @@
 import React from "react";
 import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {ProfileStateType} from "../../../redux/rootStateTypes";
+import {PostPropsType} from "../../../redux/rootStateTypes";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 
+
 type PropsType = {
-    profilePage: ProfileStateType
+    posts: Array<PostPropsType>
     addPostAC: (newPostMessage: string) => void
 }
 
@@ -18,33 +19,28 @@ type AddPostFormDataType = {
 const maxLength50 = maxLengthCreator(50);
 
 
-class MyPosts extends React.PureComponent<PropsType> {
+const MyPosts = React.memo((props: PropsType) => {
 
-    render() {
+    const postsElements = props.posts.map(p => <Post
+        key={p.id}
+        id={p.id}
+        message={p.message}
+        likesCount={p.likesCount}
+    />)
 
-        console.log("RENDER")
-
-        const postsElements = this.props.profilePage.posts.map(p => <Post
-            key={p.id}
-            id={p.id}
-            message={p.message}
-            likesCount={p.likesCount}
-        />)
-
-        const addPost = (values: AddPostFormDataType) => {
-            this.props.addPostAC(values.newPostMessage)
-        }
-
-        return (
-            <div className={styles.postWrapper}>
-                <AddPostReduxForm onSubmit={addPost}/>
-                <div className={styles.posts}>
-                    {postsElements}
-                </div>
-            </div>
-        )
+    const addPost = (values: AddPostFormDataType) => {
+        props.addPostAC(values.newPostMessage)
     }
-}
+
+    return (
+        <div className={styles.postWrapper}>
+            <AddPostReduxForm onSubmit={addPost}/>
+            <div className={styles.posts}>
+                {postsElements}
+            </div>
+        </div>
+    )
+});
 
 const AddPostForm: React.FC<InjectedFormProps<AddPostFormDataType>> = (props) => {
     return (
