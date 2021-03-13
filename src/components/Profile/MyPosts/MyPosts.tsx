@@ -18,28 +18,42 @@ type AddPostFormDataType = {
 const maxLength50 = maxLengthCreator(50);
 
 
-const MyPosts = (props: PropsType) => {
+class MyPosts extends React.Component<PropsType> {
 
-    const postsElements = props.profilePage.posts.map(p => <Post
-        key={p.id}
-        id={p.id}
-        message={p.message}
-        likesCount={p.likesCount}
-    />)
-
-    const addPost = (values: AddPostFormDataType) => {
-        props.addPostAC(values.newPostMessage)
+    componentDidMount(): void {
+        setTimeout(() => {
+            this.setState(() => ({a: 12}))
+        }, 3000)
     }
 
-    return (
-        <div className={styles.postWrapper}>
-            <AddPostReduxForm onSubmit={addPost}/>
-            <div className={styles.posts}>
-                {postsElements}
+    shouldComponentUpdate(nextProps: Readonly<PropsType>, nextState: Readonly<{}>, ): boolean {
+        return nextProps !== this.props || nextState !== this.state;
+    }
+
+    render() {
+        console.log("RENDER")
+        console.log(this.state)
+        const postsElements = this.props.profilePage.posts.map(p => <Post
+            key={p.id}
+            id={p.id}
+            message={p.message}
+            likesCount={p.likesCount}
+        />)
+
+        const addPost = (values: AddPostFormDataType) => {
+            this.props.addPostAC(values.newPostMessage)
+        }
+
+        return (
+            <div className={styles.postWrapper}>
+                <AddPostReduxForm onSubmit={addPost}/>
+                <div className={styles.posts}>
+                    {postsElements}
+                </div>
             </div>
-        </div>
-    )
-};
+        )
+    }
+}
 
 const AddPostForm: React.FC<InjectedFormProps<AddPostFormDataType>> = (props) => {
     return (
