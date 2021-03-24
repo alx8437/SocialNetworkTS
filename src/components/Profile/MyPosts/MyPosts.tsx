@@ -1,14 +1,14 @@
 import React from "react";
 import styles from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostPropsType} from "../../../redux/rootStateTypes";
+import {PostType} from "../../../redux/rootStateTypes";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 
 
 type PropsType = {
-    posts: Array<PostPropsType>
+    posts: Array<PostType>
     addPostAC: (newPostMessage: string) => void
 }
 

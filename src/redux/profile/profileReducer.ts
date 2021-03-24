@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {PostPropsType, ProfileStateType, ProfileType} from "../rootStateTypes";
+import {PostType, ProfileStateType, ProfileType} from "../rootStateTypes";
 import {Dispatch} from "redux";
 import {profileApi} from "../../api/api";
 
@@ -45,7 +45,7 @@ export type ProfileActionsType = AddPostActionType | SetUserProfileType | SetPro
 const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType): ProfileStateType => {
     switch (action.type) {
         case ACTIONS_TYPE_PROFILE.ADD_POST:
-            const newPost: PostPropsType = {
+            const newPost: PostType = {
                 id: v1(),
                 message: action.newPostMessage,
                 likesCount: 3,

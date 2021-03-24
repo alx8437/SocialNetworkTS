@@ -7,7 +7,7 @@ export type DialogItemPropsType = {
     id: string,
     name: string,
 }
-export type PostPropsType = {
+export type PostType = {
     id: string,
     message: string,
     likesCount: number,
@@ -41,7 +41,7 @@ export type ProfileType = {
 }
 export  type ProfileStateType = {
     profile: ProfileType | null,
-    posts: Array<PostPropsType>,
+    posts: Array<PostType>,
     status: string,
 }
 

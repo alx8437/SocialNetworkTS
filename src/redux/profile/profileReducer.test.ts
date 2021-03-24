@@ -1,76 +1,27 @@
 import {ProfileStateType} from "../rootStateTypes";
-import profileReducer, {
-    ACTIONS_TYPE_PROFILE,
-    AddPostActionType,
-    SetUserProfileType,
-    UpdateTextPost
-} from "./profileReducer";
+import profileReducer, {ACTIONS_TYPE_PROFILE, AddPostActionType} from "./profileReducer";
 
-let startState: ProfileStateType = {
-    profile: null,
-    posts: [],
-    newPostText: "",
-    status: "",
-}
+
+let initialState: ProfileStateType;
 
 beforeEach(() => {
-    startState = {
-        profile: null,
+    initialState = {
         posts: [],
-        newPostText: "new post",
-        status: "",
+        status: '',
+        profile: null
     }
-});
+})
 
-test("adding new post", () => {
-
+test('correct add post', () => {
     const action: AddPostActionType = {
-        type: ACTIONS_TYPE_PROFILE.ADD_POST
+        type: ACTIONS_TYPE_PROFILE.ADD_POST,
+        newPostMessage: "hey"
     }
-    const newState = profileReducer(startState, action)
 
-    expect(newState.posts.length).toBe(1)
-    expect(newState.posts[0].message).toBe( "new post")
+    const endState = profileReducer(initialState, action)
+
+    expect(endState.posts.length).toBe(1)
 })
 
-test("upd text post", () => {
 
-    const action: UpdateTextPost = {
-        type: ACTIONS_TYPE_PROFILE.UPDATE_TEXT_POST,
-        newTextPost: "text post be updated"
-    }
-    const newState = profileReducer(startState, action)
 
-    expect(newState.newPostText).toBe("text post be updated")
-})
-
-test("add new user", () => {
-    const action: SetUserProfileType = {
-        type: ACTIONS_TYPE_PROFILE.SET_USER_PROFILE,
-        profile: {
-            aboutMe: "",
-            contacts: {
-                facebook: "facebook.com",
-                website: null,
-                vk: "",
-                twitter: "",
-                instagram: "",
-                youtube: null,
-                github: "github.com",
-                mainLink: null
-            },
-            lookingForAJob: true,
-            lookingForAJobDescription: "",
-            fullName: "Alex",
-            userId: 8427,
-            photos: {
-                small: "",
-                large: ""
-            }
-        }
-    }
-    const newState = profileReducer(startState, action);
-
-    expect(newState.profile?.fullName).toBe("Alex");
-    expect(newState.profile?.userId).toBe(8427);
-})
