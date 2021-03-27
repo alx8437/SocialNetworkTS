@@ -8,6 +8,7 @@ export enum ACTIONS_TYPE_PROFILE {
     SET_USER_PROFILE = "Profile/SET_USER_PROFILE",
     SET_PROFILE_STATUS = "Profile/SET_PROFILE_STATUS",
     UPDATE_PROFILE_STATUS = "Profile/UPDATE_PROFILE_STATUS",
+    DELETE_POST = "Profile/UPDATE_DELETE_POST"
 }
 
 const initialState: ProfileStateType = {
@@ -40,7 +41,13 @@ export type UpdateProfileStatus = {
     status: string
 }
 
-export type ProfileActionsType = AddPostActionType | SetUserProfileType | SetProfileStatusType | UpdateProfileStatus;
+export type DeletePostActionType = {
+    type: ACTIONS_TYPE_PROFILE.DELETE_POST,
+    postId: string
+}
+
+export type ProfileActionsType = AddPostActionType | SetUserProfileType
+    | SetProfileStatusType | UpdateProfileStatus | DeletePostActionType
 
 const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType): ProfileStateType => {
     switch (action.type) {
@@ -69,6 +76,13 @@ const profileReducer = (state: ProfileStateType = initialState, action: ProfileA
                 ...state,
                 status: action.status,
             }
+        case ACTIONS_TYPE_PROFILE.DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(post => post.id !== action.postId)
+            }
+
+
         default:
             return state
     }
@@ -87,6 +101,13 @@ export const updateProfileStatusAC = (status: string): UpdateProfileStatus => {
     return {
         type: ACTIONS_TYPE_PROFILE.UPDATE_PROFILE_STATUS,
         status,
+    }
+}
+
+export const deletePostAC = (postId: string): DeletePostActionType => {
+    return {
+        type: ACTIONS_TYPE_PROFILE.DELETE_POST,
+        postId,
     }
 }
 
