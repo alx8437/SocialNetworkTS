@@ -21,6 +21,7 @@ type GetLoginResponseType = {
     }
 }
 
+
 type AuthApiResponseType<D> = {
     resultCode: number
     messages: Array<string>,

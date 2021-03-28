@@ -118,34 +118,50 @@ export const toggleIsFollowingProgress = (userId: number, isFetching: boolean): 
 
 //Thunks creators
 export const getUsers = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch<UsersActionsType>) => {
-        dispatch(toggleIsFetching(true));
-        userApi.getUser(currentPage, pageSize)
-            .then(data => {
-                dispatch(setUsers(data.items));
-                dispatch(setTotalCountPages(data.totalCount));
+    return async (dispatch: Dispatch<UsersActionsType>) => {
+        try {
+            dispatch(toggleIsFetching(true));
+            const res = await userApi.getUser(currentPage, pageSize)
+            if (!res.error) {
+                dispatch(setUsers(res.items));
+                dispatch(setTotalCountPages(res.totalCount));
                 dispatch(toggleIsFetching(false));
-            });
+            }
+        } catch (e) {
+            console.log(e)
+        }
+
     }
 }
 
 export const unfollow = (userId: number) => {
-    return (dispatch: Dispatch<UsersActionsType>) => {
-        dispatch(toggleIsFollowingProgress(userId, true));
-        userApi.unFollowUser(userId).then(data => {
-            if (data.resultCode === 0) dispatch(unfollowSuccess(userId));
-            dispatch(toggleIsFollowingProgress(userId, false));
-        });
+    return async (dispatch: Dispatch<UsersActionsType>) => {
+        try {
+            dispatch(toggleIsFollowingProgress(userId, true));
+            const res = await userApi.unFollowUser(userId)
+            if (res.resultCode === 0) {
+                dispatch(unfollowSuccess(userId));
+                dispatch(toggleIsFollowingProgress(userId, false));
+            }
+        } catch (e) {
+            console.log(e)
+        }
+
     }
 }
 
 export const follow = (userId: number) => {
-    return (dispatch: Dispatch<UsersActionsType>) => {
-        dispatch(toggleIsFollowingProgress(userId, true));
-        userApi.followUser(userId).then(data => {
-            if (data.resultCode === 0) dispatch(followSuccess(userId));
-            dispatch(toggleIsFollowingProgress(userId, false));
-        });
+    return async (dispatch: Dispatch<UsersActionsType>) => {
+        try {
+             dispatch(toggleIsFollowingProgress(userId, true));
+            const res = await userApi.followUser(userId)
+                if (res.resultCode === 0) {
+                    dispatch(followSuccess(userId));
+                    dispatch(toggleIsFollowingProgress(userId, false));
+                }
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 

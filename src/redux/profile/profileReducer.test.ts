@@ -42,7 +42,7 @@ test('message of new post should be "it-incubator-the-best"', () => {
     const endState = profileReducer(initialState, action)
 
     //3. Expectation
-    expect(endState.posts[2].message === 'it-incubator-the-best')
+    expect(endState.posts[2].message === 'it-incubator-the-best').toBe(true)
 
 })
 
