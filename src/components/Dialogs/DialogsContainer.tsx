@@ -1,5 +1,5 @@
 import {DialogsStateType} from '../../redux/rootStateTypes';
-import Dialogs from "./Dialogs";
+import Dialogs, {AddMessageFormDataType} from "./Dialogs";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/store";
 import {compose} from "redux";
@@ -12,7 +12,7 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    addMessageAC: (newTextMessage: string) => void
+    addMessageAC: (payload: AddMessageFormDataType) => void
 }
 
 const mapStateToProps = (state: RootStateType): MapStatePropsType => {

@@ -1,14 +1,15 @@
 import {v1} from "uuid";
 import {DialogsStateType, MessagePropsType} from "../rootStateTypes";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-export enum ACTION_TYPES_DIALOGS {
-    ADD_MESSAGE = "Dialogs/ADD_MESSAGE",
-}
+// export enum ACTION_TYPES_DIALOGS {
+//     ADD_MESSAGE = "Dialogs/ADD_MESSAGE",
+// }
 
-export type AddMessageActionType = {
-    type: ACTION_TYPES_DIALOGS.ADD_MESSAGE,
-    newTextMessage: string
-}
+// export type AddMessageActionType = {
+//     type: ACTION_TYPES_DIALOGS.ADD_MESSAGE,
+//     newTextMessage: string
+// }
 
 const initialState: DialogsStateType = {
     dialogs: [
@@ -27,30 +28,47 @@ const initialState: DialogsStateType = {
     ],
 }
 
-const dialogsReducer = (state: DialogsStateType = initialState, action: DialogsActionsType): DialogsStateType => {
-    switch (action.type) {
-        case ACTION_TYPES_DIALOGS.ADD_MESSAGE:
+const slice = createSlice({
+    name: "dialogs",
+    initialState,
+    reducers: {
+        addMessageAC(state, action: PayloadAction<{newTextMessage: string}>) {
             const newMessage: MessagePropsType = {
                 id: v1(),
-                message: action.newTextMessage,
-            };
-            return {
-                ...state,
-                messages: [...state.messages, newMessage],
+                message: action.payload.newTextMessage
             }
-        default:
-            return state
+            state.messages.push(newMessage)
+        }
     }
-}
+})
 
-export const addMessageAC = (newTextMessage: string): AddMessageActionType => {
-    return {
-        type: ACTION_TYPES_DIALOGS.ADD_MESSAGE,
-        newTextMessage,
-    }
-}
+export const {addMessageAC} = slice.actions
+export default slice.reducer
 
+// const dialogsReducer = (state: DialogsStateType = initialState, action: DialogsActionsType): DialogsStateType => {
+//     switch (action.type) {
+//         case ACTION_TYPES_DIALOGS.ADD_MESSAGE:
+//             const newMessage: MessagePropsType = {
+//                 id: v1(),
+//                 message: action.newTextMessage,
+//             };
+//             return {
+//                 ...state,
+//                 messages: [...state.messages, newMessage],
+//             }
+//         default:
+//             return state
+//     }
+// }
 
-export type DialogsActionsType = AddMessageActionType
+// export const addMessageAC = (payload: {newTextMessage: string}): AddMessageActionType => {
+//     return payload {
+//         type: ACTION_TYPES_DIALOGS.ADD_MESSAGE,
+//         newTextMessage,
+//     }
+// }
 
-export default dialogsReducer;
+//
+// export type DialogsActionsType = AddMessageActionType
+
+// export default dialogsReducer;

@@ -9,11 +9,11 @@ import {maxLengthCreator, required} from "../../utils/validators/validators";
 
 export type DialogsPropsType = {
     dialogsPage: DialogsStateType
-    addMessageAC: (newTextMessage: string) => void
+    addMessageAC: (payload: AddMessageFormDataType) => void
     isAuth: boolean,
 }
 
-type AddMessageFormDataType = {
+export type AddMessageFormDataType = {
     newTextMessage: string,
 }
 
@@ -23,8 +23,8 @@ const Dialogs = (props: DialogsPropsType) => {
     const dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     const messagesElements = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message} id={m.id}/>)
 
-    const addMessage = (values: AddMessageFormDataType) => {
-        props.addMessageAC(values.newTextMessage)
+    const addMessage = (payload: AddMessageFormDataType) => {
+        props.addMessageAC(payload)
     }
 
     return (
