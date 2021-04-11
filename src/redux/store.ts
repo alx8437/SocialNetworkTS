@@ -2,7 +2,7 @@ import {combineReducers} from "redux";
 import profileReducer from "./profile/profileReducer";
 import dialogsReducer from "./dialogs/dialogsReducer";
 import usersReducer from "./users/usersReducer";
-import {authReducer} from "./auth/authReducer";
+import authReducer from "./auth/authReducer"
 import thunk from "redux-thunk";
 import { reducer as formReducer } from 'redux-form'
 import {appReducer} from "./app/appReducer";

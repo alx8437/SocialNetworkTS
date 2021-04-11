@@ -2,18 +2,8 @@ import {UserData} from "../rootStateTypes";
 import {Dispatch} from "redux";
 import {authApi} from "../../api/api";
 import {stopSubmit} from "redux-form";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-//Actions types type
-export enum ACTIONS_TYPE_AUTH {
-    USER_IS_AUTH = "Header/USER_IS_AUTH"
-}
-
-//Action creators types
-export type IsAuthActionType = {
-    type: ACTIONS_TYPE_AUTH.USER_IS_AUTH,
-    data: UserData,
-    isAuth: boolean,
-}
 
 //Reducer type
 export type AuthStateType = {
@@ -21,7 +11,7 @@ export type AuthStateType = {
     isAuth: boolean,
 }
 
-const initialState = {
+const initialState: AuthStateType = {
     data: {
         id: null,
         login: null,
@@ -30,35 +20,26 @@ const initialState = {
     isAuth: false,
 }
 
-
-export const authReducer = (state: AuthStateType = initialState, action: IsAuthActionType): AuthStateType => {
-    switch (action.type) {
-        case ACTIONS_TYPE_AUTH.USER_IS_AUTH:
-            return {
-                ...state,
-                data: action.data,
-                isAuth: action.isAuth,
-            }
-        default:
-            return state
+const slice = createSlice({
+    name: 'auth',
+    initialState,
+    reducers: {
+        setUserData(state, action: PayloadAction<{ data: UserData, isAuth: boolean }>) {
+            state.data = action.payload.data
+            state.isAuth = action.payload.isAuth
+        },
     }
-}
+})
 
-//Action creators
-export const setUserData = (data: UserData, isAuth: boolean): IsAuthActionType => {
-    return {
-        type: ACTIONS_TYPE_AUTH.USER_IS_AUTH,
-        data,
-        isAuth,
-    }
-};
+export const {setUserData} = slice.actions
+export default slice.reducer
 
 //Thunk creators
 export const getAuthMe = () => {
-    return (dispatch: Dispatch<IsAuthActionType>) => {
+    return (dispatch: Dispatch) => {
         return authApi.me().then(res => {
             if (res.resultCode === 0) {
-                dispatch(setUserData(res.data, true));
+                dispatch(setUserData({data: res.data, isAuth: true}));
             }
         })
     }
@@ -70,7 +51,7 @@ export const loginMe = (email: string, password: string, rememberMe: boolean) =>
             if (res.resultCode === 0) {
                 dispatch(getAuthMe())
             } else {
-                const message = res.messages.length > 0 ?  res.messages[0] : "some error"
+                const message = res.messages.length > 0 ? res.messages[0] : "some error"
                 dispatch(stopSubmit('login', {_error: message}))
             }
         })
@@ -87,8 +68,9 @@ export const logOutMe = () => {
                     email: null,
                     id: null
                 }
-                dispatch(setUserData(resetUserData, false))
+                dispatch(setUserData({data: resetUserData, isAuth: false}))
             }
         })
     }
 }
+
