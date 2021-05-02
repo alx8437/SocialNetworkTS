@@ -2,17 +2,10 @@ import {v1} from "uuid";
 import {PostType, ProfileStateType, ProfileType} from "../rootStateTypes";
 import {Dispatch} from "redux";
 import {profileApi} from "../../api/api";
-
-export enum ACTIONS_TYPE_PROFILE {
-    ADD_POST = "Profile/MyPostsContainer/ADD_POST",
-    SET_USER_PROFILE = "Profile/SET_USER_PROFILE",
-    SET_PROFILE_STATUS = "Profile/SET_PROFILE_STATUS",
-    UPDATE_PROFILE_STATUS = "Profile/UPDATE_PROFILE_STATUS",
-    DELETE_POST = "Profile/UPDATE_DELETE_POST"
-}
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState: ProfileStateType = {
-    profile:  null,
+    profile: null,
     posts: [
         {id: v1(), message: "Hello, i like this course", likesCount: 15},
         {id: v1(), message: "It's a nice course, yes!", likesCount: 20},
@@ -21,119 +14,60 @@ const initialState: ProfileStateType = {
     status: "",
 }
 
-//Types for action creators
-export type AddPostActionType = {
-    type: ACTIONS_TYPE_PROFILE.ADD_POST,
-    newPostMessage: string
-}
-
-export type SetUserProfileType = {
-    type: ACTIONS_TYPE_PROFILE.SET_USER_PROFILE,
-    profile: ProfileType
-}
-
-export type SetProfileStatusType = {
-    type: ACTIONS_TYPE_PROFILE.SET_PROFILE_STATUS,
-    status: string,
-}
-export type UpdateProfileStatus = {
-    type: ACTIONS_TYPE_PROFILE.UPDATE_PROFILE_STATUS,
-    status: string
-}
-
-export type DeletePostActionType = {
-    type: ACTIONS_TYPE_PROFILE.DELETE_POST,
-    postId: string
-}
-
-export type ProfileActionsType = AddPostActionType | SetUserProfileType
-    | SetProfileStatusType | UpdateProfileStatus | DeletePostActionType
-
-const profileReducer = (state: ProfileStateType = initialState, action: ProfileActionsType): ProfileStateType => {
-    switch (action.type) {
-        case ACTIONS_TYPE_PROFILE.ADD_POST:
+const slice = createSlice({
+    name: "profile",
+    initialState,
+    reducers: {
+        addPostAC(state, action: PayloadAction<{ newTextMessage: string }>) {
             const newPost: PostType = {
                 id: v1(),
-                message: action.newPostMessage,
+                message: action.payload.newTextMessage,
                 likesCount: 3,
             };
-            return {
-                ...state,
-                posts: [...state.posts, newPost],
-            }
-        case ACTIONS_TYPE_PROFILE.SET_USER_PROFILE:
-            return {
-                ...state,
-                profile: action.profile,
-            }
-        case ACTIONS_TYPE_PROFILE.SET_PROFILE_STATUS:
-            return {
-                ...state,
-                status: action.status,
-            }
-        case ACTIONS_TYPE_PROFILE.UPDATE_PROFILE_STATUS:
-            return {
-                ...state,
-                status: action.status,
-            }
-        case ACTIONS_TYPE_PROFILE.DELETE_POST:
-            return {
-                ...state,
-                posts: state.posts.filter(post => post.id !== action.postId)
-            }
-
-
-        default:
-            return state
+            state.posts.push(newPost)
+        },
+        setUserProfileAC(state, action: PayloadAction<{ profile: ProfileType }>) {
+            state.profile = action.payload.profile
+        },
+        setProfileStatusAC(state, action: PayloadAction<{ status: string }>) {
+            state.status = action.payload.status
+        },
+        updateProfileStatusAC(state, action: PayloadAction<{ status: string }>) {
+            state.status = action.payload.status
+        },
+        deletePostAC(state, action: PayloadAction<{ postId: string }>) {
+            const index = state.posts.findIndex(post => post.id === action.payload.postId)
+            if (index !== -1) state.posts.splice(index, 1)
+        }
     }
-}
+})
 
-//Action Creators
-export const addPostAC = (newPostMessage: string): AddPostActionType =>
-    ({type: ACTIONS_TYPE_PROFILE.ADD_POST, newPostMessage});
-export const setUserProfileAC = (profile: ProfileType): SetUserProfileType => {
-    return {type: ACTIONS_TYPE_PROFILE.SET_USER_PROFILE, profile}
-};
-export const setProfileStatusAC = (status: string): SetProfileStatusType => {
-    return {type: ACTIONS_TYPE_PROFILE.SET_PROFILE_STATUS, status}
-};
-export const updateProfileStatusAC = (status: string): UpdateProfileStatus => {
-    return {
-        type: ACTIONS_TYPE_PROFILE.UPDATE_PROFILE_STATUS,
-        status,
-    }
-}
+export const {addPostAC, deletePostAC, setProfileStatusAC, updateProfileStatusAC, setUserProfileAC} = slice.actions
 
-export const deletePostAC = (postId: string): DeletePostActionType => {
-    return {
-        type: ACTIONS_TYPE_PROFILE.DELETE_POST,
-        postId,
-    }
-}
 
 //Thunks creators
 export const getUserProfile = (userId: number) => {
-    return (dispatch: Dispatch<ProfileActionsType>) => {
+    return (dispatch: Dispatch) => {
         profileApi.getProfile(userId).then(data => {
-            dispatch(setUserProfileAC(data));
+            dispatch(setUserProfileAC({profile: data}));
         });
     }
 };
 
 export const getStatus = (userId: number) => {
-    return (dispatch: Dispatch<ProfileActionsType>) => {
+    return (dispatch: Dispatch) => {
         profileApi.getStatus(userId).then(data => {
-            if (data) dispatch(setProfileStatusAC(data));
+            if (data) dispatch(setProfileStatusAC({status: data}));
         });
     }
 };
 
 export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch<ProfileActionsType>) => {
+    return (dispatch: Dispatch) => {
         profileApi.updateStatus(status).then(res => {
-            if (res.resultCode === 0) dispatch(updateProfileStatusAC(status));
+            if (res.resultCode === 0) dispatch(updateProfileStatusAC({status}));
         });
     }
 }
 
-export default profileReducer;
+export default slice.reducer

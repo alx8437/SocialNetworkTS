@@ -9,7 +9,7 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    addPostAC: (newPostMessage: string) => void
+    addPostAC: (payload: { newTextMessage: string}) => void
 }
 
 const mapStateToProps = (state: RootStateType): MapStatePropsType => {

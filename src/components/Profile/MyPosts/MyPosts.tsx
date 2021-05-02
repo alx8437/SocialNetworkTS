@@ -9,7 +9,7 @@ import {Textarea} from "../../common/FormsControls/FormsControls";
 
 type PropsType = {
     posts: Array<PostType>
-    addPostAC: (newPostMessage: string) => void
+    addPostAC: (payload: { newTextMessage: string}) => void
 }
 
 type AddPostFormDataType = {
@@ -29,7 +29,7 @@ const MyPosts = React.memo((props: PropsType) => {
     />)
 
     const addPost = (values: AddPostFormDataType) => {
-        props.addPostAC(values.newPostMessage)
+        props.addPostAC({ newTextMessage: values.newPostMessage})
     }
 
     return (
