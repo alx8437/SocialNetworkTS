@@ -64,7 +64,7 @@ const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
 
 
 export default compose(
-    connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(mapStateToProps, {
+    connect<MapStateToPropsType, any, {}, RootStateType>(mapStateToProps, {
         follow, unfollow, changeCurrentPage, toggleIsFollowingProgress, getUsers,
     }),
     withAuthRedirect
