@@ -46,27 +46,32 @@ export const {addPostAC, deletePostAC, setProfileStatusAC, updateProfileStatusAC
 
 
 //Thunks creators
-export const getUserProfile = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        profileApi.getProfile(userId).then(data => {
-            dispatch(setUserProfileAC({profile: data}));
-        });
+export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
+    try {
+        const res = await profileApi.getProfile(userId)
+        if (res) dispatch(setUserProfileAC({profile: res}));
+    } catch (e) {
+        console.log(e)
     }
+
 };
 
-export const getStatus = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        profileApi.getStatus(userId).then(data => {
-            if (data) dispatch(setProfileStatusAC({status: data}));
-        });
-    }
+export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
+        try {
+            const res = await profileApi.getStatus(userId);
+            if (res) dispatch(setProfileStatusAC({status: res}));
+        } catch (e) {
+            console.log(e)
+        }
+
 };
 
-export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch) => {
-        profileApi.updateStatus(status).then(res => {
-            if (res.resultCode === 0) dispatch(updateProfileStatusAC({status}));
-        });
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    try {
+        const res = await profileApi.updateStatus(status)
+        if (res.resultCode === 0) dispatch(updateProfileStatusAC({status}));
+    } catch (e) {
+        console.log(e)
     }
 }
 

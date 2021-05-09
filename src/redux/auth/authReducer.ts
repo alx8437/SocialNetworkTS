@@ -35,13 +35,10 @@ export const {setUserData} = slice.actions
 export default slice.reducer
 
 //Thunk creators
-export const getAuthMe = () => {
-    return (dispatch: Dispatch) => {
-        return authApi.me().then(res => {
-            if (res.resultCode === 0) {
-                dispatch(setUserData({data: res.data, isAuth: true}));
-            }
-        })
+export const getAuthMe = () => async (dispatch: Dispatch) => {
+    const res = await authApi.me()
+    if (res.resultCode === 0) {
+        dispatch(setUserData({data: res.data, isAuth: true}));
     }
 }
 
@@ -59,18 +56,19 @@ export const loginMe = (email: string, password: string, rememberMe: boolean) =>
     }
 }
 
-export const logOutMe = () => {
-    return (dispatch: Dispatch<any>) => {
-        authApi.logOut().then(res => {
-            if (res.resultCode === 0) {
-                const resetUserData: UserData = {
-                    login: null,
-                    email: null,
-                    id: null
-                }
-                dispatch(setUserData({data: resetUserData, isAuth: false}))
+export const logOutMe = () => async (dispatch: Dispatch<any>) => {
+    try {
+        const res = await authApi.logOut()
+        if (res.resultCode === 0) {
+            const resetUserData: UserData = {
+                login: null,
+                email: null,
+                id: null
             }
-        })
+            dispatch(setUserData({data: resetUserData, isAuth: false}))
+        }
+    } catch (e) {
+        console.log(e)
     }
 }
 
