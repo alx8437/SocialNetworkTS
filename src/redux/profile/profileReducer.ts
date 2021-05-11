@@ -44,7 +44,6 @@ const slice = createSlice({
 
 export const {addPostAC, deletePostAC, setProfileStatusAC, updateProfileStatusAC, setUserProfileAC} = slice.actions
 
-
 //Thunks creators
 export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
     try {

@@ -13,6 +13,12 @@ export type PostType = {
     likesCount: number,
 }
 
+export type AuthStateType = {
+    data: UserData,
+    isAuth: boolean,
+}
+
+
 export type DialogsStateType = {
     dialogs: Array<DialogItemPropsType>,
     messages: Array<MessagePropsType>,

@@ -2,7 +2,6 @@ import {v1} from "uuid";
 import {DialogsStateType, MessagePropsType} from "../rootStateTypes";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-
 const initialState: DialogsStateType = {
     dialogs: [
         {id: v1(), name: "Alex"},

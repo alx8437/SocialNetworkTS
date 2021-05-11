@@ -57,6 +57,15 @@ export const {
 } = slice.actions
 
 
+const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: Function, actionCreator: Function) => {
+    dispatch(toggleIsFollowingProgress({userId, isFetching: true}));
+    const res = await apiMethod(userId)
+    if (res.resultCode === 0) {
+        dispatch(actionCreator({userId}));
+        dispatch(toggleIsFollowingProgress({userId, isFetching: false}));
+    }
+}
+
 //Thunks creators
 export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: Dispatch) => {
     try {
@@ -74,12 +83,8 @@ export const getUsers = (currentPage: number, pageSize: number) => async (dispat
 
 export const unfollow = (userId: number) => async (dispatch: Dispatch) => {
     try {
-        dispatch(toggleIsFollowingProgress({userId, isFetching: true}));
-        const res = await userApi.unFollowUser(userId)
-        if (res.resultCode === 0) {
-            dispatch(unfollowSuccess({userId}));
-            dispatch(toggleIsFollowingProgress({userId, isFetching: false}));
-        }
+        const apiMethod = userApi.unFollowUser.bind(userApi)
+        followUnfollowFlow(dispatch, userId, apiMethod, unfollowSuccess)
     } catch (e) {
         console.log(e)
     }
@@ -87,12 +92,9 @@ export const unfollow = (userId: number) => async (dispatch: Dispatch) => {
 
 export const follow = (userId: number) => async (dispatch: Dispatch) => {
     try {
-        dispatch(toggleIsFollowingProgress({userId, isFetching: true}));
-        const res = await userApi.followUser(userId)
-        if (res.resultCode === 0) {
-            dispatch(followSuccess({userId}));
-            dispatch(toggleIsFollowingProgress({userId, isFetching: false}));
-        }
+        const apiMethod = userApi.followUser.bind(userApi)
+        followUnfollowFlow(dispatch, userId, apiMethod, followSuccess)
+
     } catch (e) {
         console.log(e)
     }

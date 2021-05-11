@@ -1,15 +1,8 @@
-import {UserData} from "../rootStateTypes";
+import {AuthStateType, UserData} from "../rootStateTypes";
 import {Dispatch} from "redux";
 import {authApi} from "../../api/api";
 import {stopSubmit} from "redux-form";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-
-
-//Reducer type
-export type AuthStateType = {
-    data: UserData,
-    isAuth: boolean,
-}
 
 const initialState: AuthStateType = {
     data: {

@@ -2,12 +2,10 @@ import {Dispatch} from "redux";
 import {getAuthMe} from "../auth/authReducer";
 import {createSlice} from "@reduxjs/toolkit";
 
-
 const initialState = {
     initialized: false,
 }
 
-//slice reducer
 const slice = createSlice({
     name: "initializedApp",
     initialState,
@@ -19,7 +17,6 @@ const slice = createSlice({
 })
 
 const {setInitialisedAC} = slice.actions
-
 export const appReducer = slice.reducer
 
 //Thunk creators
