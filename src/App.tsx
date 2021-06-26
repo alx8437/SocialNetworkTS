@@ -1,7 +1,6 @@
 import React from 'react';
-import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
@@ -15,6 +14,7 @@ import {connect} from "react-redux";
 import {RootStateType} from "./redux/store";
 import {setInitialised} from "./redux/app/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import './App.css';
 
 
 type MapDispatchPropsType = {
@@ -38,7 +38,6 @@ class App extends React.Component<MapDispatchPropsType & MapStatePropsType> {
 
         return (
             <div className="app-wrapper">
-                <Route/>
                 <HeaderContainer />
                 <div className='wrapperContent'>
                     <Navbar/>
@@ -62,8 +61,9 @@ const mapStateToProps = (state: RootStateType) => {
 }
 
 export default compose(
+    withRouter,
     //if we not use MapStateToPropsType => write instead of this void
     //connect<void, MapDispatchPropsType, {}, RootStateType>
     connect<MapStatePropsType, MapDispatchPropsType, {}, RootStateType>
-    (mapStateToProps, {setInitialised})(App)
-)
+    (mapStateToProps, {setInitialised}))(App) as React.ComponentType
+
