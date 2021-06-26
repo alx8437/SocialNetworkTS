@@ -84,7 +84,7 @@ export const getUsers = (currentPage: number, pageSize: number) => async (dispat
 export const unfollow = (userId: number) => async (dispatch: Dispatch) => {
     try {
         const apiMethod = userApi.unFollowUser.bind(userApi)
-        followUnfollowFlow(dispatch, userId, apiMethod, unfollowSuccess)
+        await followUnfollowFlow(dispatch, userId, apiMethod, unfollowSuccess)
     } catch (e) {
         console.log(e)
     }
@@ -93,8 +93,7 @@ export const unfollow = (userId: number) => async (dispatch: Dispatch) => {
 export const follow = (userId: number) => async (dispatch: Dispatch) => {
     try {
         const apiMethod = userApi.followUser.bind(userApi)
-        followUnfollowFlow(dispatch, userId, apiMethod, followSuccess)
-
+        await followUnfollowFlow(dispatch, userId, apiMethod, followSuccess)
     } catch (e) {
         console.log(e)
     }
