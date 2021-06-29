@@ -1,12 +1,11 @@
 import React from "react";
-import {reduxForm, InjectedFormProps, Field} from 'redux-form';
-import {required} from "../../utils/validators/validators";
-import {Input} from "../common/FormsControls/FormsControls";
+import {InjectedFormProps, reduxForm} from 'redux-form';
+import {createField} from "../common/FormsControls/FormsControls";
 import {loginMe} from "../../redux/auth/authReducer";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/store";
-import { Redirect } from "react-router-dom";
-import s from "../common/FormsControls/FormControls.module.css"
+import {Redirect} from "react-router-dom";
+import styles from "../common/FormsControls/FormControls.module.css"
 
 // Types for our form
 export type LoginFormDataType = {
@@ -27,35 +26,14 @@ type MapDispatchPropsType = {
 // Когда мы оборачиваем нашу форму формой из библиотеки redux-form
 // Сюда прийдут из нее пропсы - их мы должны встретить и типизировать, юзаем InjectedFormProps
 // Также дженериками уточняем тип данных формы FormDataType - пишем сами
-const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
-    const styleForError = props.error ? `${s.errorMessage}` : '';
+const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = ({handleSubmit, error}) => {
+    const styleForError = error ? `${styles.errorMessage}` : '';
     return <React.Fragment>
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field
-                    placeholder={"email"}
-                    name={"email"}
-                    component={Input}
-                    validate={[required]}
-                />
-            </div>
-            <div>
-                <Field
-                    placeholder={"password"}
-                    type={"password"}
-                    name={"password"}
-                    component={Input}
-                    validate={[required]}
-                />
-            </div>
-            <div>
-                <Field
-                    type="checkbox"
-                    name={"rememberMe"}
-                    component={Input}
-                /> remember me
-            </div>
-            <div className={styleForError}>{props.error}</div>
+        <form onSubmit={handleSubmit}>
+            {createField('email')}
+            {createField('password')}
+            {createField('checkbox', 'remember me')}
+            <div className={styleForError}>{error}</div>
             <button>Login</button>
         </form>
     </React.Fragment>
@@ -71,7 +49,7 @@ const Login = (props: MapDispatchPropsType & MapStatePropsType) => {
     }
 
     if (props.isAuth) {
-      return  <Redirect to={"/profile"}/>
+        return <Redirect to={"/profile"}/>
     }
 
     return (
@@ -83,7 +61,7 @@ const Login = (props: MapDispatchPropsType & MapStatePropsType) => {
 }
 
 const mapStateToProps = (state: RootStateType) => {
-    return  {isAuth: state.auth.isAuth}
+    return {isAuth: state.auth.isAuth}
 }
 
 export default connect<MapStatePropsType, MapDispatchPropsType, {}, RootStateType>(mapStateToProps, {loginMe})(Login);

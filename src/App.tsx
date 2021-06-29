@@ -34,11 +34,11 @@ class App extends React.Component<MapDispatchPropsType & MapStatePropsType> {
 
     render() {
 
-        if (!this.props.initialized) return <Preloader />
+        if (!this.props.initialized) return <Preloader/>
 
         return (
             <div className="app-wrapper">
-                <HeaderContainer />
+                <HeaderContainer/>
                 <div className='wrapperContent'>
                     <Navbar/>
                     <Route path='/login' render={() => <Login/>}/>
